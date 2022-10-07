@@ -1,42 +1,78 @@
-<h5>version 0.0.2</h5>
+<body>
 
-<h1 align=center>T1A02-list-and-table-by-fred</h1>
+<h5>Version 0.0.2</h5>
 
-<h2> lists</h2>
+<h1 align=center>T1A02-Lists-and-Tables-by-Trey</h1>
 
-<ol> Ordered list of fav foods
-<li>kd
-<li>Steak
-<li>chicken
-<li>fish
-<li>pizza
+<h2> Lists</h2>
+
+<ol> Ordered list of favourite foods
+  <li>Pizza
+    <li>Spagetti
+      <li>Chips
+        <li>Nachos
+          <li>Tacos
 </ol>
-  
-<ul> Unordered list of Contries (at least 5)
-<li>Canada
-<li>France
-<li>
-<li>
-<li>
+
+<ul> Unordered list of Countries
+  <li>Canada
+    <li>USA
+      <li>Mexico
+        <li>Britain
+          <li>France
+            <li>Russia
 </ul>
 
-<b>Assignment</b>. You make a list inside a list of multiple items<br>
+<b>Assignment</b>. You make a list inside of a list of multiple items
 
-<h2> Table</h2>
+
+<ol>
+  <li>list thing one
+    <li>two
+      <li>list with subitems<ul>
+        <li>suprise list inside of list
+          <li>second suprise list
+        </ul>
+        <li>finish list
+</ol>
+
+
+
+<h2 Tables </h2>
 
 <table border=1>
-<tr><td>A</td><td>B</td></tr>
-<tr><td>1</td><td>2</td></tr>
+  <tr><td>A</td><td>B</td></tr>
+  <tr><td>1</td><td>2</td></tr>
 </table><br>
 
-<b>Assignment</b> Make a 3 x 4 table,
-then make a link and image table with border = 0<br><br<>br>
+<b>Assignment</b> Make a 3 x 4 table, then make a link and image table with border = 0<br><br><br>
+
+<table border=0>
+  <tr><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td></tr>
+  <tr><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td></tr>
+  <tr><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td><td><img width=200 src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg"></td></tr>
+</table><br>
+
+
+
+
+
 
 <h2>Advanced</h2>
 
-Load an image and get it to move 10 pixels to the left using the button below<br>
+Load an image and get it to move 10 pixels to the right using the button below<br>
 
-<image id="myImage01" src+"" style="position:relative; left:0: top:0; width:50; height:50; "><br>
-
-<intput type=button value="go left" onclick="{
+<image id="myImage01" src="https://img-eshop.cdn.nintendo.net/i/d3bdc74cc9c2f9e213e37055fe3d916b6add29d74c99791bda989e9c7bcd6523.jpg" style="position:relative; left:0; top:0; width:50; height:50; "><br>
   
+  <input type=button value="Go Right" onclick="{document.getElementById('myImage01').style.left = '200px'
+                                              document.getElementById('myDiv01').innerHTML = 'It went right'
+                                              }">
+  
+  <div id="myDiv01">...</div>
+
+  <style>
+    body {
+      background-color: 77D8FF
+    }
+  
+  </body>
