@@ -1,0 +1,78 @@
+<body>
+
+<h5>Version 0.0.2</h5>
+
+<h1 align=center>T1A02-Lists-and-Tables-by-Trey</h1>
+
+<h2> Lists</h2>
+
+<ol> Ordered list of favourite foods
+  <li>Pizza
+    <li>Spagetti
+      <li>Chips
+        <li>Nachos
+          <li>Tacos
+</ol>
+
+<ul> Unordered list of planets
+  <li>Murcury
+    <li>venus
+      <li>uranus
+        <li>mars
+          <li>pluto
+            <li>neptune
+</ul>
+
+<b>Assignment</b>. You make a list inside of a list of multiple items
+
+
+<ol>
+  <li>list one thing
+    <li>one thing
+      <li>no not like that<ul>
+        <li>try listing it again
+          <li>it again
+        </ul>
+        <li>how is this
+</ol>
+
+
+
+<h2 Tables </h2>
+
+<table border=1>
+  <tr><td>A</td><td>B</td></tr>
+  <tr><td>1</td><td>2</td></tr>
+</table><br>
+
+<b>Assignment</b> Make a 3 x 4 table, then make a link and image table with border = 0<br><br><br>
+
+<table border=0>
+  <tr><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td></tr>
+  <tr><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td></tr>
+  <tr><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td><td><img width=200 src="https://i.pinimg.com/736x/08/59/b8/0859b82ff97610047497a9da7ccbd2a6.jpg"></td></tr>
+</table><br>
+
+
+
+
+
+
+<h2>Advanced</h2>
+
+Load an image and get it to move 10 pixels to the right using the button below<br>
+
+<image id="myImage01" src="https://thumbs.gfycat.com/HoarsePerkyBarnacle-small.gif" style="position:relative; left:0; top:0; width:50; height:50; "><br>
+  
+  <input type=button value="Go Right" onclick="{document.getElementById('myImage01').style.left = '10px'
+                                              document.getElementById('myDiv01').innerHTML = 'It went right'
+                                              }">
+  
+  <div id="myDiv01">...</div>
+
+  <style>
+    body {
+      background-color: 77D8FF
+    }
+  
+  </body>
