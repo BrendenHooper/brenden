@@ -1,6 +1,6 @@
 <body>
 
-<h5>Version 0.0.2</h5>
+<h5>Version 0.0.3</h5>
 
 <h1 align=center>T1A02-Lists-and-Tables-by-Trey</h1>
 
@@ -65,7 +65,7 @@ Load an image and get it to move 10 pixels to the right using the button below<b
 <image id="myImage01" src="https://thumbs.gfycat.com/HoarsePerkyBarnacle-small.gif" style="position:relative; left:0; top:0; width:50; height:50; "><br>
   
   <input type=button value="Go Right" onclick="{
-    document.getElementById('myImage01').style.left = '10px'                                           
+    document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) + 30                             
     document.getElementById('myDiv01').innerHTML = 'It went right'
 }">
   
