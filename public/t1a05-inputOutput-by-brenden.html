@@ -1,16 +1,219 @@
-Version 0.1.2
-<h2 align=center>t1a05-input output by Brenden</h2>
+<html>
+  <head>
+  Version 0.1.2
+    <h2 align=center>t1a05-Input Output by Trey</h2>
+    
+    
 
-<style>
-  <backgroundcouler:blue>
-  </style
-<a href="https://www.w3school.com/jsref/prop_html_innerhtml.asp">good reference to input putput Javascript innerHTML value by Brenden</a>
-<h4> Example input output code</h4>
-<pre>
-let myIn01 = document.getElementById('myNum01').value document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myIn01*myIn01
-</pre>
-  <h4> example working code </h4>
-  <input id="myNum01" type=number value="4" ><br>
 
-<input type=button value="myEvent squares" onclick="{ let myIn01 = parsaFloat(document.getElementById('myNum01').value)let myAnswer = myIn01 * myIn01 document.getElementById('myDiv01').innerHTML = myIn01 = ' squared = ' = myAnser}"><br>
-<div id="myDiv01"...</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  
+  <body>
+    
+    <a href="https://www.w3schools.com/jsref/prop_html_innerhtml.asp">Good reference to input output Javascript innerHTML value by Fred</a>
+    
+    <h4> Example input output code</h4>
+    <pre>
+       let myIn01 = document.getElementById('myNum01').value
+       document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myIn01*myIn01
+    </pre>
+    
+    <h4> Example working code </h4>
+    <input id="myNum01" type=number value="" > <br>
+    
+   <input type=button value="Square Input" onclick="{
+                                                       let myIn01 = parseFloat(document.getElementById('myNum01').value)
+                                                       let myAnswer = myIn01 * myIn01
+                                                       document.getElementById('myDiv01').innerHTML = myIn01 + ' ^2 = ' + myAnswer
+                                                       }"><br>
+    
+    <div id="myDiv01">...</div>    
+    
+    <br><br>
+    
+ 
+     <input id="myNum02" type=number value="" >  <input id="myMultiplier" type=text value="*">  <input id="myNum03" type=number value="" > <br>
+    
+   <input type=button value="do math" onclick="{
+                                                       let myIn02 = parseFloat(document.getElementById('myNum02').value)
+                                                       let myIn03 = parseFloat(document.getElementById('myNum03').value)
+                                                       let myAnswer = myIn02 myMultiplier myIn03
+                                                       document.getElementById('myDiv02').innerHTML = myIn02 + myMultiplier + myIn03 + ' = ' + myAnswer
+                                                       }"><br>
+    
+  
+    
+    
+    
+    <div id="myDiv02">...</div>    
+    
+    
+    
+    
+    
+    <br><br>
+      Multiplication 
+  <form>
+    1st Number : <input type="text" 
+    id="mfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="msecondNumber" /><br>
+    <input type="button" onClick="multiplyBy()" 
+    Value="Multiply" /><br>
+  </form>
+  
+  <p>The Product is : <br>
+   <span id = "mresult"></span>
+  </p>
+  
+  
+  <script>
+    function multiplyBy()
+    {
+      num1 = document.getElementById(
+        "mfirstNumber").value;
+      num2 = document.getElementById(
+        "msecondNumber").value;
+      document.getElementById(
+        "mresult").innerHTML = num1 * num2;
+    }
+  </script><br>
+  Division
+     <form>
+    1st Number : <input type="text" 
+    id="dfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="dsecondNumber" /><br>
+    <input type="button" onClick="divideBy()" 
+    Value="Divide" /><br>
+  </form>
+  
+  <p>The Quotient is : <br>
+   <span id = "dresult"></span>
+  </p>
+  
+  
+  <script>
+    function divideBy()
+    {
+      num1 = document.getElementById(
+        "dfirstNumber").value;
+      num2 = document.getElementById(
+        "dsecondNumber").value;
+      document.getElementById(
+        "dresult").innerHTML = num1 / num2;
+    }
+  </script>
+  <br>    
+    
+    
+ <form>
+    1st Number : <input type="number" 
+    id="aFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="aSecondNumber" /><br>
+    <input type="button" onClick="addNumber()" 
+    Value="Add" /><br>
+  </form>    
+    
+     <p>The Sum is : <br>
+   <span id = "aresult"></span>
+  </p>
+  
+    
+      <script>
+    function addNumber()
+    {
+      num1 = document.getElementById(
+        "aFirstNumber").value;
+      num2 = document.getElementById(
+        "aSecondNumber").value;
+      document.getElementById(
+        "aresult").innerHTML = num1*1 + num2*1;
+    }
+  </script>
+  <br>    
+
+     <form>
+    1st Number : <input type="number" 
+    id="sFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="sSecondNumber" /><br>
+    <input type="button" onClick="minusNumber()" 
+    Value="Subtract" /><br>
+  </form>    
+    
+     <p>The Difference is : <br>
+   <span id = "sresult"></span>
+  </p>
+  
+    
+      <script>
+    function minusNumber()
+    {
+      num1 = document.getElementById(
+        "sFirstNumber").value;
+      num2 = document.getElementById(
+        "sSecondNumber").value;
+      document.getElementById(
+        "sresult").innerHTML = num1*1 - num2*1;
+    }
+  </script>
+  <br><br><br><br><br><br><br><br><br>    
+    
+    <button id="clickButton">Click the button to add the input into the
+below Text Box</button>
+<br/><br />
+<input id="readTheInput" />
+<script>
+    document.getElementById("bOne").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "1";
+    });
+   document.getElementById("bTwo").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "2";
+    });
+   document.getElementById("bThree").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "3";
+    });
+</script>
+    <br>
+    
+<table class=calc border=1>
+  <tr><td><input type=button value="1" id=bOne></td><td><input type=button value="2" id=bTwo></td><td><input type=button value="3" id=bThree></td></tr>
+  <tr><td><input type=button value="4"></td><td><input type=button value="5"></td><td><input type=button value="6"></td></tr>
+  <tr><td><input type=button value="7"></td><td><input type=button value="8"></td><td><input type=button value="9"></td></tr>
+  <tr><td><input type=button value=""></td><td><input type=button value="0"></td><td><input type=button value=""></td></tr>
+</table><br>
+    
+    
+    
+    
+    
+    
+  </body>
+  
+  <style>
+  
+    body {
+      background-color: #EDBB99;
+      color: black;
+      font-family: serif;
+      outline-style: solid;
+      outline-color: #BA4A00;
+      outline-width: thick;
+      padding: 10px;
+      
+    }
+    
+    .calc {
+     color: black; 
+    }
+    
+    
+  </style>
+  
+  
+  
+</html>
