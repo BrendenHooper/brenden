@@ -1,7 +1,125 @@
-Version 0.0.1
-<h2 aling=center>t1a06-varibles-by-brenden.html</h2>
 
-<a href=''>you fix: good reference to variables in javascript and other launguages</a><br>
-other laungages use: bool, int, float, char, string, int_8, int_16 ect<br>
+<html>
 
-note: javascript does use and let for local variables.<br>
+<head>
+   Version 0.0.1
+   
+
+   <h2 align=center>T1A06-Variables-by-Brenden.html</h2>
+   
+   
+</head>
+    
+<body>    
+   <a href="https://www.w3schools.com/js/js_variables.asp">Good reference to Variables in Javascript 
+   and other languages</a><br>
+
+   Other Languages use: bool, int, float, char, string, 
+   int_8, int_16 etc<br>
+
+   Note: Javascript does use var and let for local variables.<br>
+   For Global variables Mr. Ellis prefers to use document.myVarName
+
+
+   <h4> Example input output code</h4>
+   <pre>
+    let myIn01 = document.getElementById('myText01').value
+    document.getElementById('myDiv01').innerHTML = myIn01 
+   </pre>
+
+   <h4> Example working code</h4>
+
+   <input id="myText01" type=text value="you're a idiot " ><br> 
+
+   <input type=button value="Show Variable" onclick="{
+    let myIn01 = document.getElementById('myText01').value
+    document.getElementById('myDiv01').innerHTML = myIn01
+
+   }"><br>
+
+   <input type=button value="Using no variable" onclick="{
+   document.getElementById('myDiv01').innerHTML = document.getElementById('myText01').value
+     
+   }"><br>
+
+   <div id="myDiv01">...</div>
+
+   	<input type="button" value="Popup using let" onclick="popup02()">
+        <input type="button" value="Popup using var" onclick="popup01()">
+	<input type="button" value="Popup using const" onclick="popup03()">
+	
+	
+	
+	
+	
+	
+   <script>
+	   
+    function popup03() {
+	    	const exp = 'popup with multiple messages using const and alert';
+		const name = 'Name: jimmy';
+		const age = 'Age: 2';
+		const msg01 = 'He does not like you';
+    const msg02 = 'your still reading this?'
+    const msg03 = 'this how to keep a idiot busy for 30 secounds'
+  
+	    	alert(exp);
+	    	alert(name);
+	    	alert(age);
+	    	alert(msg01);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg02);
+        alert(msg03);
+    }
+    function popup02() {
+	       let message = "popup using let and alert";
+               alert(message);
+ 
+    }
+    function popup01() {  
+		var msg; 
+		msg = "popup using var and alert"; 
+		alert(msg);
+
+		var num = "two variables assigned the same value"; 
+		var hundred = num;
+		alert(num);
+		alert(hundred);
+    }
+      
+    </script>
+   
+   
+   
+   
+    </body>
+    
+     <style>
+  
+    body {
+      background-color: #33ffff;
+      color: green;
+      font-family: serif;
+      outline-color: #702FFA;
+      padding: 10px;
+      
+    }
+
+    
+  </style>
+    
+</html>
+
+
