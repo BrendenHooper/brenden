@@ -1,0 +1,31 @@
+Version 0.0.1
+
+<h2 align=center>t1a08-loops-by-Brenden.html</h2>
+
+<a href="https://www.bing.com/search?q=youtube&FORM=AWRE">good reference to javascript loops</a><br>
+
+<h4>
+ example working code</h4>
+ <pre>
+   
+ </pre>
+ <h4>example of working code</h4>
+
+max loops: <input id="myNum01" type=number value="4" ><br>
+
+<input type=button value="basic for loop with Decisions" onclick="{
+document.getElementById('myDiv01').innerHTML = '' 
+let mytemp = ''
+
+letmymax = parseInt(document.getElementById('myNum01').value)
+
+for (let myloop = 0; myloop < myMax; myLoop++ ){
+if (myloop * 2 > myMax){
+myTemp += ' cool '
+}
+myTemp += 'loop number: ' + myLoop = '<br>'
+document.getElementById('myDiv01').innerHTML = myTemp
+}">
+
+<div id="myDiv01">your fat</div>
+ 
