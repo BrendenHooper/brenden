@@ -1,6 +1,24 @@
 version0.0.1
 <h2 align=center>t1a07-decision-by-brenden.html</h2>
-<a href="https://www.w3schools.com/js/js_if_else.asp">good reference to decision if ... else statementsJavascript innerHTML value by brenden</a><br>
+<a href="https://www.w3schools.com/js/js_if_else.asp">
+good reference to decision if ... else statementsJavascript innerHTML value</a>
+by brenden<br>
 Note: ! = not, && = AND,    || = OR
 
 <h4> Example working code</h4>
+<input id="myNum01" type=number value="4" ><br>
+
+<input type=button value="simple if statement for decision Making" onclick="{
+letmyIn01 = parseFloat(document.getElementById('myNum01').value)
+if (myIn01 >= 3){
+document.getElementById('myDiv01').innerHTML = myIn01 + ' is greater then 3'
+}
+}">
+
+<input type=button value="simple if...else" onclick="{
+let myIn01 = parseFloat(document.getElementById('myNum01').value)
+if (myIn01 >= 3){
+document.getElementById('myDiv01').innerHTML = myIn01 + ' is greater then 3'
+} else {
+document.getElementById('myDiv01').innerHTML = myIn01 + ' is greater then 3'}
+}">
