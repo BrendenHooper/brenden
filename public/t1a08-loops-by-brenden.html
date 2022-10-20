@@ -1,31 +1,207 @@
-Version 0.0.1
 
-<h2 align=center>t1a08-loops-by-Brenden.html</h2>
+<html>
+    <head>
+    Version 0.0.1
 
-<a href="https://www.bing.com/search?q=youtube&FORM=AWRE">good reference to javascript loops</a><br>
+    <h2 align=center>T1A08-Loops-by-Brenden.html</h2>
+        
+        
+        <html>
+<head>
+<script>
+    var colors = ["red", "blue","purple", "green", "magenta","cyan","lime","yellow"];
+    var colorIndex = 0;
+    function changeColor() {
+        var col = document.getElementById("body");
+        if( colorIndex >= colors.length ) {
+            colorIndex = 0;
+        }
+        col.style.backgroundColor = colors[colorIndex];
+        colorIndex++;
+    }
+</script>
+    <body id='body'>
+    <button onclick="changeColor();">Change color</button>
+    </body>
+    </head></html>
+   <style>
+     body {
+      color: black;
+      padding: 10px;
+      
+       }
+  </style> 
+        
+    </head>
+      <body>
+    <script>
 
-<h4>
- example working code</h4>
- <pre>
-   
- </pre>
- <h4>example of working code</h4>
+function forLoopIf() {
+    document.getElementById('myDiv02').innerHTML = '';
+    let myTemp = '';
 
-max loops: <input id="myNum01" type=number value="4" ><br>
+    let myMax = parseInt(document.getElementById('myNum02').value);
 
-<input type=button value="basic for loop with Decisions" onclick="{
-document.getElementById('myDiv01').innerHTML = '' 
-let mytemp = ''
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
 
-letmymax = parseInt(document.getElementById('myNum01').value)
+       if (myLoop * 2 > myMax){
+          myTemp += ' cool '
+      };
 
-for (let myloop = 0; myloop < myMax; myLoop++ ){
-if (myloop * 2 > myMax){
-myTemp += ' cool '
+      myTemp += 'Loop number: ' + myLoop + '<br>';
+    }
+    document.getElementById('myDiv02').innerHTML = myTemp;
 }
-myTemp += 'loop number: ' + myLoop = '<br>'
-document.getElementById('myDiv01').innerHTML = myTemp
+</script>
+<script>
+    function vertWords() {
+let vWord = "You can make words stack vertically";
+
+let text = "";
+for (let x of vWord) {
+  text += x + "<br>";
+}
+    
+    }
+
+
+let text = "";
+for (let i = 0; i < bort.length; i++) {
+  text += bort[i] + "<br>";
+}
+
+document.getElementById("fort").innerHTML = text;
+};
+
+let txt = "";
+numbers.forEach(myFunction);
+document.getElementById("nAry").innerHTML = txt;
+
+function myFunction(value, index, array) {
+  txt += value + "<br>"; 
+}
+}
+</script>
+
+          <script>
+              function moreLoop() {
+    const L001 = '5 Popups';
+    for(let x=1; x<=5; x++){
+        if (x<=5) {
+            alert(L001)
+        
+        };
+    }
+              }
+          </script>
+    
+  
+<a href="https://www.w3schools.com/js/js_loop_for.asp">Good reference to Javascript Loops</a><br>
+
+
+<h4> Example input output code</h4>
+<pre>
+
+ onclick="{
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop * 2 > myMax){
+          myTemp += ' cool '
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
+                                                                  }"
+</pre>
+
+<h4> Example working code</h4>
+
+
+Max loops: <input id="myNum01" type=number value="4" ><br> 
+
+<input type=button value="Basic For loop with Decisions" onclick="{
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop * 2 > myMax){
+          myTemp += ' cool '
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
 }">
 
-<div id="myDiv01">your fat</div>
- 
+
+<input type=button value="Basic For loop only" onclick="{
+    let myTemp = ''
+    let myMax = parseInt(document.getElementById('myNum01').value)
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
+}">
+
+
+
+<input type=button value="Even number identifier" onclick="{
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop % 2 == 0){
+          myTemp += 'Even Number, '
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
+}">
+
+
+<input type=button value="Odd number identifier" onclick="{
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop % 2 == 1){
+          myTemp += '<font style=\'color:red;\'> Odd </font>'
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
+}">
+
+<div id="myDiv01"><font color=red>...</font></div><br><br><br>
+
+Max loops: <input id="myNum02" type=number value="5" ><br> 
+
+<input type=button value="Basic For loop with Decisions " onclick="forLoopIf()">
+<div id="myDiv02"><font color=red>...</font><br><br>
+<p id=vertWords></p>
+
+
+
+    </body>
+    
+
+
+
+</html>
