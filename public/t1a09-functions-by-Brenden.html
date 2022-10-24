@@ -1,10 +1,10 @@
 <script>
 
 function myExampleFunction(){
-let myIn01 = parseInt(Document.getElementById('mytext01').value)
-let mySum = myIn01 + myIn01
-let myReply = myIn01 + ' + ' + myIn01 + ' = ' + mySum
-return myReply
+   let myIn01 = parseInt(document.getElementById('myText01').value)
+   let mySum = myIn01 + myIn01
+   let myReply =  myIn01 + ' + ' + myIn01 + ' = ' + mySum
+   return myReply
 
 }
 
@@ -24,13 +24,13 @@ infomation can also be passed to functions (that more advanced)
  }
  </pre>
  
- <h4>
- Example of working code</h4>
- 
- <input type=text id="mytext01" value="6"><br>
- 
- <input type=button value="function example" onClick="{  
- document.getElementById('myDiv01').innerHTML = myExampleFunction()
- }">
- 
- <div id="myDiv01">...</div>
+ <h4> Example working code</h4>
+
+
+<input type="text" id="myText01" value="3"><br>
+
+<input type="button" value="Function Example" onclick="{
+   document.getElementById('myDiv01').innerHTML =  myExampleFunction()
+}">
+
+<div id="myDiv01">...</div>
