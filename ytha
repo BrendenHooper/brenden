@@ -5,7 +5,7 @@
         
         document.getElementById('ammountMultiplier').innerHTML = "Multiplier Upgrade x" + (multiplier+1);
         document.getElementById('ammountMultiplier2').innerHTML = "x" + (multiplier+1);
-        document.getElementById('costMultiplier').innerHTML = ((multiplier+1) * 1000) + " Jeremycoin";
+        document.getElementById('costMultiplier').innerHTML = ((multiplier+1) * 1500) + " Jeremycoin";
         document.getElementById('currentMultiplier').innerHTML = "Your current Multiplier is x" + (multiplier);
         
         document.getElementById('ammountSchoolpc').innerHTML = "You Own " + Schoolpc + " Schoolpc";
@@ -14,14 +14,14 @@
         document.getElementById('ammountHightechpc').innerHTML = "You Own " + Hightechpc + " Hightechpc";
         document.getElementById('costHightechpc').innerHTML = ((Hightechpc+1) * 200) + " Jeremycoin";
         
-         document.getElementById('ammountGodlikepc').innerHTML = "You Own " + Godlikepc + " Schoolpc";
-        document.getElementById('costGodlikepc').innerHTML = ((Schoolpc+1) * 700) + " Jeremycoin";
+         document.getElementById('ammountGodlikepc').innerHTML = "You Own " + Godlikepc + " Godlikepc";
+        document.getElementById('costGodlikepc').innerHTML = ((Godlikepc+1) * 700) + " Jeremycoin";
         
-        document.getElementById('Jeremycoinpersecond').innerHTML = "You are gaining " + (((Schoolpc)+(Hightechpc*3)=(Godlikepc))*multiplier) + " Jeremycoin per/s";
+        document.getElementById('Jeremycoinpersecond').innerHTML = "You are gaining " + (((Schoolpc)+(Hightechpc*3)+(Godlikepc*5))*multiplier) + " Jeremycoin per/s";
     }
     
     var multiplier = 1;
-    var cookiecount = 10000000;
+    var cookiecount = 0;
     var Schoolpc = 0;
     var Hightechpc = 0;
     var Godlikepc = 0;
@@ -59,7 +59,7 @@
     
     <p id="ammountMultiplier">Multiplier Upgrade x2</p>
     <button><a href="#" onClick="buyMultiplier()"><span id="ammountMultiplier2">x2</span></a></button>
-    <p id="costMultiplier">2000 Jeremy Coins</p>
+    <p id="costMultiplier">3000 Jeremy Coins</p>
     <p id="currentMultiplier">Your current Multiplier is x1</p>
     <br>
     
@@ -125,7 +125,7 @@
         function buyGodlikepc() {
         if (cookiecount >= ((Godlikepc+1) * 700)) {
             cookiecount = cookiecount - ((Godlikepc+1) * 700);
-            Hightechpc = Hightechpc + 1;
+            Godlikepc = Godlikepc + 1;
             update()
         }
     }
@@ -133,7 +133,7 @@
     
     function buyMultiplier() {
         if (cookiecount >= ((multiplier+1) * 10)) {
-            cookiecount = cookiecount - ((multiplier+1) * 1000);
+            cookiecount = cookiecount - ((multiplier+1) * 1500);
             multiplier = multiplier + 1;
             update()
         }
