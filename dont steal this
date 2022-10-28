@@ -1,8 +1,5 @@
 <script>
 
-<h4>dont steal or i will sue you</h4>
-<br><br><br><br><br>
-
     function update() {
         document.getElementById('text').value = cookiecount;
         document.title = cookiecount + " Jeremycoin";
