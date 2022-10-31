@@ -40,6 +40,8 @@ if (myHour &lt; 18) {
         document.getElementById('myDiv01').innerHTML = myIn01 + ' is not complex'}
 }">
 <div id="myDiv01">...</div>
+  
+
 
 <h4> How big are you? write 1.78 for 1.78m as example</h4>
 
@@ -55,6 +57,18 @@ if (myHour &lt; 18) {
     } else {
         document.getElementById('myDiv02').innerHTML = myIn02 + ' You are pretty Big'}
 }">
-
-
+  <input id="myHeight02" type="number" value="1.80"><br> 
 <div id="myDiv02">...</div></body></html>
+
+
+<input id="myHeight03" type="number" value="1.80"><br> 
+<input type="button" value="how much money so you have" onclick="{
+    let myIn03 = parseFloat(document.getElementById('myHeight03').value)
+    if (myIn03 <= 1000){
+        document.getElementById('myDiv03').innerHTML = myIn03 + ' You are poor'
+    } else {
+        document.getElementById('myDiv03').innerHTML = myIn03 + ' You are still poor'}
+}">
+
+
+<div id="myDiv03">...</div></body></html>
