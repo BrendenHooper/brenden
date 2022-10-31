@@ -1,34 +1,121 @@
-Version 0.0.1<br>
+<!DOCTYPE html>
+<html>
+<head>
+  <script>function togglePopup(){
+document.getElementById("popup-1").classList.toggle("active");}</script>
 <style>
-  body{
-  background-image: url('https://thumbs.gfycat.com/HoarsePerkyBarnacle-small.gif');}
+
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100vw;
+  height:100vh;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;}
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0);
+  background:#7E5109 ;
+  width:450px;
+  height:220px;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+}
+.popup .close-btn {
+position:absolute;
+right:20px;
+top:20px;
+width:30px;
+height:30px;
+background:#222;
+color:#fff ;
+font-size:25px;
+font-weight:600;
+line-height:30px;
+text-align:center;
+border-radius:50%;
+}
+.popup.active .overlay {
+  display:block;
+}
+.popup.active .content {
+transition:all 300ms ease-in-out;
+transform:translate(-50%, -50%) scale(1);
+}
+
 </style>
-      
+</head>
+<h1 align=center>T1A04 CSS by Fred</h1>
+<body id="mainBody"> 
+Reference Link
+<a href="https://www.w3schools.com/cssref/default.asp">w3Schools</a><br>
 
+Properly done with a .css file listening all css commands for you
+Website<br>
+Another way to do CSS (Cascading Style Sheets: determine colors 
+locations extra effects on the tags on your web page)<br>
 
+Here is typical in document style 
+<pre>
+b {
+color: #00ff00
+}
+</pre><br>
 
+I do CSS inside the tag. It overpowers all other methods<br>
 
-<h1 style="position:absolute;left:660px"> T1A04 CSS by Brenden</h1>
-
-reference link <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">w3schools</a><br>
-  
-<pre> b {
-color: #00ff00:
-}</pre><br>
-<b> this is my bold</b><br>
-<b id="myB1" style="color:#00ff00; background-Color:blue; "> this is bold</b><br>
-
+<b > This is bold</b><br>
+<b id="myB1" style="color:#00ff00; background-Color:blue;"> This is bold</b>
 <input type=button value=Change onclick="{
                                          document.getElementById('myB1').style.color = 'red'
-                                         document.getElementById('myB1').style.backgroundColor = 'cyan'
+                                         document.getElementById('myB1').style.backgroundColor = 'yellow'
+                                         }"><br>
+  
+  <br>
+<input type="button" value="change background color to red" onClick="{
+document.getElementById('mainBody').style.backgroundColor = 'red' 
 }"><br>
+<input type="button" value="change background color to normal" onClick="{
+document.getElementById('mainBody').style.backgroundColor = 'white' 
+}"><br>
+<input type="button" value="change background color to LightBlue" onClick="{
+document.getElementById('mainBody').style.backgroundColor = '#ADD8E6' 
+}"><br>
+  
+  
 
-<br>
-<br>
-<textarea style="position:relative: left:0; top:0; width:200; height:50; ">
-  </textarea><br>
-<br>
- <br>
-<br>
-<input
-  </body>
+<textarea style="position:relative; left:0; top:0; width:200; height:50; ">
+Advanced see if you move this textarea
+</textarea><br>
+
+
+ <div class="popup" id="popup-1">
+   <div class="overlay"></div>
+   <div class="content">
+     <div class="close-btn" onclick="togglePopup()">&times;
+      <div style="position:relative; height:60px;">
+<img src="https://avatars.githubusercontent.com/u/5605614?v=4"
+   style="position:relative; top:-500x; left:-380px; width:400px; height:100px; border:none;"
+   alt="photo of Jeremy Ellis"
+   title="Photo of Jeremy Ellis" />
+<img src="https://as1.ftcdn.net/v2/jpg/01/22/06/50/1000_F_122065003_dolgUjKVql7xrQ13u7uqcFQ3aJmR1DyU.jpg"
+   style="position:relative; top:-600x; left:-380px; width:65px; height:65px; border:none;"
+   alt="photo of Hand"
+   title="Photo of Hand" />
+</div>
+       </div>
+   </div>
+   
+   <button onclick="togglePopup()">Show Popup</button>
+
+                                         
+</div>                                      
+</body>
+</html>
