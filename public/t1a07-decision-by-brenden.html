@@ -2,6 +2,35 @@
 
 <h2 align="center">t1a07-decision-by-Brenden.html</h2>
 
+  
+  <script>
+    var colors = ["red", "blue","purple", "green", "magenta","cyan","lime","yellow"];
+    var colorIndex = 0;
+    function changeColor() {
+        var col = document.getElementById("body");
+        if( colorIndex >= colors.length ) {
+            colorIndex = 0;
+        }
+        col.style.backgroundColor = colors[colorIndex];
+        colorIndex++;
+    }
+</script>
+    <body id='body'>
+    <button onclick="changeColor();">Change color</button>
+    </body>
+    </head></html>
+   <style>
+     body {
+      color: black;
+      padding: 10px;
+      
+       }
+  </style> 
+        
+    </head>
+  
+  
+  
 <a href="https://www.w3schools.com/js/js_if_else.asp">Good reference to Decisions if ... else statments <br></a>
 Javascript innerHTML value by Fred<br>
 Note: ! = Not,  &amp;&amp; = AND,   || = OR
