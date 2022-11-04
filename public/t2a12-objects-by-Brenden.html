@@ -1,8 +1,26 @@
-<html><head></head><body>Version 0.0.1
+<head></head><body>Version 0.0.1
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-image: url('https://i.pinimg.com/originals/25/8b/64/258b64d71fda19836797b97c8a7f5f4b.jpg');
+}
+
+
+
+   body { color: red;}
+ 
+
+
+
+</style>
+</head>
 
 <h2 align="center">t2a02-objects-by-Fred.html</h2>
 
-<a href="">Good reference to Javascript Objects</a><br>
+<a href="https://www.youtube.com/watch?v=79R6r_ZAtds">Good reference to Javascript Objects</a><br>
 
 Objects are stored named variables
 
@@ -18,7 +36,7 @@ Objects are stored named variables
 
 <h4> Example working Objects code</h4>
 
-Nothing: <input type="text" id="myText01" value="Useless at the moment"><br>
+Nothing: <input type="text" id="myText01" value="internal screaming"><br>
 
 
 <input type="button" value="Example Object Set and Show" onclick="{
@@ -30,7 +48,9 @@ Nothing: <input type="text" id="myText01" value="Useless at the moment"><br>
   }
    document.getElementById('myDiv01').innerHTML = '<br>myPerson Object has properties: <br>'
    document.getElementById('myDiv01').innerHTML += 'firstName: ' + myPerson.firstName + '<br>'
-   document.getElementById('myDiv01').innerHTML += 'You do the others  <br> ' 
+   document.getElementById('myDiv01').innerHTML += 'lastName: ' + myPerson.lastName + '<br>'
+   document.getElementById('myDiv01').innerHTML += 'age: ' + myPerson.age + '<br>'
+   document.getElementById('myDiv01').innerHTML += 'eyeColor: ' + myPerson.eyeColor + '<br>'
 }">
 
 <div id="myDiv01">...</div>
