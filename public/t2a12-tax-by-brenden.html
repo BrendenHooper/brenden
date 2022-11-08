@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class="container-fluid">
+    <header>
+        <h1>Business Registration Address Setup</h1>
+    </header>
+
+    <label>number 1</label>
+    <input type="text" name="number1" id="number1" placeholder="enter single digit number"> <br>
+    +<br>
+    <label>number 2</label>
+    <input type="text" name="number2" id="number2" placeholder="enter single digit number"><br>
+    <button type="button" class="btn btn-info" onclick="submit1()">submit</button><br><br>
+    <div class="screen" id="screen1"></div>
+
+
+</div> <!-- End Container-->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+
+});
+function submit1(){
+    var a =  document.getElementById("number1").value;
+    var b =  document.getElementById("number2").value;
+    var c = parseInt(a) * parseInt(b); 
+    document.getElementById("screen1").innerHTML=c;
+  }
+</script>
