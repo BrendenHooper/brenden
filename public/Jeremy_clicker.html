@@ -1,3 +1,4 @@
+
 <script>
 
     function update() {
@@ -18,7 +19,7 @@
          document.getElementById('ammountGodlikepc').innerHTML = "You Own " + Godlikepc + " Godlikepc";
         document.getElementById('costGodlikepc').innerHTML = ((Godlikepc+1) * 700) + " Jeremycoin";
         
-        document.getElementById('Jeremycoinpersecond').innerHTML = "You are gaining " + (((Schoolpc)+(Hightechpc*3)+(Godlikepc*5))*multiplier) + " Jeremycoin per/s";
+        documeacnt.getElementById('Jeremycoinpersecond').innerHTML = "You are gaining " + (((Schoolpc)+(Hightechpc*3)+(Godlikepc*5))*multiplier) + " Jeremycoin per/s";
     }
     
     var multiplier = 1;
@@ -41,7 +42,7 @@
 
     <p id="Jeremycoinpersecond">You are gaining 0 Jeremy Ellis Coins per/s </p>
     
-    <a href=# onclick="add()"><img src="https://avatars.githubusercontent.com/u/5605614?v=4"></a>
+    <a href=# onclick="add()"><img width=200 src="https://avatars.githubusercontent.com/u/5605614?v=4"></a>
     <br><br>
     You got: 
     <input type="text" id="text" disabled style= text-align:center value=0>
@@ -133,7 +134,7 @@
     
     
     function buyMultiplier() {
-        if (cookiecount >= ((multiplier+1) * 10)) {
+        if (cookiecount >= ((multiplier+1) * 1500)) {
             cookiecount = cookiecount - ((multiplier+1) * 1500);
             multiplier = multiplier + 1;
             update()
