@@ -1,0 +1,64 @@
+<h1 align=center>t2a06-spy-name.html</h1>
+<textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
+
+
+<input type=button value="encrypt" onclick="{
+   let myTemp = ''
+   myString = document.getElementById('myArea01').value.toLowerCase().split('')
+   for (let myLoop=0;   myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+      if (myString[myLoop] == 'a') {myTemp  = '001'}
+      if (myString[myLoop] == 'b') {myTemp  = '210'}
+      if (myString[myLoop] == 'c') {myTemp  = '211'}
+      if (myString[myLoop] == 'd') {myTemp  = '220'}
+      if (myString[myLoop] == 'e') {myTemp  = '221'}
+      if (myString[myLoop] == 'f') {myTemp  = '230'}
+      if (myString[myLoop] == 'g') {myTemp  = '223'}
+      if (myString[myLoop] == 'h') {myTemp  = '322'}
+      if (myString[myLoop] == 'i') {myTemp  = '330'}
+      if (myString[myLoop] == 'j') {myTemp  = '242'}
+      if (myString[myLoop] == 'k') {myTemp  = '251'}
+      if (myString[myLoop] == 'l') {myTemp  = '252'}
+      if (myString[myLoop] == 'm') {myTemp  = '431'}
+      if (myString[myLoop] == 'n') {myTemp  = '720'}
+      if (myString[myLoop] == 'o') {myTemp  = '271'}
+      if (myString[myLoop] == 'p') {myTemp  = '820'}
+      if (myString[myLoop] == 'q') {myTemp  = '441'}
+      if (myString[myLoop] == 'r') {myTemp  = '282'}
+      if (myString[myLoop] == 's') {myTemp  = '921'}
+      if (myString[myLoop] == 't') {myTemp  = '292'}
+      if (myString[myLoop] == 'u') {myTemp  = '730'}
+      if (myString[myLoop] == 'v') {myTemp  = '371'}
+      if (myString[myLoop] == 'w') {myTemp  = '543'}
+      if (myString[myLoop] == 'x') {myTemp  = '640'}
+      if (myString[myLoop] == 'y') {myTemp  = '550'}
+      if (myString[myLoop] == 'z') {myTemp  = '462'}
+      if (myString[myLoop] == '1') {myTemp  = '1000'}
+      if (myString[myLoop] == '2') {myTemp  = '01000'}
+      if (myString[myLoop] == '3') {myTemp  = '11000'}
+      if (myString[myLoop] == '4') {myTemp  = '00100'}
+      if (myString[myLoop] == '5') {myTemp  = '10100'}
+      if (myString[myLoop] == '6') {myTemp  = '01100'}
+      if (myString[myLoop] == '7') {myTemp  = '11100'}
+      if (myString[myLoop] == '8') {myTemp  = '00010'}
+      if (myString[myLoop] == '9') {myTemp  = '10010'}
+      if (myString[myLoop] == '0') {myTemp  = '01010'}
+      if (myString[myLoop] == '.') {myTemp  = '00000'}
+      if (myString[myLoop] == ' ') {myTemp  = '11111'}
+      
+      
+      myString[myLoop] = myTemp
+   }
+   document.getElementById('myArea02').value = myString.join('')
+}"><br><br>
+
+
+
+<textarea id="myArea02" rows=4 cols=70></textarea><br> 
+
+<input type=button value="decrypt" onclick="{
+   alert('Sorry, you have to do this!')
+}"><br><br>
+
+
+<textarea id="myArea03" rows=4 cols=70></textarea><br> 
