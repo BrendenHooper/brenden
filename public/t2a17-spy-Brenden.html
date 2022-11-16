@@ -1,12 +1,56 @@
-<h1 align=center>t2a06-spy-name.html</h1>
-<textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
+<html>
+<h1 align=center>spy by Brenden</h1>
+
+ <h3>Select the encrypting you want</h3>
+        <input type="radio" name="myRad01" id="easy">easy<input type="radio" name="myRad01" id="medium">medium<input type="radio" name="myRad01" id="hard">hard<br><br>
+
+ <textarea id="myArea01" rows=2 cols=50>Hello how are you</textarea><br> 
+        <input type=button value="Encrypt" onclick="encrypt()"><br><br>
+        <textarea id="myArea02" rows=4 cols=70></textarea><br> 
+        <input type=button value="Decrypt" onclick="decrypt()"><br><br>
+        <textarea id="myArea03" rows=2 cols=50></textarea><br>
 
 
-<input type=button value="encrypt" onclick="{
-   let myTemp = ''
-   myString = document.getElementById('myArea01').value.toLowerCase().split('')
-   for (let myLoop=0;   myLoop < myString.length; myLoop++){
-      myTemp = myString[myLoop]
+<script>
+
+ function encrypt() {
+            if (document.getElementById('easy').checked) {
+                easyEn()
+            } else if (document.getElementById('medium').checked) {
+                mediumEn()
+            } else if (document.getElementById('hard').checked) {
+                hardEn()
+            }
+        }
+        function decrypt() {
+            if (document.getElementById('easy').checked) {
+                easyDe()
+            } else if (document.getElementById('medium').checked) {
+                mediumDe()
+            } else if (document.getElementById('hard').checked) {
+                hardDe()
+            }
+
+        }
+
+ function easyEn() {
+            let myTemp = ''
+            myString = document.getElementById('myArea01').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
+                if (myString[myLoop] == 'e') {myTemp  = 'f'}
+                if (myString[myLoop] == 'h') {myTemp  = 'i'} 
+          myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea02').value = myString.join('')
+        }
+
+
+function mediumEn() {
+            let myTemp = ''
+            myString = document.getElementById('myArea01').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
       if (myString[myLoop] == 'a') {myTemp  = '001'}
       if (myString[myLoop] == 'b') {myTemp  = '210'}
       if (myString[myLoop] == 'c') {myTemp  = '211'}
@@ -33,32 +77,196 @@
       if (myString[myLoop] == 'x') {myTemp  = '640'}
       if (myString[myLoop] == 'y') {myTemp  = '550'}
       if (myString[myLoop] == 'z') {myTemp  = '462'}
-      if (myString[myLoop] == '1') {myTemp  = '1000'}
-      if (myString[myLoop] == '2') {myTemp  = '01000'}
-      if (myString[myLoop] == '3') {myTemp  = '11000'}
-      if (myString[myLoop] == '4') {myTemp  = '00100'}
-      if (myString[myLoop] == '5') {myTemp  = '10100'}
-      if (myString[myLoop] == '6') {myTemp  = '01100'}
-      if (myString[myLoop] == '7') {myTemp  = '11100'}
-      if (myString[myLoop] == '8') {myTemp  = '00010'}
-      if (myString[myLoop] == '9') {myTemp  = '10010'}
-      if (myString[myLoop] == '0') {myTemp  = '01010'}
-      if (myString[myLoop] == '.') {myTemp  = '00000'}
-      if (myString[myLoop] == ' ') {myTemp  = '11111'}
-      
-      
-      myString[myLoop] = myTemp
-   }
-   document.getElementById('myArea02').value = myString.join('')
-}"><br><br>
+      if (myString[myLoop] == ' ') {myTemp  = '111'}
+               myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea02').value = myString.join('')
+        }
+         
+         
+         
+function hardEn() {
+            let myTemp = ''
+            myString = document.getElementById('myArea01').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
+                if (myString[myLoop] == 'q') {myTemp  = 'a'}
+                if (myString[myLoop] == 'w') {myTemp  = 'a'}
+                if (myString[myLoop] == 'e') {myTemp  = 'a'}
+                if (myString[myLoop] == 'r') {myTemp  = 'a'}
+                if (myString[myLoop] == 't') {myTemp  = 'a'}
+                if (myString[myLoop] == 'y') {myTemp  = 'a'}
+                if (myString[myLoop] == 'u') {myTemp  = 'a'}
+                if (myString[myLoop] == 'i') {myTemp  = 'a'}
+                if (myString[myLoop] == 'o') {myTemp  = 'a'}
+                if (myString[myLoop] == 'p') {myTemp  = 'a'}
+                if (myString[myLoop] == 'a') {myTemp  = 'a'}
+                if (myString[myLoop] == 's') {myTemp  = 'a'}
+                if (myString[myLoop] == 'd') {myTemp  = 'a'}
+                if (myString[myLoop] == 'f') {myTemp  = 'a'}
+                if (myString[myLoop] == 'g') {myTemp  = 'a'}
+                if (myString[myLoop] == 'h') {myTemp  = 'a'}
+                if (myString[myLoop] == 'j') {myTemp  = 'a'}
+                if (myString[myLoop] == 'k') {myTemp  = 'a'}
+                if (myString[myLoop] == 'l') {myTemp  = 'a'}
+                if (myString[myLoop] == ';') {myTemp  = 'a'}
+                if (myString[myLoop] == ':') {myTemp  = 'a'}
+                if (myString[myLoop] == 'z') {myTemp  = 'a'}
+                if (myString[myLoop] == 'x') {myTemp  = 'a'}
+                if (myString[myLoop] == 'c') {myTemp  = 'a'}
+                if (myString[myLoop] == 'v') {myTemp  = 'a'}
+                if (myString[myLoop] == 'b') {myTemp  = 'a'}
+                if (myString[myLoop] == 'n') {myTemp  = 'a'}
+                if (myString[myLoop] == 'm') {myTemp  = 'a'}
+                if (myString[myLoop] == ',') {myTemp  = 'a'}
+                if (myString[myLoop] == '.') {myTemp  = 'a'}
+                if (myString[myLoop] == '/') {myTemp  = 'a'}
+                if (myString[myLoop] == '?') {myTemp  = 'a'}
+                if (myString[myLoop] == '1') {myTemp  = 'a'}
+                if (myString[myLoop] == '2') {myTemp  = 'a'}
+                if (myString[myLoop] == '3') {myTemp  = 'a'}
+                if (myString[myLoop] == '4') {myTemp  = 'a'}
+                if (myString[myLoop] == '5') {myTemp  = 'a'}
+                if (myString[myLoop] == '6') {myTemp  = 'a'}
+                if (myString[myLoop] == '7') {myTemp  = 'a'}
+                if (myString[myLoop] == '8') {myTemp  = 'a'}
+                if (myString[myLoop] == '9') {myTemp  = 'a'}
+                if (myString[myLoop] == '0') {myTemp  = 'a'}
+                if (myString[myLoop] == '!') {myTemp  = 'a'}
+                if (myString[myLoop] == '@') {myTemp  = 'a'}
+                if (myString[myLoop] == '#') {myTemp  = 'a'}
+                if (myString[myLoop] == '$') {myTemp  = 'a'}
+                if (myString[myLoop] == '%') {myTemp  = 'a'}
+                if (myString[myLoop] == '^') {myTemp  = 'a'}
+                if (myString[myLoop] == '&') {myTemp  = 'a'}
+                if (myString[myLoop] == '*') {myTemp  = 'a'}
+                if (myString[myLoop] == '_') {myTemp  = 'a'}
+                if (myString[myLoop] == '-') {myTemp  = 'a'}
+                if (myString[myLoop] == '=') {myTemp  = 'a'}
+                if (myString[myLoop] == '+') {myTemp  = 'a'}
+                if (myString[myLoop] == ' ') {myTemp  = 'a'}
+               myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea02').value = myString.join('')
+        }
 
 
 
-<textarea id="myArea02" rows=4 cols=70></textarea><br> 
-
-<input type=button value="decrypt" onclick="{
-   alert('Sorry, you have to do this!')
-}"><br><br>
-
+function easyDe() {
+            let myTemp = ''
+            myString = document.getElementById('myArea02').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
+                if (myString[myLoop] == 'i') {myTemp  = 'h'} 
+                if (myString[myLoop] == 'f') {myTemp  = 'e'}
+                myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea03').value = myString.join('')
+        }
+        
+        
+        function mediumDe() {
+            let myTemp = ''
+            myString = document.getElementById('myArea02').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
+                if (myString[myLoop] == '001') {myTemp  = 'a'} 
+                if (myString[myLoop] == '210') {myTemp  = 'b'}
+                if (myString[myLoop] == '211') {myTemp  = 'c'}
+                if (myString[myLoop] == '220') {myTemp  = 'd'}
+                if (myString[myLoop] == '221') {myTemp  = 'e'}
+                if (myString[myLoop] == '230') {myTemp  = 'f'}
+                if (myString[myLoop] == '223') {myTemp  = 'g'}
+                if (myString[myLoop] == '322') {myTemp  = 'h'}
+                if (myString[myLoop] == '330') {myTemp  = 'i'}
+                if (myString[myLoop] == '242') {myTemp  = 'j'}
+                if (myString[myLoop] == '251') {myTemp  = 'k'}
+                if (myString[myLoop] == '252') {myTemp  = 'l'} 
+                if (myString[myLoop] == '431') {myTemp  = 'm'}
+                if (myString[myLoop] == '720') {myTemp  = 'n'}
+                if (myString[myLoop] == '271') {myTemp  = 'o'}
+                if (myString[myLoop] == '820') {myTemp  = 'p'}
+                if (myString[myLoop] == '441') {myTemp  = 'q'}
+                if (myString[myLoop] == '282') {myTemp  = 'r'}
+                if (myString[myLoop] == '921') {myTemp  = 's'}
+                if (myString[myLoop] == '292') {myTemp  = 't'}
+                if (myString[myLoop] == '730') {myTemp  = 'u'}
+                if (myString[myLoop] == '371') {myTemp  = 'v'}
+                if (myString[myLoop] == '543') {myTemp  = 'w'}
+                if (myString[myLoop] == '640') {myTemp  = 'x'}
+                if (myString[myLoop] == '550') {myTemp  = 'y'}
+                if (myString[myLoop] == '462') {myTemp  = 'z'}
+                if (myString[myLoop] == '111') {myTemp  = ' '}
+                myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea03').value = myString.join('')
+        }
+        
+        
+         function hardDe() {
+            let myTemp = ''
+            myString = document.getElementById('myArea02').value.toLowerCase().split('')
+            for (let myLoop=0;   myLoop < myString.length; myLoop++){
+                myTemp = myString[myLoop]
+                if (myString[myLoop] == 'a') {myTemp  = 'a'} 
+                if (myString[myLoop] == 'a') {myTemp  = 'a'}
+                if (myString[myLoop] == 'a') {myTemp  = 'a'}
+                if (myString[myLoop] == 'a') {myTemp  = 'a'}
+                if (myString[myLoop] == 'a') {myTemp  = 'a'}
+                if (myString[myLoop] == 'a') {myTemp  = 'e'}
+                if (myString[myLoop] == 'a') {myTemp  = 'f'}
+                if (myString[myLoop] == 'a') {myTemp  = 'g'}
+                if (myString[myLoop] == 'a') {myTemp  = 'h'}
+                if (myString[myLoop] == 'a') {myTemp  = 'i'}
+                if (myString[myLoop] == 'a') {myTemp  = 'j'}
+                if (myString[myLoop] == 'a') {myTemp  = 'k'} 
+                if (myString[myLoop] == 'a') {myTemp  = 'l'}
+                if (myString[myLoop] == 'a') {myTemp  = 'm'}
+                if (myString[myLoop] == 'a') {myTemp  = 'n'}
+                if (myString[myLoop] == 'a') {myTemp  = 'o'}
+                if (myString[myLoop] == 'a') {myTemp  = 'p'}
+                if (myString[myLoop] == 'a') {myTemp  = 'q'}
+                if (myString[myLoop] == 'a') {myTemp  = 'r'}
+                if (myString[myLoop] == 'a') {myTemp  = 's'}
+                if (myString[myLoop] == 'a') {myTemp  = 't'}
+                if (myString[myLoop] == 'a') {myTemp  = 'u'}
+                if (myString[myLoop] == 'a') {myTemp  = 'v'}
+                if (myString[myLoop] == 'a') {myTemp  = 'w'}
+                if (myString[myLoop] == 'a') {myTemp  = 'x'}
+                if (myString[myLoop] == 'a') {myTemp  = 'y'}
+                if (myString[myLoop] == 'a') {myTemp  = 'z'}
+                if (myString[myLoop] == 'a') {myTemp  = '1'}
+                if (myString[myLoop] == 'a') {myTemp  = '2'}
+                if (myString[myLoop] == 'a') {myTemp  = '3'}
+                if (myString[myLoop] == 'a') {myTemp  = '4'}
+                if (myString[myLoop] == 'a') {myTemp  = '5'}
+                if (myString[myLoop] == 'a') {myTemp  = '6'}
+                if (myString[myLoop] == 'a') {myTemp  = '7'}
+                if (myString[myLoop] == 'a') {myTemp  = '8'}
+                if (myString[myLoop] == 'a') {myTemp  = '9'}
+                if (myString[myLoop] == 'a') {myTemp  = '0'}
+                if (myString[myLoop] == 'a') {myTemp  = '!'}
+                if (myString[myLoop] == 'a') {myTemp  = '@'}
+                if (myString[myLoop] == 'a') {myTemp  = '#'}
+                if (myString[myLoop] == 'a') {myTemp  = '$'}
+                if (myString[myLoop] == 'a') {myTemp  = '%'}
+                if (myString[myLoop] == 'a') {myTemp  = '^'}
+                if (myString[myLoop] == 'a') {myTemp  = '&'}
+                if (myString[myLoop] == 'a') {myTemp  = '*'}
+                if (myString[myLoop] == 'a') {myTemp  = '-'}
+                if (myString[myLoop] == 'a') {myTemp  = '='}
+                if (myString[myLoop] == 'a') {myTemp  = '_'}
+                if (myString[myLoop] == 'a') {myTemp  = '+'}
+                if (myString[myLoop] == 'a') {myTemp  = ';'}
+                if (myString[myLoop] == 'a') {myTemp  = ':'}
+                if (myString[myLoop] == 'a') {myTemp  = ','}
+                if (myString[myLoop] == 'a') {myTemp  = '.'}
+                if (myString[myLoop] == 'a') {myTemp  = '/'}
+                if (myString[myLoop] == 'a') {myTemp  = '?'}
+                myString[myLoop] = myTemp
+            }
+            document.getElementById('myArea03').value = myString.join('')
+        }
+        </script></html>
 
 <textarea id="myArea03" rows=4 cols=70></textarea><br> 
