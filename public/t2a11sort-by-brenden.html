@@ -1,0 +1,122 @@
+<script>
+    //script that generates random numbers, and sorts them in ascending order
+    //functin that generates random numbers and stores them in an array, displays them, with a br after each number 
+    //every time the function is called, it generates a new set of random numbers and resets the array
+    var numbers = [];
+    function init(){
+        //disable reset button
+        document.getElementById("reset").disabled = true;
+        //disable sort button
+        document.getElementById("sort").disabled = true;
+    }
+
+    function generateNumbers() {
+        //display numbers have been generated in result tag 
+        document.getElementById("result").innerHTML = "Numbers have been generated";
+
+        document.getElementById("generate").disabled = true;
+        //enable sort button
+        document.getElementById("sort").disabled = false;
+
+
+        for (var i = 0; i < 20; i++) {
+            numbers[i] = Math.floor(Math.random() * 52);
+            //display numbers with br in numbers tag 
+            document.getElementById("numbers").innerHTML += numbers[i] + "<br>";
+            //store numbers in the array
+            numbers[i] = numbers[i];
+        }
+        return numbers;
+    }
+
+    //get the numbers from the array and sort them in ascending order
+   //display the numbers with a br after each one
+    function sortNumbers() {
+        //display numbers have been sorted in results tag
+        document.getElementById("result").innerHTML = "Numbers have been sorted";
+        //disable sort button
+        document.getElementById("sort").disabled = true;
+        //enable reset button
+        document.getElementById("reset").disabled = false;
+
+
+
+        numbers.sort(function (a, b) {
+            return a - b;
+        });
+        for (var i = 0; i < numbers.length; i++) {
+            document.getElementById("sortedNumbers").innerHTML += numbers[i] + "<br>";
+        }
+            //every time the function is called, it generates a new set of random numbers and resets the array
+
+        
+
+    }
+//function to reset the array and the display
+    function reset() {
+        numbers = [];
+        document.getElementById("numbers").innerHTML = "";
+        document.getElementById("sortedNumbers").innerHTML = "";
+
+        //enable the generate button
+        document.getElementById("generate").disabled = false;
+        //enable the sort button
+        document.getElementById("sort").disabled = true;
+        //disable reset button
+        document.getElementById("reset").disabled = true;
+        //in result tag, say "reset"
+        document.getElementById("result").innerHTML = "Numbers Have Been Reset";
+
+        
+
+    }
+</script>
+<h1> Use Buttons Below To Generate 20 Random Numbers 0-52</h1>
+<p id="result">Click Generate Numbers To Start</p>
+<body onload="init()"></body>
+<button id="generate" onclick="generateNumbers()">Generate Numbers</button>
+<button id="sort" onclick="sortNumbers()">Sort Numbers</button> 
+<button id="reset" onclick="reset()">Reset</button>
+<BR> <BR> <BR>  
+
+<div id="numbers"></div>
+<div id="sortedNumbers"></div>
+<div id="myDiv01"></div>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
+
+    
+    BODY{
+        background-color: #f2f2f2;
+        BORDER: 3px solid #000000;
+        border-radius: 10px;
+        
+        font-family: 'Poppins', sans-serif;
+        FONT-SIZE: 12px;
+        COLOR: #000000;
+        MARGIN: 10px;
+        PADDING: 30px;
+
+    }
+    /* display sorted numbers beside the unsorted numbers */
+    #numbers {
+        border: #000000 1px solid;
+        width: auto;
+        height: auto;
+        padding: 5px;
+        text-align: center;
+
+        float: left;
+    }
+    #sortedNumbers {
+        float: left;
+        border: #000000 1px solid;
+        width: auto;
+        height: auto;
+        padding: 5px;
+        margin-left: 200px;
+        text-align: center;
+    }
+</style>
