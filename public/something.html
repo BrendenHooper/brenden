@@ -75,7 +75,13 @@ function myCheckHit(){
    }   
    if (event.key == 's') {   // s = go down
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
-   }  
+   }                                                                                                                    
+    if (event.key == 'a') {  // a = go right
+     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+   }   
+   if (event.key == 'w') {   // w = go up
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+   }                                                                                                                  
    // put more here
   myCheckHit()     // checks for all collisions
 }">
