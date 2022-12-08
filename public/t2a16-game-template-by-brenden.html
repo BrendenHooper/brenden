@@ -67,7 +67,13 @@ function myCheckHit(){
    
    
    <input type=button value="Auto image Left" onclick="{
- document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+ clearInterval(myClock)
+  let myTemp = '100px 0px'
+  myClock = setInterval(function(){
+      myGlobalX -= 5
+      myTemp =  myGlobalX + 'px 0px'
+      document.getElementById('myImg01').style.left = myTemp
+  }, 100)
   myCheckHit()     // checks for all collisions
     
 }">
