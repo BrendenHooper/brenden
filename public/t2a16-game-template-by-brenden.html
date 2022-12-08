@@ -62,6 +62,20 @@ function myCheckHit(){
     
 }">
 
+   
+   
+   
+   
+   <input type=button value="Auto image Left" onclick="{
+ document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+  myCheckHit()     // checks for all collisions
+    
+}">
+
+   
+   
+   
+   
 
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
