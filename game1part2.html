@@ -4,7 +4,7 @@
 
    let myGlobalX = 0
    let myClock
-   let myScore = 10
+   let myScore = 1000
 
 
    // global functions here
@@ -30,29 +30,88 @@ function myCheckHit(){
    document.all.myText01.value = myScore  // show the present score
 
    if ( myHitOther('myImg01','myImg02') ){
-      document.getElementById('myImg01').style.left = '20px'
-      document.all.myText01.value = 'You hit myImg02'  
+document.getElementById('myImg01').style.left = '240px'
+document.getElementById('myImg01').style.top = '220px'      
+document.all.myText01.value = 'you suck'  
       myScore -= 1
-   }   
+   }  
+   if ( myHitOther('myImg01','myImg04') ){
+document.getElementById('myImg01').style.left = '240px'
+document.getElementById('myImg01').style.top = '220px'
+document.all.myText01.value = 'you suck'  
+      myScore -= 1
+   } 
    
-   if ( myHitOther('myImg01','myImg03') ){
-       //alert('you lose')
-      document.getElementById('myImg01').style.left = '20px'
-      document.all.myText01.value = 'You hit myImg03'  
+   if ( myHitOther('myImg01','myImg05') ){
+document.getElementById('myImg01').style.left = '240px'
+document.getElementById('myImg01').style.top = '220px'      
+document.all.myText01.value = 'you suck'  
       myScore -= 1
-   }   
+   }
+   if ( myHitOther('myImg01','myImg06') ){
+document.getElementById('myImg01').style.left = '240px'
+document.getElementById('myImg01').style.top = '220px'      
+document.all.myText01.value = 'you suck6'  
+      myScore -= 1
+   }
+   if ( myHitOther('myImg01','myImg07') ){
+     
+document.all.myText01.value = 'you suck7'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg08') ){
+     
+document.all.myText01.value = 'you suck8'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg09') ){
+     
+document.all.myText01.value = 'you suck9'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg10') ){
+     
+document.all.myText01.value = 'you suck10'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg11') ){
+     
+document.all.myText01.value = 'you suck11'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg12') ){
+     
+document.all.myText01.value = 'you suck12'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg13') ){
+     
+document.all.myText01.value = 'you suck13'  
+      myScore -= 1
+   }
+ if ( myHitOther('myImg01','myImg14') ){
+     
+document.all.myText01.value = 'you suck14'  
+      myScore -= 1
+   }
+
+   
+   
+
+   
+   
    
   // you LOSE refresh the page
    if (myScore <= 0){
     document.all.myText01.value = 'You Lose scrore at zero!'  
     alert('Sorry you lose')
-    location.reload()
+    location = 'https://brendenhooper.github.io/brenden/public/game1.html'
    }
 
    // YOU WIN and go to next level!
 
-   if ( myHitOther('myImg01','myImg04') ){
-      document.all.myText01.value = 'You hit myImg04 and you win the game!'  
+   if ( myHitOther('myImg01','myImg03') ){
+      document.all.myText01.value = 'you win now go to levle 2'  
        alert('You Win, now go to the next level')
       document.getElementById('myImg01').style.left = '20px'
       location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
@@ -68,7 +127,7 @@ function myCheckHit(){
 
 
 
-<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1"  onkeydown="{
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  onkeydown="{
    document.all.myText01.value = event.key
    if (event.key == 'd') {  // d = go right
      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
@@ -90,7 +149,7 @@ function myCheckHit(){
 
 
 
-<h1 align=center><font color=Yellow>T4A05 Template with WASD by Fred</font></h1>
+<h1 align=center><font color=blue>Brenden maze game</font></h1>
 
 <input id="myText01" type=text value="" size=50 placeholder="Feedback here"><br>
 
@@ -129,7 +188,28 @@ function myCheckHit(){
 
 
 
-<img id="myImg01" src="https://tresubresdobles.com/wp-content/uploads/2019/07/skft-67293d24439b84f3ce1ae556d35f10db.jpg"  style="position:absolute; width:100px; height:80px; left: 50px; top:190px;">
-<img id="myImg02" src="https://i.ytimg.com/vi/WJZIJ4XSQ-Q/maxresdefault.jpg"  style="position:absolute; width:100px; height:80px; left:350px; top:190px;">
-<img id="myImg03" src="https://pbs.twimg.com/profile_images/463525719683764224/71Oe_sTw.jpeg"  style="position:absolute; width:100px; height:80px; left:500px; top:190px;">
-<img id="myImg04" src="https://cdn.wallpapersafari.com/68/80/57GzcT.jpg"  style="position:absolute; width:100px; height:80px; left:500px; top:400px;">
+<img id="myImg01" src="https://i.pinimg.com/736x/7d/81/e7/7d81e76f90991d4f5c9f983c043554ca.jpg"  style="position:absolute; width:30px; height:30px; left:270px; top:810px;">
+<img id="myImg03" src="https://th.bing.com/th/id/OIP.kXBpsQhY6T5nNzC3opupBQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:70px; height:70px; left:170px; top:870px;">
+
+<img id="myImg02" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:800px; left:100px; top:210px;">
+<img id="myImg04" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:540px; height:10px; left:100px; top:200px;">
+<img id="myImg05" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:800px; left:630px; top:210px;">
+<img id="myImg06" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:530px; height:10px; left:110px; top:1000px;">
+
+<img id="myImg07" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left:110px; top:260px;">
+<img id="myImg08" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:200px; left:280px; top:200px;">
+<img id="myImg09" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left:160px; top:200px;">
+<img id="myImg10" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:30px; left:220px; top:370px;">
+<img id="myImg11" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:130px; left:220px; top:320px;">
+<img id="myImg12" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left:160px; top:320px;">
+<img id="myImg13" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left:110px; top:380px;">
+<img id="myImg14" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:20px; height:110px; left:230px; top:400px;">
+<img id="myImg15" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left:110px; top:440px;">
+<img id="myImg16" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:20px; height:180px; left:160px; top:500px;">
+<img id="myImg17" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:450px; left:160px; top:500px;">
+<img id="myImg18" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:10px; left:180px; top:560px;">
+<img id="myImg19" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:100px; left:240px; top:510px;">
+<img id="myImg20" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:20px; height:10px; left:170px; top:940px;">
+<img id="myImg21" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:10px; left:240px; top:860px;">
+
+
