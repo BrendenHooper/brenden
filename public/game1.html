@@ -252,6 +252,9 @@
  document.all.myText01.value = 'you suck'  
        myScore -= 1
     }
+    if ( myHitOther('myImg01','myImg40') ){      
+ document.all.myText01.value = 'dont touch the red go to the green gl'  
+    }
     
     
 
@@ -271,7 +274,7 @@
        document.all.myText01.value = 'you win now go to levle 2'  
         alert('You Win, now go to the next level')
        document.getElementById('myImg01').style.left = '20px'
-       location = 'https://brendenhooper.github.io/brenden/game1part2.html'
+       location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
     }
  
     // more if statements here
@@ -308,7 +311,7 @@
  
  <h1 align=center><font color=blue>Brenden maze game</font></h1>
  
- <input id="myText01" type=text value="" size=50 placeholder="Feedback here"><br>
+ <input id="myText01" type=text value="before you start the orange square is harmless and can give you hints" size=60 placeholder="Feedback here"><br>
  
  <input type=button value="Auto Background Left" onclick="{
    clearInterval(myClock)
@@ -386,3 +389,6 @@
  <img id="myImg37" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:220px; left:740px; top:400px;">
  <img id="myImg38" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:210px; left:660px; top:340px;">
  <img id="myImg39" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:280px; left:830px; top:340px;">
+
+
+ <img id="myImg40" src="https://th.bing.com/th/id/R.ec9f8f0ea3c156056c51267c241d0f7e?rik=zfTWLGWo7o3nSA&pid=ImgRaw&r=0"  style="position:absolute; width:10px; height:10px; left:70px; top:270px;">
