@@ -1,178 +1,191 @@
 <script>
 
-    // global variables here
- 
-    let myGlobalX = 0
-    let myClock
-    let myScore = 1
- 
- 
-    // global functions here
- function myHitOther(my1,my2){
-    left1   = parseInt(document.getElementById(my1).style.left)
-    right1  = left1 + parseInt(document.getElementById(my1).style.width)
-    top1    = parseInt(document.getElementById(my1).style.top)   
-    bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
-    left2   = parseInt(document.getElementById(my2).style.left)
-    right2  = left2 + parseInt(document.getElementById(my2).style.width)
-    top2    = parseInt(document.getElementById(my2).style.top)   
-    bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
-    if ((right1  >=  left2  ) &&      	   
-        (bottom1 >=  top2   ) &&
-        (left1   <=  right2 ) &&
-        (top1    <=  bottom2) ){
-        return true
-    }
- }
- 
- 
- function myCheckHit(){
-    document.all.myText01.value = myScore  // show the present score
- 
-    if ( myHitOther('myImg01','myImg02') ){
- document.getElementById('myImg01').style.left = '50px'
- document.getElementById('myImg01').style.top = '210px'      
- document.all.myText01.value = 'you suck'  
-       myScore -= 1
-    }  
-    if ( myHitOther('myImg01','myImg04') ){
- document.getElementById('myImg01').style.left = '50px'
- document.getElementById('myImg01').style.top = '210px'
- document.all.myText01.value = 'you suck1'  
-       myScore -= 1
-    } 
-    if ( myHitOther('myImg01','myImg05') ){
- document.getElementById('myImg01').style.left = '50px'
- document.getElementById('myImg01').style.top = '210px'
- document.all.myText01.value = 'you suck1'  
-       myScore -= 1
-    }
-    if ( myHitOther('myImg01','myImg06') ){
- document.getElementById('myImg01').style.left = '50px'
- document.getElementById('myImg01').style.top = '210px'
- document.all.myText01.value = 'you suck1'  
-       myScore -= 1
-    }
-    if ( myHitOther('myImg01','myImg07') ){
- document.getElementById('myImg01').style.left = '50px'
- document.getElementById('myImg01').style.top = '210px'
- document.all.myText01.value = 'you suck1'  
-       myScore -= 1
-    }
-    
-    
-    
-    if ( myHitOther('myImg01','myImg40') ){      
- document.all.myText01.value = 'dont touch the red go to the green gl'  
-    }
-    
-    
+   // global variables here
 
-    
-    
-    
-   // you LOSE refresh the page
-    if (myScore <= 0){
-     document.all.myText01.value = 'You Lose scrore at zero!'  
-     alert('Sorry you lose')
-     location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
-    }
- 
-    // YOU WIN and go to next level!
- 
-    if ( myHitOther('myImg01','myImg03') ){
-       document.all.myText01.value = 'you win now go to levle 2'  
-        alert('you win and now the suffering stops')
-    }
+   let myGlobalX = 0
+   let myClock
+   let myScore = 1
 
-    if ( myHitOther('myImg01','myImg03') ){
-       document.all.myText01.value = 'you somehow got it'  
-        alert('last level')
-    }
- 
-    // more if statements here
- 
- }
- 
- 
- </script>
- 
- 
- 
- 
- <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/R.80fd6d54a2547a1c7b917e37aa6ad2b3?rik=hsjDtiJaMvKxDw&pid=ImgRaw&r=0"  onkeydown="{
-    document.all.myText01.value = event.key
-    if (event.key == 'd') {  // d = go right
-      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-    }   
-    if (event.key == 's') {   // s = go down
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
-    }                                                                                                                    
-     if (event.key == 'a') {  // a = go right
-      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
-    }   
-    if (event.key == 'w') {   // w = go up
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
-    }                                                                                                                  
-    // put more here
-   myCheckHit()     // checks for all collisions
- }">
- 
- 
- 
- 
- 
- <h1 align=center><font color=blue>Brenden maze game</font></h1>
- 
- <input id="myText01" type=text value="before you start the orange square is harmless and can give you hints" size=60 placeholder="Feedback here"><br>
- 
- <input type=button value="Auto Background Left" onclick="{
-   clearInterval(myClock)
-   let myTemp = '100px 0px'
-   myClock = setInterval(function(){
-       myGlobalX -= 5
-       myTemp =  myGlobalX + 'px 0px'
-       document.getElementById('myBody').style.backgroundPosition = myTemp
-   }, 100)
-     
- }">
- 
- 
- <input type=button value="Right" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-   myCheckHit()     // checks for all collisions
- }">
- 
- <input type=button value="Down" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-   document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
-   myCheckHit()     // checks for all collisions
- }">
+
+   // global functions here
+function myHitOther(my1,my2){
+   left1   = parseInt(document.getElementById(my1).style.left)
+   right1  = left1 + parseInt(document.getElementById(my1).style.width)
+   top1    = parseInt(document.getElementById(my1).style.top)   
+   bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
+   left2   = parseInt(document.getElementById(my2).style.left)
+   right2  = left2 + parseInt(document.getElementById(my2).style.width)
+   top2    = parseInt(document.getElementById(my2).style.top)   
+   bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
+   if ((right1  >=  left2  ) &&      	   
+       (bottom1 >=  top2   ) &&
+       (left1   <=  right2 ) &&
+       (top1    <=  bottom2) ){
+       return true
+   }
+}
+
+
+function myCheckHit(){
+   document.all.myText01.value = myScore  // show the present score
+
+   if ( myHitOther('myImg01','myImg02') ){
+document.getElementById('myImg01').style.left = '50px'
+document.getElementById('myImg01').style.top = '210px'      
+document.all.myText01.value = 'you suck'  
+      myScore -= 1
+   }  
+   if ( myHitOther('myImg01','myImg04') ){
+document.getElementById('myImg01').style.left = '50px'
+document.getElementById('myImg01').style.top = '210px'
+document.all.myText01.value = 'you suck1'  
+      myScore -= 1
+   } 
+   if ( myHitOther('myImg01','myImg05') ){
+document.getElementById('myImg01').style.left = '50px'
+document.getElementById('myImg01').style.top = '210px'
+document.all.myText01.value = 'you suck1'  
+      myScore -= 1
+   }
+   if ( myHitOther('myImg01','myImg06') ){
+document.getElementById('myImg01').style.left = '50px'
+document.getElementById('myImg01').style.top = '210px'
+document.all.myText01.value = 'you suck1'  
+      myScore -= 1
+   }
+   if ( myHitOther('myImg01','myImg07') ){
+document.getElementById('myImg01').style.left = '50px'
+document.getElementById('myImg01').style.top = '210px'
+document.all.myText01.value = 'you suck1'  
+      myScore -= 1
+   }
    
-    <input type=button value="left" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
-   myCheckHit()     // checks for all collisions
- }">
- 
- <input type=button value="up" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-   document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
-   myCheckHit()     // checks for all collisions
- }"><br><br>
- 
- 
- 
- image
- <img id="myImg01" src="https://i.pinimg.com/736x/7d/81/e7/7d81e76f90991d4f5c9f983c043554ca.jpg"  style="position:absolute; width:30px; height:30px; left: 120px; top:220px;">
- fake finish
- <img id="myImg02" src="https://th.bing.com/th/id/OIP.kXBpsQhY6T5nNzC3opupBQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:100px; height:100px; left:1000px; top:200px;">
- real finish
- <img id="myImg03" src="https://th.bing.com/th/id/R.80fd6d54a2547a1c7b917e37aa6ad2b3?rik=hsjDtiJaMvKxDw&pid=ImgRaw&r=0"  style="position:absolute; width:100px; height:100px; left:1000px; top:200px;">
-inner walls
- <img id="myImg04" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:2000px; left:1710px; top:200px;">
- <img id="myImg05" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:1610px; height:10px; left:100px; top:200px;">
- <img id="myImg06" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:2000px; left:100px; top:200px;">
- <img id="myImg07" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:1610px; height:10px; left:100px; top:2190px;">
- inner walls
- <img id="myImg08" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:70px; left:150px; top:260px;">
- <img id="myImg09" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:340px; height:10px; left:220px; top:260px;">
- <img id="myImg10" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:90px; height:10px; left:150px; top:320px;">
+   
+   
+   if ( myHitOther('myImg01','myImg40') ){      
+document.all.myText01.value = 'dont touch the red go to the green gl'  
+   }
+   
+   
 
+   
+   
+   
+  // you LOSE refresh the page
+   if (myScore <= 0){
+    document.all.myText01.value = 'You Lose scrore at zero!'  
+    alert('Sorry you lose')
+    location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
+   }
+
+   // YOU WIN and go to next level!
+
+   if ( myHitOther('myImg01','myImg03') ){
+      document.all.myText01.value = 'you win now go to levle 2'  
+       alert('you win and now the suffering stops')
+   }
+
+   if ( myHitOther('myImg01','myImg03') ){
+      document.all.myText01.value = 'you somehow got it'  
+       alert('last level')
+   }
+
+   // more if statements here
+
+}
+
+
+</script>
+
+
+
+
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/R.80fd6d54a2547a1c7b917e37aa6ad2b3?rik=hsjDtiJaMvKxDw&pid=ImgRaw&r=0"  onkeydown="{
+   document.all.myText01.value = event.key
+   if (event.key == 'd') {  // d = go right
+     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+   }   
+   if (event.key == 's') {   // s = go down
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+   }                                                                                                                    
+    if (event.key == 'a') {  // a = go right
+     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+   }   
+   if (event.key == 'w') {   // w = go up
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+   }                                                                                                                  
+   // put more here
+  myCheckHit()     // checks for all collisions
+}">
+
+
+
+
+
+<h1 align=center><font color=blue>Brenden maze game</font></h1>
+
+<input id="myText01" type=text value="before you start the orange square is harmless and can give you hints" size=60 placeholder="Feedback here"><br>
+
+<input type=button value="Auto Background Left" onclick="{
+  clearInterval(myClock)
+  let myTemp = '100px 0px'
+  myClock = setInterval(function(){
+      myGlobalX -= 5
+      myTemp =  myGlobalX + 'px 0px'
+      document.getElementById('myBody').style.backgroundPosition = myTemp
+  }, 100)
+    
+}">
+
+
+<input type=button value="Right" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+  myCheckHit()     // checks for all collisions
+}">
+
+<input type=button value="Down" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+  myCheckHit()     // checks for all collisions
+}">
+  
+   <input type=button value="left" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+  myCheckHit()     // checks for all collisions
+}">
+
+<input type=button value="up" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+  myCheckHit()     // checks for all collisions
+}"><br><br>
+
+
+
+image
+<img id="myImg01" src="https://i.pinimg.com/736x/7d/81/e7/7d81e76f90991d4f5c9f983c043554ca.jpg"  style="position:absolute; width:30px; height:30px; left: 120px; top:220px;">
+fake finish
+<img id="myImg02" src="https://th.bing.com/th/id/OIP.kXBpsQhY6T5nNzC3opupBQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:100px; height:100px; left:1000px; top:200px;">
+real finish
+<img id="myImg03" src="https://th.bing.com/th/id/R.80fd6d54a2547a1c7b917e37aa6ad2b3?rik=hsjDtiJaMvKxDw&pid=ImgRaw&r=0"  style="position:absolute; width:100px; height:100px; left:1000px; top:200px;">
+inner walls
+<img id="myImg04" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:2000px; left:1710px; top:200px;">
+<img id="myImg05" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:1610px; height:10px; left:100px; top:200px;">
+<img id="myImg06" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:2000px; left:100px; top:200px;">
+<img id="myImg07" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:1610px; height:10px; left:100px; top:2190px;">
+inner walls
+<img id="myImg08" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:70px; left:160px; top:260px;">
+<img id="myImg09" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:340px; height:10px; left:220px; top:260px;">
+<img id="myImg10" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:90px; height:10px; left:170px; top:320px;">
+<img id="myImg11" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:240px; left:250px; top:330px;">
+<img id="myImg12" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:160px; left:310px; top:270px;">
+<img id="myImg13" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:190px; left:160px; top:380px;">
+<img id="myImg14" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:30px; height:10px; left:170px; top:380px;">
+<img id="myImg15" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:30px; height:10px; left:170px; top:500px;">
+<img id="myImg16" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:30px; height:10px; left:220px; top:440px;">
+<img id="myImg17" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:80px; height:10px; left:170px; top:560px;">
+<img id="myImg18" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left:260px; top:540px;">
+<img id="myImg19" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left:260px; top:480px;">
+<img id="myImg20" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left:320px; top:420px;">
+<img id="myImg21" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:90px; left:430px; top:270px;">
+<img id="myImg22" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left:370px; top:360px;">
+<img id="myImg23" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:40px; left:370px; top:320px;">
+<img id="myImg24" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:110px; left:370px; top:430px;">
