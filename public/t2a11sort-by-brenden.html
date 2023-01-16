@@ -82,7 +82,34 @@
 <div id="numbers"></div>
 <div id="sortedNumbers"></div>
 <div id="myDiv01"></div>
+<br><br><br><br><br><br>
+    <script>
+   let myMax = 3      // 52 when working
+   let myCards = new Array(myMax)  
+</script>
 
+<input type=button value="Set Random" onclick="{
+  for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+     myCards[myLoop] = Math.floor(Math.random()*10)
+  }
+}">
+
+<input type=button value="Show" onclick="{
+  let myTemp = ''
+  for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+     myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>'
+  }
+   document.getElementById('myDiv01').innerHTML = myTemp
+}">
+
+<input type=button value="Sort" onclick="{
+  let myTemp = 0
+  for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+     myCards[myLoop] = 0 // you do this stuff
+  }
+}">
+
+<dir id="myDiv01"></div>
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
