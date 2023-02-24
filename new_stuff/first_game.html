@@ -1,1 +1,152 @@
-fghjk
+
+
+<script>
+
+    // global variables here
+ 
+    let myGlobalX = 0
+    let myClock
+    let myScore = 1
+ 
+ 
+    // global functions here
+ function myHitOther(my1,my2){
+    left1   = parseInt(document.getElementById(my1).style.left)
+    right1  = left1 + parseInt(document.getElementById(my1).style.width)
+    top1    = parseInt(document.getElementById(my1).style.top)   
+    bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
+    left2   = parseInt(document.getElementById(my2).style.left)
+    right2  = left2 + parseInt(document.getElementById(my2).style.width)
+    top2    = parseInt(document.getElementById(my2).style.top)   
+    bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
+    if ((right1  >=  left2  ) &&      	   
+        (bottom1 >=  top2   ) &&
+        (left1   <=  right2 ) &&
+        (top1    <=  bottom2) ){
+        return true
+    }
+ }
+ 
+ 
+ function myCheckHit(){
+    document.all.myText01.value = myScore  // show the present score
+ 
+    if ( myHitOther('myImg01','myImg02') ){
+       document.getElementById('myImg01').style.left = '20px'
+       showMessage()
+    }   
+    
+  
+    
+   // you LOSE refresh the page
+    if (myScore <= 0){
+     document.all.myText01.value = 'You Lose scrore at zero!'  
+     alert('Sorry you lose')
+     location.reload()
+    }
+ 
+    // YOU WIN and go to next level!
+ 
+    if ( myHitOther('myImg01','myImg04') ){
+       document.all.myText01.value = 'You hit myImg04 and you win the game!'  
+        alert('You Win, now go to the next level')
+       document.getElementById('myImg01').style.left = '20px'
+       location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
+    }
+ 
+    // more if statements here
+ 
+ }
+ 
+ 
+ </script>
+ 
+ 
+ 
+ 
+ <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/R.8248c292f1f64db985525170be768d52?rik=GZtE9WL5v8zLrw&riu=http%3a%2f%2fwww.drodd.com%2fimages14%2fblack15.jpg&ehk=hJBdca%2f%2bFH4lwRrq6pqcsLQKekAfATNjXRAyINSnNDA%3d&risl=&pid=ImgRaw&r=0"  onkeydown="{
+    document.all.myText01.value = event.key
+    if (event.key == 'd') {  // d = go right
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+    }   
+    if (event.key == 's') {   // s = go down
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+    }                                                                                                                    
+     if (event.key == 'a') {  // a = go right
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+    }   
+    if (event.key == 'w') {   // w = go up
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+    }                                                                                                                  
+    // put more here
+   myCheckHit()     // checks for all collisions
+ }">
+ 
+ 
+ 
+ 
+ 
+ 
+ <input id="myText01" type=text value="" size=0 placeholder=""><br>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+    
+ 
+
+ 
+ 
+ 
+ 
+ <img id="myImg01" src="https://d3vjn2zm46gms2.cloudfront.net/blogs/2016/10/27003821/Blue1.jpg"  style="position:absolute; width:30px; height:30px; left: 50px; top:210px;">
+
+<img id="myImg02" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:10px; left: 30px; top:210px;">
+
+<audio id="myAudio">
+    <source src="https://brendenhooper.github.io/brenden/new_stuff/dark-souls-_you-died_-sound-effect-from-youtube.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+
+<style>
+    .message {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    </style>
+    
+    <script>
+    function showMessage() {
+      var message = document.createElement('div');
+      message.innerText = 'you died!';
+      message.classList.add('message');
+      message.style.color = 'red';
+      message.style.fontSize = '100px';
+      document.body.appendChild(message);
+      setTimeout(function() {
+        message.style.opacity = '1';
+      }, 10);
+      setTimeout(function() {
+        message.style.opacity = '0';
+        setTimeout(function() {
+          document.body.removeChild(message);
+        }, 1000);
+      }, 5000);
+      var audio = document.getElementById('myAudio');
+  audio.play();    }
+    </script>
