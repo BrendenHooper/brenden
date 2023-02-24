@@ -1,5 +1,6 @@
 # brenden
-
+https://brendenhooper.github.io/brenden/new_stuff/
+<br>
 
 https://brendenhooper.github.io/brenden/public/index.html
 
