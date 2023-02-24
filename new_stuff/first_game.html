@@ -64,7 +64,7 @@
  
  
  
- <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://th.bing.com/th/id/R.8248c292f1f64db985525170be768d52?rik=GZtE9WL5v8zLrw&riu=http%3a%2f%2fwww.drodd.com%2fimages14%2fblack15.jpg&ehk=hJBdca%2f%2bFH4lwRrq6pqcsLQKekAfATNjXRAyINSnNDA%3d&risl=&pid=ImgRaw&r=0"  onkeydown="{
+ <body id="myBody" style="background-repeat:repeat; background-size: 80%"   onkeydown="{
     document.all.myText01.value = event.key
     if (event.key == 'd') {  // d = go right
       document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
@@ -115,6 +115,12 @@
 
 
 <style>
+    
+    body {
+        background-color: black;
+    }
+
+    
     .message {
       opacity: 0;
       transition: opacity 1s ease-in-out;
