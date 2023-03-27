@@ -87,7 +87,7 @@
     <script>
     function save() {
         localStorage.setItem("cookiecount", cookiecount);
-        localStorage.setItem("Schoolpc", autoClick);
+        localStorage.setItem("Schoolpc", Schoolpc);
         localStorage.setItem("Hightechpc", Hightechpc);
         localStorage.setItem("Godlikepc", Godlikepc);
         localStorage.setItem("multiplier", multiplier);
@@ -96,11 +96,11 @@
         cookiecount = localStorage.getItem("cookiecount");
         cookiecount = parseInt(cookiecount);
         Schoolpc = localStorage.getItem("Schoolpc");
-        Schoolpc = parseInt(autoClick);
+        Schoolpc = parseInt(Schoolpc);
         Hightechpc = localStorage.getItem("Hightechpc");
         Hightechpc = parseInt(Hightechpc);
-        Hightechpc = localStorage.getItem("Godlikepc");
-        Hightechpc = parseInt(Godlikepc);
+        Godlikepc = localStorage.getItem("Godlikepc");
+        Godlikepc = parseInt(Godlikepc);
         multiplier = localStorage.getItem("multiplier");
         multiplier = parseInt(multiplier);        
         update()
