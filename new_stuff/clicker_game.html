@@ -41,7 +41,7 @@
 
     <p id="Jeremycoinpersecond">You are gaining 0 Jeremy Ellis Coins per/s </p>
     
-    <a href=# onclick="add()"><img width=200 src="https://avatars.githubusercontent.com/u/5605614?v=4"></a>
+    <a href=# id="jeremy" onclick="add()"><img style="border-radius: 50%;" width=200 src="https://avatars.githubusercontent.com/u/5605614?v=4"></a>
     <br><br>
     You got: 
     <input type="text" id="text" disabled style= text-align:center value=0>
@@ -65,20 +65,20 @@
     <br>
     
     <p id="buySchoolpc">Buy 1 Schoolpc</p>
-    <a href="#" id="Schoolpc" onClick="buySchoolpc()"><img src="https://hehimhismedia.com/wp-content/uploads/2020/05/Dell-Computer.jpg" width="30px" height="40px"></a>
+    <a href="#" id="Schoolpc" onClick="buySchoolpc()"><img src="https://hehimhismedia.com/wp-content/uploads/2020/05/Dell-Computer.jpg" width="50px" height="50px"></a>
     <p id="costSchoolpc">12 Jeremy Coins</p>
     <p id="ammountSchoolpc">You Own 0 Schoolpc</p>
     
     <br>
     
-    <p>Buy 1 Hightechpc</p>
+    <p id="buyHightechpc">Buy 1 Hightechpc</p>
     <a href="#" id="Hightechpc" onClick="buyHightechpc()"><img src="https://evatech.com.au/news/wp-content/uploads/2016/08/DSC_1910.jpg" width="50px" height="50px"></a>
     <p id="costHightechpc">200 Jeremy Coins</p>
     <p id="ammountHightechpc">You Own 0 Farms</p>
     <br>
     
-        <p>Buy 1 Godlikepc</p>
-    <a href="#" id="Godlikepc" onClick="buyGodlikepc()"><img src="https://c1.neweggimages.com/ProductImageOriginal/83-360-205-13.jpg" width="50px" height="40px"></a>
+    <p id="buyGodlikepc">Buy 1 Godlikepc</p>
+    <a href="#" id="Godlikepc" onClick="buyGodlikepc()"><img src="https://c1.neweggimages.com/ProductImageOriginal/83-360-205-13.jpg" width="50px" height="50px"></a>
     <p id="costGodlikepc">700 Jeremy Coins</p>
     <p id="ammountGodlikepc">You Own 0 Godlikepc</p>
     
@@ -175,21 +175,69 @@ body {
 }
 
 
+#ammountmultiplier{
+    position: absolute;
+    top: 90px;
+    left: 530px;
+}
+#costmultiplier{
+    position: absolute;
+    top: 105px;
+    left: 530px;
+}
+#currentmultiplier{
+    position: absolute;
+    top: 120px;
+    left: 530px;
+}
 #costSchoolpc{
     position: absolute;
     top: 190px;
-    left: 560px;
+    left: 530px;
 }
 #ammountSchoolpc{
     position: absolute;
     top: 205px;
-    left: 560px;
+    left: 530px;
 }
 #buySchoolpc{
     position: absolute;
     top: 220px;
-    left: 560px;
+    left: 530px;
 }
+#costHightechpc{
+    position: absolute;
+    top: 290px;
+    left: 530px;
+}
+#ammountHightechpc{
+    position: absolute;
+    top: 305px;
+    left: 530px;
+}
+#buyHightechpc{
+    position: absolute;
+    top: 320px;
+    left: 530px;
+}
+#costGodlikepc{
+    position: absolute;
+    top: 390px;
+    left: 530px;
+}
+#ammountGodlikepc{
+    position: absolute;
+    top: 405px;
+    left: 530px;
+}
+#buyGodlikepc{
+    position: absolute;
+    top: 420px;
+    left: 530px;
+}
+
+
+
 
 
 </style>
