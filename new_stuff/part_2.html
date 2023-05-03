@@ -64,18 +64,21 @@ const camera = {
   y: 0
 };
 
+canvas.height = 500;
+canvas.width = 500;
 
 // Define the maze
 const maze = [
     //0 = empty space
     //1 = wall
     //2 = finish
-    //3 = fake finish
+    //3 = diamond
+    //4 = fakeWall
+    //5 = invisibleWall
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -133,17 +136,19 @@ const maze = [
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
-
    
 
     
 
 
 // Define the size of each cell
-const cellSize = 25;
+const cellSize = 100;
 
 // Draw the maze and player on the canvas
 function draw() {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(draw);
     // Move the camera to keep the player centered
     camera.x = playerPosition.x * cellSize - canvas.width / 2 + cellSize / 2;
     camera.y = playerPosition.y * cellSize - canvas.height / 2 + cellSize / 2;
@@ -152,8 +157,7 @@ function draw() {
     camera.x = Math.max(0, Math.min(camera.x, maze[0].length * cellSize - canvas.width));
     camera.y = Math.max(0, Math.min(camera.y, maze.length * cellSize - canvas.height));
 
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 
     // Draw the maze
     for (let i = 0; i < maze.length; i++) {
@@ -170,18 +174,43 @@ function draw() {
                 ctx.fillStyle = 'aqua';
                 ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
             }
+            //turn collision off
+            else if (maze[i][j] === 4) {
+                ctx.fillStyle = 'lime';
+                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
+            }
+            //draw invisible walls invisible, but stop collision
+            else if (maze[i][j] === 5) {
+                ctx.fillStyle = 'transparent';
+                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
+            }
         }
     }
 
-    // Draw the player
-    ctx.fillStyle = 'red';
-    ctx.fillRect(playerPosition.x * cellSize - camera.x, playerPosition.y * cellSize - camera.y, cellSize, cellSize);
-//if collision with diamond, reset the maze
+    // Draw the player as a red circle
+ctx.fillStyle = 'red';
+//draw as a circle
+ctx.beginPath();
+ctx.arc(playerPosition.x * cellSize - camera.x + cellSize / 2, playerPosition.y * cellSize - camera.y + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
+ctx.fill();
+
+//if collision with diamond, remove it and replace with 0
     if (maze[playerPosition.y][playerPosition.x] === 3) {
         maze[playerPosition.y][playerPosition.x] = 0;
         score++;
         document.getElementById('scoreHolder').innerHTML = score;
+    
     }
+
+
+
+    //draw score on canvas
+    ctx.fillStyle = 'black';
+    ctx.font = '20px sans-serif';
+    ctx.fillText("Score:" + score, 10, 50);
+
+
+    
   
 }
 
@@ -189,37 +218,32 @@ function draw() {
 // Set the starting position of the player
 let playerPosition = { x: 1, y: 1 };
 
-
 // Handle keyboard input
 document.addEventListener('keydown', function(event) {
     switch (event.code) {
         case 'KeyA': // A key
-            if (maze[playerPosition.y][playerPosition.x - 1] !== 1 && playerPosition.x > 0) {
+            if (maze[playerPosition.y][playerPosition.x - 1] !== 1 && maze[playerPosition.y][playerPosition.x - 1] !== 5 && playerPosition.x > 0) {
                 playerPosition.x--;
-               
-                draw();
             }
             break;
         case 'KeyW': // W key
-            if (maze[playerPosition.y - 1][playerPosition.x] !== 1 && playerPosition.y > 0) {
+            if (maze[playerPosition.y - 1][playerPosition.x] !== 1 && maze[playerPosition.y - 1][playerPosition.x] !== 5 && playerPosition.y > 0) {
                 playerPosition.y--;
-                draw();
             }
             break;
         case 'KeyD': // D key
-            if (maze[playerPosition.y][playerPosition.x + 1] !== 1 && playerPosition.x < maze[0].length - 1) {
+            if (maze[playerPosition.y][playerPosition.x + 1] !== 1 && maze[playerPosition.y][playerPosition.x + 1] !== 5 && playerPosition.x < maze[0].length - 1) {
                 playerPosition.x++;
-                draw();
             }
             break;
         case 'KeyS': // S key
-            if (maze[playerPosition.y + 1][playerPosition.x] !== 1 && playerPosition.y < maze.length - 1) {
+            if (maze[playerPosition.y + 1][playerPosition.x] !== 1 && maze[playerPosition.y + 1][playerPosition.x] !== 5 && playerPosition.y < maze.length - 1) {
                 playerPosition.y++;
-                draw();
             }
             break;
     }
 });
+
 
 function checkWin(){
 
