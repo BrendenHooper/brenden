@@ -1,0 +1,1168 @@
+<script>
+
+    // global variables here
+ 
+    let myGlobalX = 0
+    let myClock
+
+ 
+ 
+    // global functions here
+ function myHitOther(my1,my2){
+    left1   = parseInt(document.getElementById(my1).style.left)
+    right1  = left1 + parseInt(document.getElementById(my1).style.width)
+    top1    = parseInt(document.getElementById(my1).style.top)   
+    bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
+    left2   = parseInt(document.getElementById(my2).style.left)
+    right2  = left2 + parseInt(document.getElementById(my2).style.width)
+    top2    = parseInt(document.getElementById(my2).style.top)   
+    bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
+    if ((right1  >=  left2  ) &&      	   
+        (bottom1 >=  top2   ) &&
+        (left1   <=  right2 ) &&
+        (top1    <=  bottom2) ){
+        return true
+    }
+ }
+ 
+ 
+ function myCheckHit(){
+
+ 
+    if ( myHitOther('myImg01','myImg02') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg03') ){
+        remove()
+       showMessage()
+       reset() 
+    } 
+    if ( myHitOther('myImg01','myImg04') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg05') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg06') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg07') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg08') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg09') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg10') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg11') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg12') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg13') ){
+        remove()
+       showMessage()
+       reset()
+    } 
+    if ( myHitOther('myImg01','myImg14') ){
+        remove()
+       showMessage()
+       reset()
+    }  
+    if ( myHitOther('myImg01','myImg19') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg20') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg21') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg22') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg23') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg24') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg25') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg26') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg27') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg28') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg29') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg33') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg34') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg35') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg36') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg37') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg38') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg39') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg40') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg44') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg45') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg46') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg47') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg48') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg49') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg50') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg51') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg53') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg54') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg55') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg56') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg57') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg58') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg59') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg60') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg61') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg62') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg63') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg64') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg71') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg72') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg73') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    if ( myHitOther('myImg01','myImg74') ){
+        remove()
+       showMessage()
+       reset()
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if ( myHitOther('myImg01','myImg15') ){
+        remove()
+        room2_1()
+    }
+    if ( myHitOther('myImg01','myImg30') ){
+        remove()
+        room2_1()
+    }
+    if ( myHitOther('myImg01','myImg41') ){
+        remove()
+        room2_1()
+    } 
+    if ( myHitOther('myImg01','myImg42') ){
+        remove()
+        room2_2()
+    }   
+
+    if ( myHitOther('myImg01','myImg16') ){
+        remove()
+        room3_3()
+    } 
+    if ( myHitOther('myImg01','myImg17') ){
+        remove()
+        room5_5()
+    }
+    if ( myHitOther('myImg01','myImg43') ){
+        remove()
+        room4_7()
+    } 
+    if ( myHitOther('myImg01','myImg52') ){
+        remove()
+        room4_7()
+    } 
+
+
+    if ( myHitOther('myImg01','myImg31') ){
+        remove()
+        room6_8()
+    } 
+    if ( myHitOther('myImg01','myImg67') ){
+        remove()
+        room4_7()
+    }
+    if ( myHitOther('myImg01','myImg66') ){
+        remove()
+        room3_3()
+    } 
+    if ( myHitOther('myImg01','myImg18') ){
+        remove()
+        room7_6()
+    } 
+    if ( myHitOther('myImg01','myImg75') ){
+        remove()
+        room2_16()
+    } 
+    
+    
+    
+    
+   
+ 
+    // YOU WIN and go to next level!
+ 
+    if ( myHitOther('myImg01','myImg1111') ){
+        alert('You Win, now go to the next level')
+       location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
+    }
+ 
+    // more if statements here
+ 
+ }
+ 
+ 
+ </script>
+ 
+ 
+ 
+ 
+ <body id="myBody" style="background-repeat:repeat; background-size: 80%"   onkeydown="{
+    if (event.key == 'd') {  // d = go right
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+    }   
+    if (event.key == 's') {   // s = go down
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+    }                                                                                                                    
+     if (event.key == 'a') {  // a = go right
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+    }   
+    if (event.key == 'w') {   // w = go up
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+    }                                                                                                                  
+    // put more here
+   myCheckHit()     // checks for all collisions
+ }">
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <input id="myText01" type=text value="00000" size=0 placeholder="">
+ <input type="button" value="test" onclick="{
+    let myIn01 = parseFloat(document.getElementById('myText01').value)
+    if (myIn01 == '00000'){ 
+        remove()
+    }
+    else if (myIn01 == '32573'){
+        reset()
+    }
+    else if (myIn01 == '72810'){
+        room2_2()
+    }
+    else if (myIn01 == '13874'){
+        room3_3()
+    }
+    else if (myIn01 == '82735'){
+        room4_7()
+    }
+}">
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+    
+ 
+
+ 
+ 
+ 
+ 
+ <img id="myImg01" src="https://lwlies.com/wp-content/uploads/2019/02/blue-derek-jarman.jpg"  style="position:absolute; width:28px; height:28px; left: 51px; top:231px;">
+room 1
+walls
+<img id="myImg02" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:230px; left: 30px; top:210px;">
+<img id="myImg03" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:180px; height:10px; left: 30px; top:210px;">
+<img id="myImg04" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 90px; top:270px;">
+<img id="myImg05" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left: 90px; top:320px;">
+<img id="myImg06" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 150px; top:270px;">
+<img id="myImg07" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left: 150px; top:270px;">
+<img id="myImg08" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 200px; top:220px;">
+<img id="myImg09" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left: 40px; top:430px;">
+<img id="myImg10" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:170px; height:10px; left: 90px; top:380px;">
+<img id="myImg11" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 90px; top:380px;">
+<img id="myImg12" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 210px; top:280px;">
+<img id="myImg13" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:40px; height:10px; left: 210px; top:320px;">
+<img id="myImg14" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 250px; top:320px;">
+tp 1 room 1
+<img id="myImg15" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 161px; top:231px;">
+tp 3 room 1
+<img id="myImg16" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 171px; top:291px;">
+tp 5 room 1
+<img id="myImg17" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 211px; top:341px;">
+tp 6 room 1
+<img id="myImg18" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 111px; top:281px;">
+
+room 2
+walls 
+<img id="myImg19" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:250px; height:10px; left: 700px; top:200px;">
+<img id="myImg20" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:120px; left: 700px; top:200px;">
+<img id="myImg21" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 700px; top:200px;">
+<img id="myImg22" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 700px; top:200px;">
+<img id="myImg23" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:220px; left: 700px; top:200px;">
+<img id="myImg24" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:170px; left: 700px; top:200px;">
+<img id="myImg25" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg26" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg27" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg28" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:120px; left: 700px; top:200px;">
+<img id="myImg29" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left: 700px; top:200px;">
+tp 1 room 2
+<img id="myImg30" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+tp 8 room 2
+<img id="myImg31" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+tp 9 room 2
+<img id="myImg32" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+
+
+room 3
+walls
+<img id="myImg33" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:170px; left: 700px; top:200px;">
+<img id="myImg34" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg35" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 700px; top:200px;">
+<img id="myImg36" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg37" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 700px; top:200px;">
+<img id="myImg38" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg39" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:50px; left: 700px; top:200px;">
+<img id="myImg40" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left: 700px; top:200px;">
+tp 1 room 3
+<img id="myImg41" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+tp 2 room 3
+<img id="myImg42" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+tp 7 room 3
+<img id="myImg43" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+
+
+room 4
+walls
+<img id="myImg44" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 700px; top:200px;">
+<img id="myImg45" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left: 700px; top:200px;">
+<img id="myImg46" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:60px; left: 700px; top:200px;">
+<img id="myImg47" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:60px; height:10px; left: 700px; top:200px;">
+
+
+
+room5
+walls
+<img id="myImg48" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:100px; left: 700px; top:200px;">
+<img id="myImg49" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+<img id="myImg50" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:100px; left: 700px; top:200px;">
+<img id="myImg51" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:50px; height:10px; left: 700px; top:200px;">
+tp 7 room 5
+<img id="myImg52" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+
+
+room 6
+walls
+<img id="myImg53" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:130px; left: 700px; top:200px;">
+<img id="myImg54" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:130px; height:10px; left: 700px; top:200px;">
+<img id="myImg55" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:70px; left: 700px; top:200px;">
+<img id="myImg56" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:130px; left: 700px; top:200px;">
+<img id="myImg57" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:130px; height:10px; left: 700px; top:200px;">
+<img id="myImg58" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:180px; left: 700px; top:200px;">
+<img id="myImg59" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left: 700px; top:200px;">
+<img id="myImg60" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left: 700px; top:200px;">
+<img id="myImg61" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:80px; left: 700px; top:200px;">
+<img id="myImg62" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:70px; height:10px; left: 700px; top:200px;">
+<img id="myImg63" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:70px; left: 700px; top:200px;">
+<img id="myImg64" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left: 700px; top:200px;">
+room 6 tp 1
+<img id="myImg65" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room 6 tp 3
+<img id="myImg66" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room6 tp 7
+<img id="myImg67" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room 6 tp 9
+<img id="myImg68" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room 6 tp 10
+<img id="myImg69" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room 6 tp 11
+<img id="myImg70" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+
+
+room 7
+walls
+<img id="myImg71" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left: 700px; top:200px;">
+<img id="myImg72" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:110px; left: 700px; top:200px;">
+<img id="myImg73" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:120px; height:10px; left: 700px; top:200px;">
+<img id="myImg74" src="https://th.bing.com/th/id/OIP.7JSoCmh8oop3qcddxoO_CQHaHa?pid=ImgDet&w=900&h=900&rs=1"  style="position:absolute; width:10px; height:110px; left: 700px; top:200px;">
+room 7 tp 16
+<img id="myImg75" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+room 7 tp 18
+<img id="myImg76" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1"  style="position:absolute; width:28px; height:28px; left: 700px; top:200px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<audio id="myAudio">
+    <source src="https://brendenhooper.github.io/brenden/new_stuff/dark-souls-_you-died_-sound-effect-from-youtube.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+
+<style>
+    
+    body {
+        background-color: black;
+    }
+
+    
+    
+    .message {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    </style>
+    
+    <script>
+    function showMessage() {
+      var message = document.createElement('div');
+      message.innerText = 'you died!';
+      message.classList.add('message');
+      message.style.color = 'red';
+      message.style.fontSize = '100px';
+      document.body.appendChild(message);
+      setTimeout(function() {
+        message.style.opacity = '1';
+      }, 10);
+      setTimeout(function() {
+        message.style.opacity = '0';
+        setTimeout(function() {
+          document.body.removeChild(message);
+        }, 1000);
+      }, 5000);
+      var audio = document.getElementById('myAudio');
+  audio.play();    }
+
+
+
+function reset() {
+       document.getElementById('myImg01').style.left = '51px'
+       document.getElementById('myImg01').style.top = '231px'
+       document.getElementById('myImg02').style.left = '30px'
+       document.getElementById('myImg02').style.top = '210px'
+       document.getElementById('myImg03').style.left = '30px'
+       document.getElementById('myImg03').style.top = '210px'
+       document.getElementById('myImg04').style.left = '90px'
+       document.getElementById('myImg04').style.top = '270px'
+       document.getElementById('myImg05').style.left = '90px'
+       document.getElementById('myImg05').style.top = '320px'
+       document.getElementById('myImg06').style.left = '150px'
+       document.getElementById('myImg06').style.top = '270px'
+       document.getElementById('myImg07').style.left = '150px'
+       document.getElementById('myImg07').style.top = '270px'
+       document.getElementById('myImg08').style.left = '200px'
+       document.getElementById('myImg08').style.top = '220px'
+       document.getElementById('myImg09').style.left = '40px'
+       document.getElementById('myImg09').style.top = '430px'
+       document.getElementById('myImg10').style.left = '90px'
+       document.getElementById('myImg10').style.top = '380px'
+       document.getElementById('myImg11').style.left = '90px'
+       document.getElementById('myImg11').style.top = '380px'
+       document.getElementById('myImg12').style.left = '210px'
+       document.getElementById('myImg12').style.top = '280px'
+       document.getElementById('myImg13').style.left = '210px'
+       document.getElementById('myImg13').style.top = '320px'
+       document.getElementById('myImg14').style.left = '250px'
+       document.getElementById('myImg14').style.top = '320px'
+       document.getElementById('myImg15').style.left = '161px'
+       document.getElementById('myImg15').style.top = '231px'
+       document.getElementById('myImg16').style.left = '171px'
+       document.getElementById('myImg16').style.top = '291px'
+       document.getElementById('myImg17').style.left = '211px'
+       document.getElementById('myImg17').style.top = '341px'
+       document.getElementById('myImg18').style.left = '111px'
+       document.getElementById('myImg18').style.top = '281px'   
+}
+function remove() {
+       document.getElementById('myImg01').style.left = '800px'
+       document.getElementById('myImg01').style.top = '300px'
+       document.getElementById('myImg02').style.left = '700px'
+       document.getElementById('myImg02').style.top = '200px'
+       document.getElementById('myImg03').style.left = '700px'
+       document.getElementById('myImg03').style.top = '200px'
+       document.getElementById('myImg04').style.left = '700px'
+       document.getElementById('myImg04').style.top = '200px'
+       document.getElementById('myImg05').style.left = '700px'
+       document.getElementById('myImg05').style.top = '200px'
+       document.getElementById('myImg06').style.left = '700px'
+       document.getElementById('myImg06').style.top = '200px'
+       document.getElementById('myImg07').style.left = '700px'
+       document.getElementById('myImg07').style.top = '200px'
+       document.getElementById('myImg08').style.left = '700px'
+       document.getElementById('myImg08').style.top = '200px'
+       document.getElementById('myImg09').style.left = '700px'
+       document.getElementById('myImg09').style.top = '200px'
+       document.getElementById('myImg10').style.left = '700px'
+       document.getElementById('myImg10').style.top = '200px'
+       document.getElementById('myImg11').style.left = '700px'
+       document.getElementById('myImg11').style.top = '200px'
+       document.getElementById('myImg12').style.left = '700px'
+       document.getElementById('myImg12').style.top = '200px'
+       document.getElementById('myImg13').style.left = '700px'
+       document.getElementById('myImg13').style.top = '200px'
+       document.getElementById('myImg14').style.left = '700px'
+       document.getElementById('myImg14').style.top = '200px'
+       document.getElementById('myImg15').style.left = '700px'
+       document.getElementById('myImg15').style.top = '200px'
+       document.getElementById('myImg16').style.left = '700px'
+       document.getElementById('myImg16').style.top = '200px'
+       document.getElementById('myImg17').style.left = '700px'
+       document.getElementById('myImg17').style.top = '200px'
+       document.getElementById('myImg18').style.left = '700px'
+       document.getElementById('myImg18').style.top = '200px'
+       document.getElementById('myImg19').style.left = '700px'
+       document.getElementById('myImg19').style.top = '200px'
+       document.getElementById('myImg20').style.left = '700px'
+       document.getElementById('myImg20').style.top = '200px'
+       document.getElementById('myImg21').style.left = '700px'
+       document.getElementById('myImg21').style.top = '200px'
+       document.getElementById('myImg22').style.left = '700px'
+       document.getElementById('myImg22').style.top = '200px'
+       document.getElementById('myImg23').style.left = '700px'
+       document.getElementById('myImg23').style.top = '200px'
+       document.getElementById('myImg24').style.left = '700px'
+       document.getElementById('myImg24').style.top = '200px'
+       document.getElementById('myImg25').style.left = '700px'
+       document.getElementById('myImg25').style.top = '200px'
+       document.getElementById('myImg26').style.left = '700px'
+       document.getElementById('myImg26').style.top = '200px'
+       document.getElementById('myImg27').style.left = '700px'
+       document.getElementById('myImg27').style.top = '200px'
+       document.getElementById('myImg28').style.left = '700px'
+       document.getElementById('myImg28').style.top = '200px'
+       document.getElementById('myImg29').style.left = '700px'
+       document.getElementById('myImg29').style.top = '200px'
+       document.getElementById('myImg30').style.left = '700px'
+       document.getElementById('myImg30').style.top = '200px'
+       document.getElementById('myImg31').style.left = '700px'
+       document.getElementById('myImg31').style.top = '200px'
+       document.getElementById('myImg32').style.left = '700px'
+       document.getElementById('myImg32').style.top = '200px'
+       document.getElementById('myImg33').style.left = '700px'
+       document.getElementById('myImg33').style.top = '200px'
+       document.getElementById('myImg34').style.left = '700px'
+       document.getElementById('myImg34').style.top = '200px'
+       document.getElementById('myImg35').style.left = '700px'
+       document.getElementById('myImg35').style.top = '200px'
+       document.getElementById('myImg36').style.left = '700px'
+       document.getElementById('myImg36').style.top = '200px'
+       document.getElementById('myImg37').style.left = '700px'
+       document.getElementById('myImg37').style.top = '200px'
+       document.getElementById('myImg38').style.left = '700px'
+       document.getElementById('myImg38').style.top = '200px'
+       document.getElementById('myImg39').style.left = '700px'
+       document.getElementById('myImg39').style.top = '200px'
+       document.getElementById('myImg40').style.left = '700px'
+       document.getElementById('myImg40').style.top = '200px'
+       document.getElementById('myImg41').style.left = '700px'
+       document.getElementById('myImg41').style.top = '200px'
+       document.getElementById('myImg42').style.left = '700px'
+       document.getElementById('myImg42').style.top = '200px'
+       document.getElementById('myImg43').style.left = '700px'
+       document.getElementById('myImg43').style.top = '200px'
+       document.getElementById('myImg44').style.left = '700px'
+       document.getElementById('myImg44').style.top = '200px'
+       document.getElementById('myImg45').style.left = '700px'
+       document.getElementById('myImg45').style.top = '200px'
+       document.getElementById('myImg46').style.left = '700px'
+       document.getElementById('myImg46').style.top = '200px'
+       document.getElementById('myImg47').style.left = '700px'
+       document.getElementById('myImg47').style.top = '200px'
+       document.getElementById('myImg48').style.left = '700px'
+       document.getElementById('myImg48').style.top = '200px'
+       document.getElementById('myImg49').style.left = '700px'
+       document.getElementById('myImg49').style.top = '200px'
+       document.getElementById('myImg50').style.left = '700px'
+       document.getElementById('myImg50').style.top = '200px'
+       document.getElementById('myImg51').style.left = '700px'
+       document.getElementById('myImg51').style.top = '200px'
+       document.getElementById('myImg52').style.left = '700px'
+       document.getElementById('myImg52').style.top = '200px'
+       document.getElementById('myImg53').style.left = '700px'
+       document.getElementById('myImg53').style.top = '200px'
+       document.getElementById('myImg54').style.left = '700px'
+       document.getElementById('myImg54').style.top = '200px'
+       document.getElementById('myImg55').style.left = '700px'
+       document.getElementById('myImg55').style.top = '200px'
+       document.getElementById('myImg56').style.left = '700px'
+       document.getElementById('myImg56').style.top = '200px'
+       document.getElementById('myImg57').style.left = '700px'
+       document.getElementById('myImg57').style.top = '200px'
+       document.getElementById('myImg58').style.left = '700px'
+       document.getElementById('myImg58').style.top = '200px'
+       document.getElementById('myImg59').style.left = '700px'
+       document.getElementById('myImg59').style.top = '200px'
+       document.getElementById('myImg60').style.left = '700px'
+       document.getElementById('myImg60').style.top = '200px'
+       document.getElementById('myImg61').style.left = '700px'
+       document.getElementById('myImg61').style.top = '200px'
+       document.getElementById('myImg62').style.left = '700px'
+       document.getElementById('myImg62').style.top = '200px'
+       document.getElementById('myImg63').style.left = '700px'
+       document.getElementById('myImg63').style.top = '200px'
+       document.getElementById('myImg64').style.left = '700px'
+       document.getElementById('myImg64').style.top = '200px'
+       document.getElementById('myImg65').style.left = '700px'
+       document.getElementById('myImg65').style.top = '200px'
+       document.getElementById('myImg66').style.left = '700px'
+       document.getElementById('myImg66').style.top = '200px'
+       document.getElementById('myImg67').style.left = '700px'
+       document.getElementById('myImg67').style.top = '200px'
+       document.getElementById('myImg68').style.left = '700px'
+       document.getElementById('myImg68').style.top = '200px'
+       document.getElementById('myImg69').style.left = '700px'
+       document.getElementById('myImg69').style.top = '200px'
+       document.getElementById('myImg70').style.left = '700px'
+       document.getElementById('myImg70').style.top = '200px'
+       document.getElementById('myImg71').style.left = '700px'
+       document.getElementById('myImg71').style.top = '200px'
+       document.getElementById('myImg72').style.left = '700px'
+       document.getElementById('myImg72').style.top = '200px'
+       document.getElementById('myImg73').style.left = '700px'
+       document.getElementById('myImg73').style.top = '200px'
+       document.getElementById('myImg74').style.left = '700px'
+       document.getElementById('myImg74').style.top = '200px'
+       document.getElementById('myImg75').style.left = '700px'
+       document.getElementById('myImg75').style.top = '200px'
+       document.getElementById('myImg76').style.left = '700px'
+       document.getElementById('myImg76').style.top = '200px'
+}
+
+function room2_1() { 
+       document.getElementById('myImg01').style.left = '301px'
+       document.getElementById('myImg01').style.top = '281px'
+       document.getElementById('myImg19').style.left = '100px'
+       document.getElementById('myImg19').style.top = '200px'
+       document.getElementById('myImg20').style.left = '100px'
+       document.getElementById('myImg20').style.top = '200px'
+       document.getElementById('myImg21').style.left = '160px'
+       document.getElementById('myImg21').style.top = '210px'
+       document.getElementById('myImg22').style.left = '220px'
+       document.getElementById('myImg22').style.top = '210px'
+       document.getElementById('myImg23').style.left = '280px'
+       document.getElementById('myImg23').style.top = '210px'
+       document.getElementById('myImg24').style.left = '340px'
+       document.getElementById('myImg24').style.top = '210px'
+       document.getElementById('myImg25').style.left = '290px'
+       document.getElementById('myImg25').style.top = '260px'
+       document.getElementById('myImg26').style.left = '290px'
+       document.getElementById('myImg26').style.top = '370px'
+       document.getElementById('myImg27').style.left = '230px'
+       document.getElementById('myImg27').style.top = '420px'
+       document.getElementById('myImg28').style.left = '220px'
+       document.getElementById('myImg28').style.top = '310px'
+       document.getElementById('myImg29').style.left = '110px'
+       document.getElementById('myImg29').style.top = '310px'
+       document.getElementById('myImg30').style.left = '181px'
+       document.getElementById('myImg30').style.top = '221px'
+       document.getElementById('myImg31').style.left = '121px'
+       document.getElementById('myImg31').style.top = '221px'
+       document.getElementById('myImg32').style.left = '241px'
+       document.getElementById('myImg32').style.top = '221px'
+       
+}
+
+
+function room3_3() {
+       document.getElementById('myImg01').style.left = '321px'
+       document.getElementById('myImg01').style.top = '371px'
+       document.getElementById('myImg33').style.left = '300px'
+       document.getElementById('myImg33').style.top = '300px'
+       document.getElementById('myImg34').style.left = '310px'
+       document.getElementById('myImg34').style.top = '300px'
+       document.getElementById('myImg35').style.left = '360px'
+       document.getElementById('myImg35').style.top = '300px'
+       document.getElementById('myImg36').style.left = '360px'
+       document.getElementById('myImg36').style.top = '350px'
+       document.getElementById('myImg37').style.left = '410px'
+       document.getElementById('myImg37').style.top = '350px'
+       document.getElementById('myImg38').style.left = '370px'
+       document.getElementById('myImg38').style.top = '410px'
+       document.getElementById('myImg39').style.left = '360px'
+       document.getElementById('myImg39').style.top = '410px'
+       document.getElementById('myImg40').style.left = '310px'
+       document.getElementById('myImg40').style.top = '460px'
+       document.getElementById('myImg41').style.left = '371px'
+       document.getElementById('myImg41').style.top = '371px'
+       document.getElementById('myImg42').style.left = '321px'
+       document.getElementById('myImg42').style.top = '321px'
+       document.getElementById('myImg43').style.left = '321px'
+       document.getElementById('myImg43').style.top = '421px'
+}
+function room2_2(){
+    
+       document.getElementById('myImg01').style.left = '241px'
+       document.getElementById('myImg01').style.top = '381px'
+       document.getElementById('myImg19').style.left = '100px'
+       document.getElementById('myImg19').style.top = '200px'
+       document.getElementById('myImg20').style.left = '100px'
+       document.getElementById('myImg20').style.top = '200px'
+       document.getElementById('myImg21').style.left = '160px'
+       document.getElementById('myImg21').style.top = '210px'
+       document.getElementById('myImg22').style.left = '220px'
+       document.getElementById('myImg22').style.top = '210px'
+       document.getElementById('myImg23').style.left = '280px'
+       document.getElementById('myImg23').style.top = '210px'
+       document.getElementById('myImg24').style.left = '340px'
+       document.getElementById('myImg24').style.top = '210px'
+       document.getElementById('myImg25').style.left = '290px'
+       document.getElementById('myImg25').style.top = '260px'
+       document.getElementById('myImg26').style.left = '290px'
+       document.getElementById('myImg26').style.top = '370px'
+       document.getElementById('myImg27').style.left = '230px'
+       document.getElementById('myImg27').style.top = '420px'
+       document.getElementById('myImg28').style.left = '220px'
+       document.getElementById('myImg28').style.top = '310px'
+       document.getElementById('myImg29').style.left = '110px'
+       document.getElementById('myImg29').style.top = '310px'
+       document.getElementById('myImg30').style.left = '181px'
+       document.getElementById('myImg30').style.top = '221px'
+       document.getElementById('myImg31').style.left = '121px'
+       document.getElementById('myImg31').style.top = '221px'
+       document.getElementById('myImg32').style.left = '241px'
+       document.getElementById('myImg32').style.top = '221px'
+}
+
+function room4_7() {
+        document.getElementById('myImg01').style.left = '321px'
+        document.getElementById('myImg01').style.top = '321px'
+        document.getElementById('myImg44').style.left = '300px'
+        document.getElementById('myImg44').style.top = '300px'
+        document.getElementById('myImg45').style.left = '310px'
+        document.getElementById('myImg45').style.top = '300px'
+        document.getElementById('myImg46').style.left = '360px'
+        document.getElementById('myImg46').style.top = '310px'
+        document.getElementById('myImg47').style.left = '300px'
+        document.getElementById('myImg47').style.top = '360px'
+}
+
+function room5_5() {
+        document.getElementById('myImg01').style.left = '321px'
+        document.getElementById('myImg01').style.top = '421px'
+        document.getElementById('myImg48').style.left = '300px'
+        document.getElementById('myImg48').style.top = '400px'
+        document.getElementById('myImg49').style.left = '310px'
+        document.getElementById('myImg49').style.top = '400px'
+        document.getElementById('myImg50').style.left = '360px'
+        document.getElementById('myImg50').style.top = '400px'
+        document.getElementById('myImg51').style.left = '310px'
+        document.getElementById('myImg51').style.top = '490px'
+        document.getElementById('myImg52').style.left = '321px'
+        document.getElementById('myImg52').style.top = '461px'
+}
+
+
+function room6_8() {
+        document.getElementById('myImg01').style.left = '441px'
+        document.getElementById('myImg01').style.top = '141px'
+        document.getElementById('myImg53').style.left = '420px'
+        document.getElementById('myImg53').style.top = '120px'
+        document.getElementById('myImg54').style.left = '420px'
+        document.getElementById('myImg54').style.top = '120px'
+        document.getElementById('myImg55').style.left = '360px'
+        document.getElementById('myImg55').style.top = '180px'
+        document.getElementById('myImg56').style.left = '300px'
+        document.getElementById('myImg56').style.top = '180px'
+        document.getElementById('myImg57').style.left = '300px'
+        document.getElementById('myImg57').style.top = '180px'
+        document.getElementById('myImg58').style.left = '540px'
+        document.getElementById('myImg58').style.top = '120px'
+        document.getElementById('myImg59').style.left = '480px'
+        document.getElementById('myImg59').style.top = '230px'
+        document.getElementById('myImg60').style.left = '480px'
+        document.getElementById('myImg60').style.top = '290px'
+        document.getElementById('myImg61').style.left = '480px'
+        document.getElementById('myImg61').style.top = '290px'
+        document.getElementById('myImg62').style.left = '420px'
+        document.getElementById('myImg62').style.top = '360px'
+        document.getElementById('myImg63').style.left = '420px'
+        document.getElementById('myImg63').style.top = '300px'
+        document.getElementById('myImg64').style.left = '310px'
+        document.getElementById('myImg64').style.top = '300px'
+        document.getElementById('myImg65').style.left = '501px'
+        document.getElementById('myImg65').style.top = '251px'
+        document.getElementById('myImg66').style.left = '321px'
+        document.getElementById('myImg66').style.top = '201px'
+        document.getElementById('myImg67').style.left = '381px'
+        document.getElementById('myImg67').style.top = '201px'
+        document.getElementById('myImg68').style.left = '501px'
+        document.getElementById('myImg68').style.top = '141px'
+        document.getElementById('myImg69').style.left = '501px'
+        document.getElementById('myImg69').style.top = '191px'
+        document.getElementById('myImg70').style.left = '441px'
+        document.getElementById('myImg70').style.top = '321px'
+}
+
+
+function room7_6() {
+        document.getElementById('myImg01').style.left = '171px'
+        document.getElementById('myImg01').style.top = '121px'
+        document.getElementById('myImg71').style.left = '100px'
+        document.getElementById('myImg71').style.top = '100px'
+        document.getElementById('myImg72').style.left = '100px'
+        document.getElementById('myImg72').style.top = '100px'
+        document.getElementById('myImg73').style.left = '100px'
+        document.getElementById('myImg73').style.top = '200px'
+        document.getElementById('myImg74').style.left = '210px'
+        document.getElementById('myImg74').style.top = '100px'
+        document.getElementById('myImg75').style.left = '121px'
+        document.getElementById('myImg75').style.top = '121px'
+        document.getElementById('myImg76').style.left = '121px'
+        document.getElementById('myImg76').style.top = '161px'
+}
+
+
+function room2_16() { 
+       document.getElementById('myImg01').style.left = '301px'
+       document.getElementById('myImg01').style.top = '331px'
+       document.getElementById('myImg19').style.left = '100px'
+       document.getElementById('myImg19').style.top = '200px'
+       document.getElementById('myImg20').style.left = '100px'
+       document.getElementById('myImg20').style.top = '200px'
+       document.getElementById('myImg21').style.left = '160px'
+       document.getElementById('myImg21').style.top = '210px'
+       document.getElementById('myImg22').style.left = '220px'
+       document.getElementById('myImg22').style.top = '210px'
+       document.getElementById('myImg23').style.left = '280px'
+       document.getElementById('myImg23').style.top = '210px'
+       document.getElementById('myImg24').style.left = '340px'
+       document.getElementById('myImg24').style.top = '210px'
+       document.getElementById('myImg25').style.left = '290px'
+       document.getElementById('myImg25').style.top = '260px'
+       document.getElementById('myImg26').style.left = '290px'
+       document.getElementById('myImg26').style.top = '370px'
+       document.getElementById('myImg27').style.left = '230px'
+       document.getElementById('myImg27').style.top = '420px'
+       document.getElementById('myImg28').style.left = '220px'
+       document.getElementById('myImg28').style.top = '310px'
+       document.getElementById('myImg29').style.left = '110px'
+       document.getElementById('myImg29').style.top = '310px'
+       document.getElementById('myImg30').style.left = '181px'
+       document.getElementById('myImg30').style.top = '221px'
+       document.getElementById('myImg31').style.left = '121px'
+       document.getElementById('myImg31').style.top = '221px'
+       document.getElementById('myImg32').style.left = '241px'
+       document.getElementById('myImg32').style.top = '221px'
+       
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .jumpscare-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 9999;
+    }
+
+    .jumpscare-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation: jumpscare-animation 0.5s ease-in-out, shake-animation 0.8s ease-in-out 0.5s;
+      opacity: 0;
+    }
+
+    @keyframes jumpscare-animation {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes shake-animation {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      10% { transform: translate(-50%, -50%) rotate(-10deg); }
+      20% { transform: translate(-50%, -50%) rotate(10deg); }
+      30% { transform: translate(-50%, -50%) rotate(-10deg); }
+      40% { transform: translate(-50%, -50%) rotate(10deg); }
+      50% { transform: translate(-50%, -50%) rotate(-10deg); }
+      60% { transform: translate(-50%, -50%) rotate(10deg); }
+      70% { transform: translate(-50%, -50%) rotate(-10deg); }
+      80% { transform: translate(-50%, -50%) rotate(10deg); }
+      90% { transform: translate(-50%, -50%) rotate(-10deg); }
+      100% { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+  </style>
+</head>
+<body onload="startLoop()">
+    <div class="jumpscare-container">
+        <img src="https://th.bing.com/th/id/R.243b1626e76a77fdd03dc0002a6a97d7?rik=03ZjPa%2bjZTPAPA&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fhgl042h.jpg&ehk=Ti8l7epnWoulNoBkkFg%2b2yYFzLq6%2fJWnCZvvWfRjnYM%3d&risl=&pid=ImgRaw&r=0" alt="Jumpscare image" class="jumpscare-image" width="300" height="200">
+    </div>
+    
+
+  <script>
+    function showJumpscare() {
+      var container = document.querySelector(".jumpscare-container");
+      container.style.display = "block";
+      var image = document.querySelector(".jumpscare-image");
+      image.style.opacity = 1;
+      setTimeout(function() {
+        container.style.display = "none";
+        image.style.opacity = 0;
+      }, 1000);
+      var audio = document.getElementById('myAudio');
+      audio.play();
+    }
+
+    function startLoop() {
+      var minTime = 5000; // 5 seconds
+      var maxTime = 10000; // 10 seconds
+      
+      setInterval(function() {
+        var randomTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+        setTimeout(function() {
+          showJumpscare();
+        }, randomTime);
+      }, maxTime);
+    }
+  </script>
+</body>
+</html>
