@@ -80,8 +80,8 @@ const maze = [
     //8 = key3
     //9 = key4
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -204,30 +204,6 @@ function draw() {
                 ctx.fillStyle = 'yellow';
                 ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
             }
-            else if (maze[i][j] === 10) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
-            else if (maze[i][j] === 11) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
-            else if (maze[i][j] === 12) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
-            else if (maze[i][j] === 13) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
-            else if (maze[i][j] === 14) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
-            else if (maze[i][j] === 15) {
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(j * cellSize - camera.x, i * cellSize - camera.y, cellSize, cellSize);
-            }
         }
     }
 
@@ -247,6 +223,8 @@ ctx.fill();
     }
     if (maze[playerPosition.y][playerPosition.x] === 6) {
         maze[playerPosition.y][playerPosition.x] = 0;
+        // Remove a wall at position (3, 5)
+      maze[3][5] = 0;
     }
     if (maze[playerPosition.y][playerPosition.x] === 7) {
         maze[playerPosition.y][playerPosition.x] = 0;
@@ -257,24 +235,7 @@ ctx.fill();
     if (maze[playerPosition.y][playerPosition.x] === 9) {
         maze[playerPosition.y][playerPosition.x] = 0;
     }
-    if (maze[playerPosition.y][playerPosition.x] === 10) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
-    if (maze[playerPosition.y][playerPosition.x] === 11) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
-    if (maze[playerPosition.y][playerPosition.x] === 12) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
-    if (maze[playerPosition.y][playerPosition.x] === 13) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
-    if (maze[playerPosition.y][playerPosition.x] === 14) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
-    if (maze[playerPosition.y][playerPosition.x] === 15) {
-        maze[playerPosition.y][playerPosition.x] = 0;
-    }
+   
 
 
 
