@@ -1065,3 +1065,105 @@ function room2_16() {
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jumpscare Example</title>
+  <style>
+    .jumpscare-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 9999;
+    }
+
+    .jumpscare-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation: jumpscare-animation 0.5s ease-in-out, shake-animation 0.8s ease-in-out 0.5s;
+      opacity: 0;
+    }
+
+    @keyframes jumpscare-animation {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes shake-animation {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      10% { transform: translate(-50%, -50%) rotate(-10deg); }
+      20% { transform: translate(-50%, -50%) rotate(10deg); }
+      30% { transform: translate(-50%, -50%) rotate(-10deg); }
+      40% { transform: translate(-50%, -50%) rotate(10deg); }
+      50% { transform: translate(-50%, -50%) rotate(-10deg); }
+      60% { transform: translate(-50%, -50%) rotate(10deg); }
+      70% { transform: translate(-50%, -50%) rotate(-10deg); }
+      80% { transform: translate(-50%, -50%) rotate(10deg); }
+      90% { transform: translate(-50%, -50%) rotate(-10deg); }
+      100% { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+  <button onclick="startJumpscare()">Start</button>
+  <div class="jumpscare-container">
+    <img src="https://orion-uploads.openroadmedia.com/md_ebb42c5c23d5-jump-scare-feat.jpg" alt="Jumpscare image" class="jumpscare-image">
+  </div>
+
+  <script>
+    function startJumpscare() {
+      var interval = Math.floor(Math.random() * 20000 + 5000); // generate a random interval between 5 and 10 seconds in milliseconds
+      setTimeout(function() {
+        showJumpscare();
+        startJumpscare(); // restart the timer for the next jumpscare
+      }, interval);
+    }
+
+    function showJumpscare() {
+      var container = document.querySelector(".jumpscare-container");
+      container.style.display = "block";
+      var image = document.querySelector(".jumpscare-image");
+      image.style.opacity = 1;
+      setTimeout(function() {
+        container.style.display = "none";
+        image.style.opacity = 0;
+      }, 1000);
+      var audio = document.getElementById('myAudio2');
+      audio.play();
+    }
+  </script>
+
+<audio id="myAudio2">
+    <source src="https://brendenhooper.github.io/brenden/new_stuff/granny_bed_jumpscare_sound_effectmp3converter.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
