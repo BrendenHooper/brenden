@@ -1090,7 +1090,6 @@ function room2_16() {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jumpscare Example</title>
   <style>
     .jumpscare-container {
       display: none;
@@ -1133,21 +1132,13 @@ function room2_16() {
     }
   </style>
 </head>
-<body>
-  <button onclick="startJumpscare()">Start</button>
-  <div class="jumpscare-container">
-    <img src="https://orion-uploads.openroadmedia.com/md_ebb42c5c23d5-jump-scare-feat.jpg" alt="Jumpscare image" class="jumpscare-image">
-  </div>
+<body onload="startLoop()">
+    <div class="jumpscare-container">
+        <img src="https://th.bing.com/th/id/R.243b1626e76a77fdd03dc0002a6a97d7?rik=03ZjPa%2bjZTPAPA&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fhgl042h.jpg&ehk=Ti8l7epnWoulNoBkkFg%2b2yYFzLq6%2fJWnCZvvWfRjnYM%3d&risl=&pid=ImgRaw&r=0" alt="Jumpscare image" class="jumpscare-image" width="300" height="200">
+    </div>
+    
 
   <script>
-    function startJumpscare() {
-      var interval = Math.floor(Math.random() * 20000 + 5000); // generate a random interval between 5 and 10 seconds in milliseconds
-      setTimeout(function() {
-        showJumpscare();
-        startJumpscare(); // restart the timer for the next jumpscare
-      }, interval);
-    }
-
     function showJumpscare() {
       var container = document.querySelector(".jumpscare-container");
       container.style.display = "block";
@@ -1157,13 +1148,21 @@ function room2_16() {
         container.style.display = "none";
         image.style.opacity = 0;
       }, 1000);
-      var audio = document.getElementById('myAudio2');
+      var audio = document.getElementById('myAudio');
       audio.play();
     }
+
+    function startLoop() {
+      var minTime = 5000; // 5 seconds
+      var maxTime = 10000; // 10 seconds
+      
+      setInterval(function() {
+        var randomTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+        setTimeout(function() {
+          showJumpscare();
+        }, randomTime);
+      }, maxTime);
+    }
   </script>
-
-<audio id="myAudio2">
-    <source src="https://brendenhooper.github.io/brenden/new_stuff/granny_bed_jumpscare_sound_effectmp3converter.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
+</body>
+</html>
