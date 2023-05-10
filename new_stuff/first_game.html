@@ -1,3 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .jumpscare-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 9999;
+    }
+
+    .jumpscare-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation: jumpscare-animation 0.5s ease-in-out, shake-animation 0.8s ease-in-out 0.5s;
+      opacity: 0;
+    }
+
+    @keyframes jumpscare-animation {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes shake-animation {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      10% { transform: translate(-50%, -50%) rotate(-10deg); }
+      20% { transform: translate(-50%, -50%) rotate(10deg); }
+      30% { transform: translate(-50%, -50%) rotate(-10deg); }
+      40% { transform: translate(-50%, -50%) rotate(10deg); }
+      50% { transform: translate(-50%, -50%) rotate(-10deg); }
+      60% { transform: translate(-50%, -50%) rotate(10deg); }
+      70% { transform: translate(-50%, -50%) rotate(-10deg); }
+      80% { transform: translate(-50%, -50%) rotate(10deg); }
+      90% { transform: translate(-50%, -50%) rotate(-10deg); }
+      100% { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+  </style>
+</head>
+<body onload="startLoop()">
+    <div class="jumpscare-container">
+        <img src="https://th.bing.com/th/id/R.243b1626e76a77fdd03dc0002a6a97d7?rik=03ZjPa%2bjZTPAPA&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fhgl042h.jpg&ehk=Ti8l7epnWoulNoBkkFg%2b2yYFzLq6%2fJWnCZvvWfRjnYM%3d&risl=&pid=ImgRaw&r=0" alt="Jumpscare image" class="jumpscare-image" width="300" height="200">
+    </div>
+    
+
+  <script>
+    function showJumpscare() {
+      var container = document.querySelector(".jumpscare-container");
+      container.style.display = "block";
+      var image = document.querySelector(".jumpscare-image");
+      image.style.opacity = 1;
+      setTimeout(function() {
+        container.style.display = "none";
+        image.style.opacity = 0;
+      }, 1000);
+      var audio = document.getElementById('myAudio');
+      audio.play();
+    }
+
+    function startLoop() {
+      var minTime = 5000; // 5 seconds
+      var maxTime = 10000; // 10 seconds
+      
+      setInterval(function() {
+        var randomTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+        setTimeout(function() {
+          showJumpscare();
+        }, randomTime);
+      }, maxTime);
+    }
+  </script>
+</body>
+
+
+
+
+
+
+
+
 <script>
 
     // global variables here
@@ -1085,84 +1172,5 @@ function room2_16() {
 
    
 
-
-
-
-<html>
-<head>
-  <style>
-    .jumpscare-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      z-index: 9999;
-    }
-
-    .jumpscare-image {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      animation: jumpscare-animation 0.5s ease-in-out, shake-animation 0.8s ease-in-out 0.5s;
-      opacity: 0;
-    }
-
-    @keyframes jumpscare-animation {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
-      80% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
-
-    @keyframes shake-animation {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      10% { transform: translate(-50%, -50%) rotate(-10deg); }
-      20% { transform: translate(-50%, -50%) rotate(10deg); }
-      30% { transform: translate(-50%, -50%) rotate(-10deg); }
-      40% { transform: translate(-50%, -50%) rotate(10deg); }
-      50% { transform: translate(-50%, -50%) rotate(-10deg); }
-      60% { transform: translate(-50%, -50%) rotate(10deg); }
-      70% { transform: translate(-50%, -50%) rotate(-10deg); }
-      80% { transform: translate(-50%, -50%) rotate(10deg); }
-      90% { transform: translate(-50%, -50%) rotate(-10deg); }
-      100% { transform: translate(-50%, -50%) rotate(0deg); }
-    }
-  </style>
-</head>
-<body onload="startLoop()">
-    <div class="jumpscare-container">
-        <img src="https://th.bing.com/th/id/R.243b1626e76a77fdd03dc0002a6a97d7?rik=03ZjPa%2bjZTPAPA&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fhgl042h.jpg&ehk=Ti8l7epnWoulNoBkkFg%2b2yYFzLq6%2fJWnCZvvWfRjnYM%3d&risl=&pid=ImgRaw&r=0" alt="Jumpscare image" class="jumpscare-image" width="300" height="200">
-    </div>
-    
-
-  <script>
-    function showJumpscare() {
-      var container = document.querySelector(".jumpscare-container");
-      container.style.display = "block";
-      var image = document.querySelector(".jumpscare-image");
-      image.style.opacity = 1;
-      setTimeout(function() {
-        container.style.display = "none";
-        image.style.opacity = 0;
-      }, 1000);
-      var audio = document.getElementById('myAudio');
-      audio.play();
-    }
-
-    function startLoop() {
-      var minTime = 5000; // 5 seconds
-      var maxTime = 10000; // 10 seconds
-      
-      setInterval(function() {
-        var randomTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
-        setTimeout(function() {
-          showJumpscare();
-        }, randomTime);
-      }, maxTime);
-    }
-  </script>
 </body>
 </html>
