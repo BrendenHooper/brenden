@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+     .board {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .square {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .white {
+            background-color: #f0d9b5;
+        }
+
+        .black {
+            background-color: #b58863;
+        }
+
+        .piece {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .white-piece {
+            background-color: #fff;
+        }
+
+        .black-piece {
+            background-color: #000;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="board">
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+ <div class="piece black-piece" draggable="true"></div>      </div>
+
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+      <div class="square white"></div>
+      <div class="square black"></div>
+
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+      <div class="square black">
+<div class="piece white-piece" draggable="true"></div>      </div>
+      <div class="square white"></div>
+
+</div>
+
+<script>
+    // Add event listeners for draggable pieces
+    const pieces = document.querySelectorAll('.piece');
+
+    pieces.forEach(piece => {
+        piece.addEventListener('dragstart', dragStart);
+        piece.addEventListener('dragover', dragOver);
+        piece.addEventListener('drop', drop);
+    });
+
+    let draggedPiece = null;
+
+    function dragStart(event) {
+        draggedPiece = this;
+    }
+
+    function dragOver(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const targetSquare = this.parentElement;
+
+        // Check if the target square is valid for the dragged piece
+        if (isValidMove(targetSquare)) {
+            targetSquare.appendChild(draggedPiece);
+        }
+    }
+
+    function isValidMove(targetSquare) {
+        const sourceSquare = draggedPiece.parentElement;
+        const isWhitePiece = draggedPiece.classList.contains('white-piece');
+        const isBlackPiece = draggedPiece.classList.contains('black-piece');
+        const sourceRowIndex = sourceSquare.dataset.rowIndex;
+        const targetRowIndex = targetSquare.dataset.rowIndex;
+
+        if (isWhitePiece) {
+            if (targetRowIndex > sourceRowIndex) {
+                return false; // White pieces can only move up
+            }
+
+            if (targetSquare.hasChildNodes()) {
+                const capturedPiece = targetSquare.firstChild;
+                if (capturedPiece.classList.contains('white-piece')) {
+                    return false; // White pieces cannot capture their own pieces
+                } else {
+                    capturedPiece.remove(); // Remove the captured black piece from the target square
+                }
+            }
+        } else if (isBlackPiece) {
+            if (targetRowIndex < sourceRowIndex) {
+                return false; // Black pieces can only move down
+            }
+
+            if (targetSquare.hasChildNodes()) {
+                const capturedPiece = targetSquare.firstChild;
+                if (capturedPiece.classList.contains('black-piece')) {
+                    return false; // Black pieces cannot capture their own pieces
+                } else {
+                    capturedPiece.remove(); // Remove the captured white piece from the target square
+                }
+            }
+        }
+
+        // Additional logic for valid moves (e.g., capturing opponent's pieces) can be added here
+
+        return true; // Default case: allow the move
+    }
+</script>
