@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      background-color: black;
+    }
+
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      width: 306px;
+      height: 306px;
+      margin: 0 auto;
+    }
+
+    .cell {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #000;
+      font-size: 60px;
+      text-align: center;
+      line-height: 100px;
+      cursor: pointer;
+      float: left;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .glow {
+      animation: glowing 1s infinite;
+      background-color: #FFFF00;
+    }
+
+    @keyframes glowing {
+      0% { box-shadow: 0 0 5px #FFFF00; }
+      50% { box-shadow: 0 0 20px #FFFF00; }
+      100% { box-shadow: 0 0 5px #FFFF00; }
+    }
+
+    .message {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .reset-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: white;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .scoreboard {
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .scoreboard span {
+      margin: 0 10px;
+    }
+
+    .turn-indicator {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="board">
+    <div class="cell" onclick="makeMove(0)"></div>
+    <div class="cell" onclick="makeMove(1)"></div>
+    <div class="cell" onclick="makeMove(2)"></div>
+    <div class="cell" onclick="makeMove(3)"></div>
+    <div class="cell" onclick="makeMove(4)"></div>
+    <div class="cell" onclick="makeMove(5)"></div>
+    <div class="cell" onclick="makeMove(6)"></div>
+    <div class="cell" onclick="makeMove(7)"></div>
+    <div class="cell" onclick="makeMove(8)"></div>
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <div class="scoreboard" id="scoreboard">
+    <span id="player1Label">Player 1:</span> <span id="player1Score">0</span> -
+    <span id="player2Label">Player 2:</span> <span id="player2Score">0</span>
+    <br>
+    <span id="turnIndicator"></span>
+  </div>
+
+  <button class="reset-button" onclick="resetBoard()">Reset</button>
+
+  <script>
+    let currentPlayer = "X";
+    let cells = document.getElementsByClassName("cell");
+    let messageElement = document.getElementById("message");
+    let player1LabelElement = document.getElementById("player1Label");
+    let player1ScoreElement = document.getElementById("player1Score");
+    let player2LabelElement = document.getElementById("player2Label");
+    let player2ScoreElement = document.getElementById("player2Score");
+    let turnIndicatorElement = document.getElementById("turnIndicator");
+    let player1Score = 0;
+    let player2Score = 0;
+
+    function makeMove(cellIndex) {
+      if (cells[cellIndex].innerHTML === "") {
+        cells[cellIndex].innerHTML = currentPlayer;
+        cells[cellIndex].style.cursor = "default";
+        if (checkWin()) {
+          messageElement.innerHTML = currentPlayer === "X" ? "Player 1 wins!" : "Player 2 wins!";
+          highlightWinningCells();
+          disableBoard();
+          updateScore();
+        } else if (checkDraw()) {
+          messageElement.innerHTML = "It's a draw!";
+          disableBoard();
+        } else {
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
+          updateTurnIndicator();
+        }
+      }
+    }
+
+    function checkWin() {
+      const winningCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      for (let combination of winningCombinations) {
+        if (
+          cells[combination[0]].innerHTML === currentPlayer &&
+          cells[combination[1]].innerHTML === currentPlayer &&
+          cells[combination[2]].innerHTML === currentPlayer
+        ) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkDraw() {
+      for (let cell of cells) {
+        if (cell.innerHTML === "") {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function highlightWinningCells() {
+      const winningCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      for (let combination of winningCombinations) {
+        const cell1 = cells[combination[0]];
+        const cell2 = cells[combination[1]];
+        const cell3 = cells[combination[2]];
+
+        if (
+          cell1.innerHTML === currentPlayer &&
+          cell2.innerHTML === currentPlayer &&
+          cell3.innerHTML === currentPlayer
+        ) {
+          cell1.classList.add("glow");
+          cell2.classList.add("glow");
+          cell3.classList.add("glow");
+          cell1.style.backgroundColor = "#FFFF00";
+          cell2.style.backgroundColor = "#FFFF00";
+          cell3.style.backgroundColor = "#FFFF00";
+        }
+      }
+    }
+
+    function disableBoard() {
+      for (let cell of cells) {
+        cell.style.cursor = "default";
+      }
+    }
+
+    function resetBoard() {
+      for (let cell of cells) {
+        cell.innerHTML = "";
+        cell.classList.remove("glow");
+        cell.style.backgroundColor = "white";
+        cell.style.cursor = "pointer";
+      }
+      messageElement.innerHTML = "";
+      currentPlayer = "X";
+      updateTurnIndicator();
+    }
+
+    function updateScore() {
+      if (currentPlayer === "X") {
+        player1Score++;
+        player1ScoreElement.innerHTML = player1Score;
+      } else {
+        player2Score++;
+        player2ScoreElement.innerHTML = player2Score;
+      }
+    }
+
+    function updateTurnIndicator() {
+      turnIndicatorElement.innerHTML = "Turn: " + (currentPlayer === "X" ? "Player 1" : "Player 2");
+    }
+  </script>
+</body>
+</html>
