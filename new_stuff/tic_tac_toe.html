@@ -210,17 +210,17 @@
         cell.style.cursor = "pointer";
       }
       messageElement.innerHTML = "";
-      currentPlayer = "X";
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
       updateTurnIndicator();
     }
 
     function updateScore() {
       if (currentPlayer === "X") {
-        player1Score++;
-        player1ScoreElement.innerHTML = player1Score;
-      } else {
         player2Score++;
         player2ScoreElement.innerHTML = player2Score;
+      } else {
+        player1Score++;
+        player1ScoreElement.innerHTML = player1Score;
       }
     }
 
