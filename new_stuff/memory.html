@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory Game</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .memory-card {
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .card-front {
+      transform: rotateY(180deg);
+      background-color: white;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      display: none;
+    }
+
+    .memory-card.flipped .card-back {
+      display: block;
+    }
+
+    .red.card-back {
+      background-color: red;
+    }
+
+    .blue.card-back {
+      background-color: blue;
+    }
+
+    .green.card-back {
+      background-color: green;
+    }
+
+    .yellow.card-back {
+      background-color: yellow;
+    }
+
+    .pink.card-back {
+      background-color: pink;
+    }
+
+    .purple.card-back {
+      background-color: purple;
+    }
+
+    .silver.card-back {
+      background-color: darkviolet;
+    }
+
+    .lime.card-back {
+      background-color: lime;
+    }
+
+    .orange.card-back {
+      background-color: orange;
+    }
+
+    .cyan.card-back {
+      background-color: cyan;
+    }
+
+    .brown.card-back {
+      background-color: brown;
+    }
+
+    .blueviolet.card-back {
+  background-color: blueviolet;
+}
+
+  </style>
+</head>
+<body>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Your existing code here
+});
+
+
+    // Shuffle function
+    function shuffle(array) {
+      let currentIndex = array.length;
+      let temporaryValue, randomIndex;
+
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    // Array of card colors
+    const cardColors = [
+      'red', 'red', 'blue', 'blue', 'green', 'green', 'yellow', 'yellow',
+      'pink', 'pink', 'purple', 'purple', 'deeppink', 'deeppink', 'lime', 'lime',
+      'orange', 'orange', 'cyan', 'cyan', 'brown', 'brown', 'blueviolet', 'blueviolet'
+    ];
+
+    // Shuffle card colors
+    const shuffledCardColors = shuffle(cardColors);
+
+    // Create memory cards
+    const board = document.createElement('div');
+    board.className = 'board';
+    document.body.appendChild(board);
+
+    shuffledCardColors.forEach(color => {
+      const card = document.createElement('div');
+      card.className = 'memory-card';
+      card.onclick = () => flipCard(card);
+      const cardFront = document.createElement('div');
+      cardFront.className = 'card-face card-front';
+      const cardBack = document.createElement('div');
+      cardBack.className = 'card-face card-back';
+      cardBack.classList.add(color);
+      card.appendChild(cardFront);
+      card.appendChild(cardBack);
+      board.appendChild(card);
+    });
+
+    let hasFlippedCard = false;
+    let firstCard, secondCard;
+
+    function flipCard(card) {
+      card.classList.add('flipped');
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = card;
+      } else {
+        hasFlippedCard = false;
+        secondCard = card;
+
+        checkForMatch();
+      }
+    }
+
+    function checkForMatch() {
+      if (firstCard.querySelector('.card-back').classList.value === secondCard.querySelector('.card-back').classList.value) {
+        disableCards();
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+    }
+
+    function unflipCards() {
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
