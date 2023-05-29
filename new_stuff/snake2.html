@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #game-board {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      background-color: blue;
+    }
+
+    .dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="scoreboard">Player 1: 0 | Player 2: 0</h2>
+  <div id="game-board"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dotSize = 20;
+      const boardSize = 20;
+      const initialSpeed = 200;
+
+      let snakes = [
+        {
+          dots: [{ top: 0, left: 0, color: "lime" }],
+          direction: "right"
+        },
+        {
+          dots: [{ top: (boardSize - 1) * dotSize, left: (boardSize - 1) * dotSize, color: "darkgreen" }],
+          direction: "left"
+        }
+      ];
+
+      let speeds = [initialSpeed, initialSpeed];
+      let intervalIds = [null, null];
+      let food = { top: 0, left: 0 };
+
+      function createDot(top, left, color) {
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.top = top + "px";
+        dot.style.left = left + "px";
+        dot.style.backgroundColor = color;
+        return dot;
+      }
+
+      function drawBoard() {
+        let gameBoard = document.getElementById("game-board");
+        gameBoard.innerHTML = "";
+
+        snakes.forEach(function (snake) {
+          snake.dots.forEach(function (dot) {
+            gameBoard.appendChild(createDot(dot.top, dot.left, dot.color));
+          });
+        });
+
+        gameBoard.appendChild(createDot(food.top, food.left, "red"));
+      }
+
+      function moveSnakes() {
+        snakes.forEach(function (snake, snakeIndex) {
+          let head = Object.assign({}, snake.dots[0]);
+          let direction = snake.direction;
+
+          if (direction === "right") {
+            head.left = (head.left + dotSize) % (boardSize * dotSize);
+          } else if (direction === "left") {
+            head.left = (head.left - dotSize + boardSize * dotSize) % (boardSize * dotSize);
+          } else if (direction === "up") {
+            head.top = (head.top - dotSize + boardSize * dotSize) % (boardSize * dotSize);
+          } else if (direction === "down") {
+            head.top = (head.top + dotSize) % (boardSize * dotSize);
+          }
+
+          snake.dots.unshift(head);
+
+          if (head.top === food.top && head.left === food.left) {
+            generateFood();
+            speeds[snakeIndex] -= 10; // Increase the speed of the snake
+          } else {
+            snake.dots.pop();
+          }
+        });
+      }
+
+      function checkCollisions() {
+        snakes.forEach(function (snake, snakeIndex) {
+          let head = snake.dots[0];
+          let collided = false;
+
+          if (
+            head.top < 0 ||
+            head.top >= boardSize * dotSize ||
+            head.left < 0 ||
+            head.left >= boardSize * dotSize
+          ) {
+            collided = true;
+          }
+
+          snake.dots.slice(1).forEach(function (dot) {
+            if (dot.top === head.top && dot.left === head.left) {
+              collided = true;
+            }
+          });
+
+          // Check for head-on collision with the other snake
+          if (snakeIndex === 0) {
+            let otherSnake = snakes[1];
+            otherSnake.dots.forEach(function (dot) {
+              if (dot.top === head.top && dot.left === head.left) {
+                collided = true;
+              }
+            });
+          } else if (snakeIndex === 1) {
+            let otherSnake = snakes[0];
+            otherSnake.dots.forEach(function (dot) {
+              if (dot.top === head.top && dot.left === head.left) {
+                collided = true;
+              }
+            });
+          }
+
+          if (collided) {
+            clearInterval(intervalIds[0]);
+            clearInterval(intervalIds[1]);
+
+            if (snakeIndex === 0) {
+              if (snake.dots.length === snakes[1].dots.length) {
+                alert("It's a tie!");
+              } else if (snake.dots.length > snakes[1].dots.length) {
+                alert("Player 1 wins!");
+              } else {
+                alert("Player 2 wins!");
+              }
+            } else if (snakeIndex === 1) {
+              if (snake.dots.length === snakes[0].dots.length) {
+                alert("It's a tie!");
+              } else if (snake.dots.length > snakes[0].dots.length) {
+                alert("Player 2 wins!");
+              } else {
+                alert("Player 1 wins!");
+              }
+            }
+
+            resetGame();
+          }
+        });
+      }
+
+      function generateFood() {
+        let randomTop = Math.floor(Math.random() * boardSize) * dotSize;
+        let randomLeft = Math.floor(Math.random() * boardSize) * dotSize;
+
+        snakes.forEach(function (snake) {
+          snake.dots.forEach(function (dot) {
+            if (dot.top === randomTop && dot.left === randomLeft) {
+              generateFood(); // Retry if food position conflicts with any snake's body segment
+            }
+          });
+        });
+
+        food.top = randomTop;
+        food.left = randomLeft;
+      }
+
+      function resetGame() {
+        snakes.forEach(function (snake) {
+          snake.dots = [{ top: 0, left: 0, color: "lime" }];
+          snake.direction = "right";
+        });
+
+        speeds = [initialSpeed, initialSpeed];
+
+        generateFood();
+
+        intervalIds[0] = setInterval(gameLoop, speeds[0]);
+        intervalIds[1] = setInterval(gameLoop, speeds[1]);
+      }
+
+      function updateScoreboard() {
+        let scoreboard = document.getElementById("scoreboard");
+        scoreboard.innerHTML = `Player 1: ${scores[0]} | Player 2: ${scores[1]}`;
+      }
+
+      function gameLoop() {
+        moveSnakes();
+        checkCollisions();
+        drawBoard();
+      }
+
+      function handleKeyDown(event) {
+        event.preventDefault();
+
+        switch (event.key) {
+          // Player 1 controls
+          case "ArrowLeft":
+            if (snakes[0].direction !== "right") {
+              snakes[0].direction = "left";
+            }
+            break;
+          case "ArrowUp":
+            if (snakes[0].direction !== "down") {
+              snakes[0].direction = "up";
+            }
+            break;
+          case "ArrowRight":
+            if (snakes[0].direction !== "left") {
+              snakes[0].direction = "right";
+            }
+            break;
+          case "ArrowDown":
+            if (snakes[0].direction !== "up") {
+              snakes[0].direction = "down";
+            }
+            break;
+
+          // Player 2 controls
+          case "a":
+            if (snakes[1].direction !== "right") {
+              snakes[1].direction = "left";
+            }
+            break;
+          case "w":
+            if (snakes[1].direction !== "down") {
+              snakes[1].direction = "up";
+            }
+            break;
+          case "d":
+            if (snakes[1].direction !== "left") {
+              snakes[1].direction = "right";
+            }
+            break;
+          case "s":
+            if (snakes[1].direction !== "up") {
+              snakes[1].direction = "down";
+            }
+            break;
+        }
+      }
+
+      function startGame() {
+        drawBoard();
+
+        intervalIds[0] = setInterval(gameLoop, speeds[0]);
+        intervalIds[1] = setInterval(gameLoop, speeds[1]);
+
+        document.addEventListener("keydown", handleKeyDown);
+      }
+
+      startGame();
+    });
+  </script>
+</body>
+</html>
