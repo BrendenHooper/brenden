@@ -215,7 +215,7 @@
     }
 
     function updateScore() {
-      if (currentPlayer === "X") {
+      if (currentPlayer === "O") {
         player2Score++;
         player2ScoreElement.innerHTML = player2Score;
       } else {
@@ -225,8 +225,10 @@
     }
 
     function updateTurnIndicator() {
-      turnIndicatorElement.innerHTML = "Turn: " + (currentPlayer === "X" ? "Player 1" : "Player 2");
+      turnIndicatorElement.innerHTML = currentPlayer === "X" ? "Player 1's turn" : "Player 2's turn";
     }
+
+    updateTurnIndicator();
   </script>
 </body>
 </html>
