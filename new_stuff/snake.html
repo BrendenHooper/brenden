@@ -4,20 +4,19 @@
   <title>Snake Game</title>
   <style>
     #game-board {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  border: 1px solid #000;
-  background-color: #aad989;
-  background-image:
-    linear-gradient(45deg, rgba(170, 217, 137, 0.2) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(170, 217, 137, 0.2) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(170, 217, 137, 0.2) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(170, 217, 137, 0.2) 75%);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 0, 20px -20px, 0px 20px;
-}
-
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+      background-color: #aad989;
+      background-image:
+        linear-gradient(45deg, rgba(170, 217, 137, 0.2) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(170, 217, 137, 0.2) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(170, 217, 137, 0.2) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(170, 217, 137, 0.2) 75%);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 0, 20px -20px, 0px 20px;
+    }
 
     .snake-dot {
       position: absolute;
@@ -36,11 +35,17 @@
       height: 20px;
       background-color: #f00;
     }
+
+    #scoreboard {
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
   <h1>Snake Game</h1>
   <div id="game-board"></div>
+  <div id="scoreboard">Score: 0</div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -49,11 +54,13 @@
       const initialSpeed = 200; // Initial speed of the game (in milliseconds)
 
       let gameBoard = document.getElementById("game-board");
+      let scoreboard = document.getElementById("scoreboard");
       let dots = [{ top: 0, left: 0, color: "lime" }]; // Array of snake dots with color property
       let food = { top: 0, left: 0 }; // Position of the food
       let direction = "right"; // Initial direction of the snake
       let intervalId = null; // Interval ID for the game loop
       let speed = initialSpeed; // Current speed of the game
+      let score = 0; // Initial score
 
       function createDot(top, left, color, className) {
         let dot = document.createElement("div");
@@ -77,31 +84,32 @@
       }
 
       function moveSnake() {
-  let head = Object.assign({}, dots[0]);
-  if (direction === "right") {
-    head.left = (head.left + dotSize) % (boardSize * dotSize); // Wrap around to the left side if hitting the right wall
-  } else if (direction === "left") {
-    head.left = (head.left - dotSize + boardSize * dotSize) % (boardSize * dotSize); // Wrap around to the right side if hitting the left wall
-  } else if (direction === "up") {
-    head.top = (head.top - dotSize + boardSize * dotSize) % (boardSize * dotSize); // Wrap around to the bottom side if hitting the top wall
-  } else if (direction === "down") {
-    head.top = (head.top + dotSize) % (boardSize * dotSize); // Wrap around to the top side if hitting the bottom wall
-  }
+        let head = Object.assign({}, dots[0]);
+        if (direction === "right") {
+          head.left = (head.left + dotSize) % (boardSize * dotSize); // Wrap around to the left side if hitting the right wall
+        } else if (direction === "left") {
+          head.left = (head.left - dotSize + boardSize * dotSize) % (boardSize * dotSize); // Wrap around to the right side if hitting the left wall
+        } else if (direction === "up") {
+          head.top = (head.top - dotSize + boardSize * dotSize) % (boardSize * dotSize); // Wrap around to the bottom side if hitting the top wall
+        } else if (direction === "down") {
+          head.top = (head.top + dotSize) % (boardSize * dotSize); // Wrap around to the top side if hitting the bottom wall
+        }
 
-  // Generate a random shade of green between lime and dark green
-  let randomGreen = Math.floor(Math.random() * 8) + 2;
-  head.color = `rgba(0, ${randomGreen}0, 0, 1)`;
+        // Generate a random shade of green between lime and dark green
+        let randomGreen = Math.floor(Math.random() * 8) + 2;
+        head.color = `rgba(0, ${randomGreen}0, 0, 1)`;
 
-  dots.unshift(head);
+        dots.unshift(head);
 
-  if (head.top === food.top && head.left === food.left) {
-    generateFood();
-    speed -= 10; // Increase the speed of the game
-  } else {
-    dots.pop();
-  }
-}
-
+        if (head.top === food.top && head.left === food.left) {
+          generateFood();
+          speed -= 10; // Increase the speed of the game
+          score += 10; // Increment the score
+          updateScoreboard(); // Update the scoreboard
+        } else {
+          dots.pop();
+        }
+      }
 
       function generateFood() {
         let maxPosition = boardSize - 1;
@@ -145,13 +153,17 @@
         }
       }
 
+      function updateScoreboard() {
+        scoreboard.textContent = "Score: " + score;
+      }
+
       function gameLoop() {
         moveSnake();
         drawBoard();
 
         if (checkCollision()) {
           clearInterval(intervalId);
-          alert("Game Over!");
+          alert("Game Over! Final Score: " + score);
         } else {
           intervalId = setTimeout(gameLoop, speed);
         }
@@ -159,6 +171,7 @@
 
       generateFood();
       drawBoard();
+      updateScoreboard();
       document.addEventListener("keydown", handleDirectionChange);
       intervalId = setTimeout(gameLoop, speed);
     });
