@@ -13,6 +13,13 @@
       font-family: Arial, sans-serif;
     }
 
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
     .board {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -44,9 +51,9 @@
       backface-visibility: hidden;
     }
 
-    .card-front {
+    /* Move this rule after the rule that sets the background color */
+    .card-front.card-face {
       transform: rotateY(180deg);
-      background-color: white;
     }
 
     .card-back {
@@ -82,8 +89,8 @@
       background-color: purple;
     }
 
-    .silver.card-back {
-      background-color: darkviolet;
+    .grey.card-back {
+      background-color: grey;
     }
 
     .lime.card-back {
@@ -103,17 +110,55 @@
     }
 
     .blueviolet.card-back {
-  background-color: blueviolet;
-}
+      background-color: blueviolet;
+    }
 
+    .score-board {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 300px;
+      margin-bottom: 10px;
+    }
+
+    .player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+    }
+
+    .turn {
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-  <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Your existing code here
-});
+  <div class="container">
+    <div class="score-board">
+      <div class="player">
+        <span id="player1">Player 1</span>
+        <span id="score1">0</span> Points
+      </div>
+      <div class="player">
+        <span id="player2">Player 2</span>
+        <span id="score2">0</span> Points
+      </div>
+    </div>
 
+    <div class="board"></div>
+
+    <div class="turn" id="turn"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Your existing code here
+    });
 
     // Shuffle function
     function shuffle(array) {
@@ -135,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array of card colors
     const cardColors = [
       'red', 'red', 'blue', 'blue', 'green', 'green', 'yellow', 'yellow',
-      'pink', 'pink', 'purple', 'purple', 'deeppink', 'deeppink', 'lime', 'lime',
+      'pink', 'pink', 'purple', 'purple', 'grey', 'grey', 'lime', 'lime',
       'orange', 'orange', 'cyan', 'cyan', 'brown', 'brown', 'blueviolet', 'blueviolet'
     ];
 
@@ -143,10 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const shuffledCardColors = shuffle(cardColors);
 
     // Create memory cards
-    const board = document.createElement('div');
-    board.className = 'board';
-    document.body.appendChild(board);
-
+    const board = document.querySelector('.board');
     shuffledCardColors.forEach(color => {
       const card = document.createElement('div');
       card.className = 'memory-card';
@@ -163,6 +205,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let hasFlippedCard = false;
     let firstCard, secondCard;
+    let score1 = 0;
+    let score2 = 0;
+    let currentPlayer = 1;
 
     function flipCard(card) {
       card.classList.add('flipped');
@@ -181,8 +226,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkForMatch() {
       if (firstCard.querySelector('.card-back').classList.value === secondCard.querySelector('.card-back').classList.value) {
         disableCards();
+        increaseScore();
+        
       } else {
         unflipCards();
+        switchPlayer();
       }
     }
 
@@ -196,6 +244,21 @@ document.addEventListener('DOMContentLoaded', function() {
         firstCard.classList.remove('flipped');
         secondCard.classList.remove('flipped');
       }, 1000);
+    }
+
+    function increaseScore() {
+      if (currentPlayer === 1) {
+        score1 += 10;
+        document.getElementById('score1').innerText = score1;
+      } else if (currentPlayer === 2) {
+        score2 += 10;
+        document.getElementById('score2').innerText = score2;
+      }
+    }
+
+    function switchPlayer() {
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      document.getElementById('turn').innerText = `Turn: Player ${currentPlayer}`;
     }
   </script>
 </body>
