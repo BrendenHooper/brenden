@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hangman Game</title>
+  <style>
+    .hidden-letter {
+      display: inline-block;
+      width: 30px;
+      border-bottom: 1px solid black;
+      margin-right: 5px;
+      text-align: center;
+    }
+
+    .alphabet {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .alphabet button {
+      margin-right: 5px;
+      margin-bottom: 12px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .alphabet button.used {
+      text-decoration: line-through;
+      background-color: #ccc;
+      cursor: default;
+    }
+
+    .hangman {
+      font-family: monospace;
+      font-size: 16px;
+      margin-top: 20px;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hangman Game</h1>
+  <div class="hangman" id="hangman-container">
+    <!-- Initially empty -->
+  </div>
+  <div id="word-container"></div>
+  <p>Guess a letter:</p>
+  <div class="alphabet">
+    <button onclick="guessLetter('A')">A</button>
+    <button onclick="guessLetter('B')">B</button>
+    <button onclick="guessLetter('C')">C</button>
+    <button onclick="guessLetter('D')">D</button>
+    <button onclick="guessLetter('E')">E</button>
+    <button onclick="guessLetter('F')">F</button>
+    <button onclick="guessLetter('G')">G</button>
+    <button onclick="guessLetter('H')">H</button>
+    <button onclick="guessLetter('I')">I</button>
+    <button onclick="guessLetter('J')">J</button>
+    <button onclick="guessLetter('K')">K</button>
+    <button onclick="guessLetter('L')">L</button>
+    <button onclick="guessLetter('M')">M</button>
+    <button onclick="guessLetter('N')">N</button>
+    <br>
+    <button onclick="guessLetter('O')">O</button>
+    <button onclick="guessLetter('P')">P</button>
+    <button onclick="guessLetter('Q')">Q</button>
+    <button onclick="guessLetter('R')">R</button>
+    <button onclick="guessLetter('S')">S</button>
+    <button onclick="guessLetter('T')">T</button>
+    <button onclick="guessLetter('U')">U</button>
+    <button onclick="guessLetter('V')">V</button>
+    <button onclick="guessLetter('W')">W</button>
+    <button onclick="guessLetter('X')">X</button>
+    <button onclick="guessLetter('Y')">Y</button>
+    <button onclick="guessLetter('Z')">Z</button>
+  </div>
+  <p id="message"></p>
+
+  <script>
+    var words = ['hangman', 'python', 'programming', 'openai', 'computer', 'javascript', 'html', 'css', 'database', 'algorithm', 'hand', 'slam', 'camera', 'jockey', 'wrist', 'steep', 'sleep', 'other', 'leave', 'athlete', 'cupboard', 'funeral', 'forest', 'nerve', 'outline', 'pan', 'empire', 'explore', 'export', 'high', 'figure', 'transparent', 'vain', 'drag', 'gap', 'credit', 'girl', 'boy', 'clay', 'averagew', 'meal', 'happen', 'lunch', 'breakfast', 'dinner', 'fat', 'sour', 'wolf', 'humor', 'edition', 'style', 'haunt', 'proof', 'necklace'];
+    var chosenWord = words[Math.floor(Math.random() * words.length)];
+    var guessedLetters = [];
+    var attempts = 6;
+
+    // Hangman ASCII art for each stage
+    var hangmanStages = [
+      `
+     _______
+    |/      |
+    |
+    |
+    |
+    |
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |
+    |
+    |
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |      \\|
+    |
+    |
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |      \\|/
+    |
+    |
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |      \\|/
+    |       |
+    |
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |      \\|/
+    |       |
+    |      /
+   _|___
+  |     |
+  |_____|_____
+`,
+      `
+     _______
+    |/      |
+    |      (_)
+    |      \\|/
+    |       |
+    |      / \\
+   _|___
+  |     |
+  |_____|_____
+`
+    ];
+
+    function displayWord() {
+      var wordContainer = document.getElementById('word-container');
+      wordContainer.innerHTML = '';
+
+      for (var i = 0; i < chosenWord.length; i++) {
+        var letter = chosenWord[i];
+        var span = document.createElement('span');
+        span.className = 'hidden-letter';
+        span.textContent = guessedLetters.includes(letter) ? letter : '_';
+        wordContainer.appendChild(span);
+      }
+    }
+
+    function displayHangman() {
+      var hangmanContainer = document.getElementById('hangman-container');
+      hangmanContainer.textContent = hangmanStages[6 - attempts];
+    }
+
+    function updateMessage(message) {
+      var messageElement = document.getElementById('message');
+      messageElement.textContent = message;
+    }
+
+    function guessLetter(letter) {
+      if (guessedLetters.includes(letter.toLowerCase()) || guessedLetters.includes(letter.toUpperCase())) {
+        updateMessage('You\'ve already guessed that letter!');
+        return;
+      }
+
+      guessedLetters.push(letter.toLowerCase());
+
+      var alphabetButtons = document.querySelectorAll('.alphabet button');
+      for (var i = 0; i < alphabetButtons.length; i++) {
+        if (alphabetButtons[i].textContent.toLowerCase() === letter.toLowerCase()) {
+          alphabetButtons[i].classList.add('used');
+          break;
+        }
+      }
+
+      if (chosenWord.includes(letter.toLowerCase()) || chosenWord.includes(letter.toUpperCase())) {
+        displayWord();
+        if (!document.getElementById('word-container').textContent.includes('_')) {
+          updateMessage('Congratulations! You guessed the word correctly!');
+        } else {
+          updateMessage('Correct guess!');
+        }
+      } else {
+        attempts--;
+        displayHangman();
+        updateMessage('Wrong guess! Attempts remaining: ' + attempts);
+        if (attempts === 0) {
+          updateMessage('Sorry, you lost. The word was: ' + chosenWord);
+        }
+      }
+    }
+
+    displayWord();
+    displayHangman();
+  </script>
+</body>
+</html>
