@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guessing Game with Leaderboard</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        #guess {
+            margin-top: 20px;
+        }
+
+        #leaderboard {
+            margin-top: 50px;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guessing Game with Leaderboard</h1>
+    <p>I have picked a number between 1 and 100. Can you guess it?</p>
+    <div id="result"></div>
+    <input type="number" id="guess" min="1" max="100" placeholder="Enter your guess">
+    <br>
+    <button onclick="checkGuess()">Guess</button>
+    <div id="leaderboard"></div>
+
+    <script>
+        var number = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+        var leaderboard = [];
+
+        // Load leaderboard from local storage
+        if (localStorage.getItem("leaderboard")) {
+            leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
+        }
+
+        function checkGuess() {
+            var guess = parseInt(document.getElementById("guess").value);
+            attempts++;
+
+            var resultElement = document.getElementById("result");
+            if (guess < number) {
+                resultElement.textContent = "Too low! Try guessing higher.";
+            } else if (guess > number) {
+                resultElement.textContent = "Too high! Try guessing lower.";
+            } else {
+                resultElement.textContent = "Congratulations! You guessed the number in " + attempts + " attempts.";
+                document.getElementById("guess").disabled = true;
+
+                // Add result to leaderboard
+                var playerName = prompt("Please enter your name:");
+                leaderboard.push({ name: playerName, attempts: attempts });
+
+                // Sort leaderboard by attempts (ascending)
+                leaderboard.sort(function (a, b) {
+                    return a.attempts - b.attempts;
+                });
+
+                // Store leaderboard in local storage
+                localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+                // Display leaderboard
+                displayLeaderboard();
+            }
+        }
+
+        function displayLeaderboard() {
+            var leaderboardElement = document.getElementById("leaderboard");
+            leaderboardElement.innerHTML = "<h3>Leaderboard:</h3>";
+            leaderboard.forEach(function (entry, index) {
+                leaderboardElement.innerHTML += (index + 1) + ". " + entry.name + " - " + entry.attempts + " attempts<br>";
+            });
+        }
+
+        // Initial leaderboard display
+        displayLeaderboard();
+    </script>
+</body>
+</html>
