@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>maze game</title>
+  <style>
+    .maze {
+      display: inline-block;
+      border-collapse: collapse;
+      border: 1px solid black;
+    }
+    
+    .maze td {
+      width: 20px;
+      height: 20px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  
+
+  
+  <table id="mazeTable" class="maze"></table>
+  
+  <script>
+    // 0=open space
+    // 1=wall
+    // 2=maze switcher
+
+    var mazes = [
+      [
+        [1, 1, 1, 1, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 1, 1, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 2, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 1, 1, 1, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 0, 0, 0, 1, 1 ,1, ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [1, 1, 1, 1, 1, 1 ,1, ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ]
+
+      ],
+      [
+        [1, 1, 1, 1, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 1, 1, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 2, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [1, 1, 1, 1, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+        [0, 0, 0, 0, 1, 1 ,1, ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 0 ,0, ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+        [0, 0, 0, 0, 1, 1 ,1, ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ]
+      ]
+    ];
+    
+    var currentMazeIndex = 0;
+    var playerPosition = { row: 1, col: 1 };
+    var symbol = 2;
+    
+    function drawMaze() {
+      var mazeTable = document.getElementById('mazeTable');
+      mazeTable.innerHTML = '';
+      
+      var maze = mazes[currentMazeIndex];
+      
+      for (var i = 0; i < maze.length; i++) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < maze[i].length; j++) {
+          var cell = document.createElement('td');
+          cell.style.backgroundColor = maze[i][j] === 1 ? 'black' : 'white';
+          
+          if (i === playerPosition.row && j === playerPosition.col) {
+            cell.style.backgroundColor = 'green';
+          } else if (maze[i][j] === symbol) {
+            cell.style.backgroundColor = 'yellow';
+          }
+          
+          row.appendChild(cell);
+        }
+        mazeTable.appendChild(row);
+      }
+    }
+    
+    function toggleMaze(index) {
+      currentMazeIndex = index;
+      
+      // Reset player position when switching mazes
+      playerPosition = { row: 1, col: 1 };
+      
+      drawMaze();
+    }
+    
+    function movePlayer(direction) {
+      var maze = mazes[currentMazeIndex];
+      
+      var newRow = playerPosition.row;
+      var newCol = playerPosition.col;
+      
+      if (direction === 'up') {
+        newRow--;
+      } else if (direction === 'down') {
+        newRow++;
+      } else if (direction === 'left') {
+        newCol--;
+      } else if (direction === 'right') {
+        newCol++;
+      }
+      
+      // Check if the new position is within the maze boundaries and not a wall (1)
+      if (newRow >= 0 && newRow < maze.length && newCol >= 0 && newCol < maze[0].length && maze[newRow][newCol] !== 1) {
+        playerPosition.row = newRow;
+        playerPosition.col = newCol;
+        
+        // Check if the player reached a maze switcher position (symbol)
+        if (maze[playerPosition.row][playerPosition.col] === symbol) {
+          // Toggle the maze when the player reaches the switcher
+          currentMazeIndex = (currentMazeIndex + 1) % mazes.length;
+        }
+        
+        drawMaze();
+      }
+    }
+    
+    // Initial drawing
+    drawMaze();
+    
+    // Event listener for key presses
+    document.addEventListener('keydown', function(event) {
+      var key = event.key.toLowerCase();
+      
+      if (key === 'w') {
+        movePlayer('up');
+      } else if (key === 's') {
+        movePlayer('down');
+      } else if (key === 'a') {
+        movePlayer('left');
+      } else if (key === 'd') {
+        movePlayer('right');
+      }
+    });
+  </script>
+  
+  <h2>Move the player:</h2>
+  <button onclick="movePlayer('up')">Up</button>
+  <button onclick="movePlayer('down')">Down</button>
+  <button onclick="movePlayer('left')">Left</button>
+  <button onclick="movePlayer('right')">Right</button>
+</body>
+</html>
