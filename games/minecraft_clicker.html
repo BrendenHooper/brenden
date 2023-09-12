@@ -64,176 +64,280 @@ You got: <br>
         document.getElementById('Stonepersecond').innerHTML = "You are gaining " + StoneGainPerSecond + " Stone per/s";
     }
 
-    function timer() {
-        WoodGainPerSecond = Wood * WoodMultiplier;
-        StoneGainPerSecond = Stone * StoneMultiplier;
-        WoodBlock += WoodGainPerSecond;
-        StoneBlock += StoneGainPerSecond;
-        update();
-    }
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Minecraft Clicker</title>
+    <style>
+        /* Add your CSS styles here */
+        #inventory {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <p id="Woodpersecond">You are gaining 0 Wood per/s</p>
+    <p id="Stonepersecond">You are gaining 0 Stone per/s</p>
 
-    setInterval(timer, 1000);
-
-    function addGoldNugget() {
-        GoldNugget = GoldNugget + 1;
-        update();
-    }
-
-    function addDirt() {
-        DirtBlock = DirtBlock + 1;
-        update();
-    }
-
-    function addWood() {
-        WoodBlock = WoodBlock + 1;
-        update();
-    }
-
-    function addStone() {
-        StoneBlock = StoneBlock + 1;
-        update();
-    }
-</script>
-
-<br><br>
-<div id="buttonHolder">
-    <button><a href="#" onClick="save()">Save</a></button>
-    <button><a href="#" onclick="load()">Load</a></button>
+    <a href="#" onclick="addDirt()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3856_i147_w750.jpeg" width="50px" height="50px"></a>
     <br><br>
-    <hr>
-    <p id="ammountDirtMultiplier">Dirt Multiplier Upgrade x2</p>
-    <button><a href="#" onClick="buyDirtMultiplier()"><span id="ammountDirtMultiplier2">x2</span></a></button>
-    <p id="costDirtMultiplier">100 Gold Nugget</p>
-    <p id="currentDirtMultiplier">Your current Dirt Multiplier is x1</p>
-    <br>
-    <hr>
-    <p id="ammountWoodMultiplier">Wood Multiplier Upgrade x2</p>
-    <button><a href="#" onClick="buyWoodMultiplier()"><span id="ammountWoodMultiplier2">x2</span></a></button>
-    <p id="costWoodMultiplier">200 Gold Nugget</p>
-    <p id="currentWoodMultiplier">Your current Wood Multiplier is x1</p>
-    <br>
-    <hr>
-    <p id="ammountStoneMultiplier">Stone Multiplier Upgrade x2</p>
-    <button><a href="#" onClick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></a></button>
-    <p id="costStoneMultiplier">300 Gold Nugget</p>
-    <p id="currentStoneMultiplier">Your current Multiplier is x1</p>
-    <br>
-    <hr>
-    <p id="buy">Buy 1 Wood cutter</p>
-    <button><a href="#" onClick="buyWood()"><img src="https://i.pinimg.com/736x/12/3f/f2/123ff2fe58086262ea9aad1811ffd2e8--block-wall-wood-blocks.jpg" width="50px" height="50px"></a></button>
-    <p id="costWood">12 Gold Nugget</p>
-    <p id="ammountWood">You Own 0 Wood cutter</p>
-    <br>
-    <hr>
-    <p id="buy">Buy 1 Stone miner</p>
-    <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
-    <p id="costStone">15 Gold nugget</p>
-    <p id="ammountStone">Stone miner</p>
-</div>
+    
+    <!-- Inventory Button -->
+    <button onclick="toggleInventory()">Inventory</button>
+    
+    <!-- Inventory Dropdown -->
+    <div id="inventory">
+        <h3>Inventory</h3>
+        <p id="inventoryGoldNugget">Gold Nugget: 0</p>
+        <p id="inventoryDirt">Dirt: 0</p>
+        <button onclick="sellDirt()">Sell 10 dirt for 1 gold nugget</button>
+        <p id="inventoryWood">Wood: 0</p>
+        <button onclick="sellWood()">Sell 12 wood for 2 gold nuggets</button>
+        <p id="inventoryStone">Stone: 0</p>
+        <button onclick="sellStone()">Sell 20 stone for 3 gold nuggets</button>
+        <!-- Add more inventory items as needed -->
+    </div>
 
-<script>
-    function save() {
-        localStorage.setItem("GoldNugget", GoldNugget);
-        localStorage.setItem("DirtBlock", DirtBlock);
-        localStorage.setItem("WoodBlock", WoodBlock);
-        localStorage.setItem("StoneBlock", StoneBlock);
-        localStorage.setItem("Wood", Wood);
-        localStorage.setItem("Stone", Stone);
-        localStorage.setItem("DirtMultiplier", DirtMultiplier);
-        localStorage.setItem("WoodMultiplier", WoodMultiplier);
-        localStorage.setItem("StoneMultiplier", StoneMultiplier);
-    }
+    <script>
+        // Define global variables
+        var DirtMultiplier = 1;
+        var WoodMultiplier = 1;
+        var StoneMultiplier = 1;
 
-    function load() {
-        GoldNugget = parseInt(localStorage.getItem("GoldNugget")) || 10000;
-        DirtBlock = parseInt(localStorage.getItem("DirtBlock")) || 0;
-        WoodBlock = parseInt(localStorage.getItem("WoodBlock")) || 0;
-        StoneBlock = parseInt(localStorage.getItem("StoneBlock")) || 0;
-        Wood = parseInt(localStorage.getItem("Wood")) || 0;
-        Stone = parseInt(localStorage.getItem("Stone")) || 0;
-        DirtMultiplier = parseInt(localStorage.getItem("DirtMultiplier")) || 1;
-        WoodMultiplier = parseInt(localStorage.getItem("WoodMultiplier")) || 1;
-        StoneMultiplier = parseInt(localStorage.getItem("StoneMultiplier")) || 1;
-        update();
-    }
+        var GoldNugget = 10000;
+        var DirtBlock = 0;
+        var WoodBlock = 0;
+        var StoneBlock = 0;
 
-    function buyWood() {
-        if (GoldNugget >= ((Wood + 1) * 12)) {
-            GoldNugget = GoldNugget - ((Wood + 1) * 12);
-            Wood = Wood + 1;
+        var Wood = 0;
+        var Stone = 0;
+
+        var WoodGainPerSecond = 0;
+        var StoneGainPerSecond = 0;
+
+        function update() {
+            document.getElementById('inventoryGoldNugget').textContent = "Gold Nugget: " + GoldNugget;
+            document.getElementById('inventoryDirt').textContent = "Dirt: " + DirtBlock;
+            document.getElementById('inventoryWood').textContent = "Wood: " + WoodBlock;
+            document.getElementById('inventoryStone').textContent = "Stone: " + StoneBlock;
+
+            document.getElementById('ammountDirtMultiplier').textContent = "Dirt Multiplier Upgrade x" + (DirtMultiplier + 1);
+            document.getElementById('ammountDirtMultiplier2').textContent = "x" + (DirtMultiplier + 1);
+            document.getElementById('costDirtMultiplier').textContent = ((DirtMultiplier + 1) * 100) + " Gold Nuggets";
+            document.getElementById('currentDirtMultiplier').textContent = "Your current Dirt Multiplier is x" + DirtMultiplier;
+
+            document.getElementById('ammountWoodMultiplier').textContent = "Wood Multiplier Upgrade x" + (WoodMultiplier + 1);
+            document.getElementById('ammountWoodMultiplier2').textContent = "x" + (WoodMultiplier + 1);
+            document.getElementById('costWoodMultiplier').textContent = ((WoodMultiplier + 1) * 200) + " Wood Blocks";
+            document.getElementById('currentWoodMultiplier').textContent = "Your current Wood Multiplier is x" + WoodMultiplier;
+
+            document.getElementById('ammountStoneMultiplier').textContent = "Stone Multiplier Upgrade x" + (StoneMultiplier + 1);
+            document.getElementById('ammountStoneMultiplier2').textContent = "x" + (StoneMultiplier + 1);
+            document.getElementById('costStoneMultiplier').textContent = ((StoneMultiplier + 1) * 300) + " Stone Blocks";
+            document.getElementById('currentStoneMultiplier').textContent = "Your current Stone Multiplier is x" + StoneMultiplier;
+
+            document.getElementById('ammountWood').textContent = "You Own " + Wood + " Wood cutters";
+            document.getElementById('costWood').textContent = ((Wood + 1) * 12) + " Gold Nuggets";
+
+            document.getElementById('ammountStone').textContent = "You Own " + Stone + " Stone miners";
+            document.getElementById('costStone').textContent = ((Stone + 1) * 15) + " Gold Nuggets";
+
+            document.getElementById('Woodpersecond').textContent = "You are gaining " + WoodGainPerSecond + " Wood per/s";
+            document.getElementById('Stonepersecond').textContent = "You are gaining " + StoneGainPerSecond + " Stone per/s";
+        }
+
+        // Function to toggle the inventory dropdown
+        function toggleInventory() {
+            var inventory = document.getElementById('inventory');
+            if (inventory.style.display === "none" || inventory.style.display === "") {
+                inventory.style.display = "block";
+            } else {
+                inventory.style.display = "none";
+            }
+        }
+
+        function timer() {
+            WoodGainPerSecond = Wood * WoodMultiplier;
+            StoneGainPerSecond = Stone * StoneMultiplier;
+            WoodBlock += WoodGainPerSecond;
+            StoneBlock += StoneGainPerSecond;
             update();
         }
-    }
 
-    function buyStone() {
-        if (GoldNugget >= ((Stone + 1) * 15)) {
-            GoldNugget = GoldNugget - ((Stone + 1) * 15);
-            Stone = Stone + 1;
-            update();
-        }
-    }
+        setInterval(timer, 1000);
 
-    function buyDirtMultiplier() {
-        if (GoldNugget >= ((DirtMultiplier + 1) * 100)) {
-            GoldNugget = GoldNugget - ((DirtMultiplier + 1) * 100);
-            DirtMultiplier = DirtMultiplier + 1;
-            update();
-        }
-    }
-
-    function buyWoodMultiplier() {
-        if (GoldNugget >= ((WoodMultiplier + 1) * 200)) {
-            GoldNugget = GoldNugget - ((WoodMultiplier + 1) * 200);
-            WoodMultiplier = WoodMultiplier + 1;
-            update();
-        }
-    }
-
-    function buyStoneMultiplier() {
-        if (GoldNugget >= ((StoneMultiplier + 1) * 300)) {
-            GoldNugget = GoldNugget - ((StoneMultiplier + 1) * 300);
-            StoneMultiplier = StoneMultiplier + 1;
-            update();
-        }
-    }
-
-    function sellDirt() {
-        const cost = 10; // Cost of one GoldNugget
-        if (DirtBlock >= cost) {
-            DirtBlock = DirtBlock - cost;
+        function addGoldNugget() {
             GoldNugget = GoldNugget + 1;
             update();
-        } else {
-            alert('You don\'t have enough dirt blocks.');
         }
-    }
 
-    function sellWood() {
-        const cost = 12; // Cost of one GoldNugget
-        if (WoodBlock >= cost) {
-            WoodBlock = WoodBlock - cost;
-            GoldNugget = GoldNugget + 2;
+        function addDirt() {
+            DirtBlock = DirtBlock + 1;
             update();
-        } else {
-            alert('You don\'t have enough Wood blocks.');
         }
-    }
 
-    function sellStone() {
-        const cost = 20; // Cost of one GoldNugget
-        if (StoneBlock >= cost) {
-            StoneBlock = StoneBlock - cost;
-            GoldNugget = GoldNugget + 3;
+        function addWood() {
+            WoodBlock = WoodBlock + 1;
             update();
-        } else {
-            alert('You don\'t have enough Stone blocks.');
         }
-    }
-</script>
 
-<style>
-    /* Your CSS styles here */
-</style>
+        function addStone() {
+            StoneBlock = StoneBlock + 1;
+            update();
+        }
+
+        function sellDirt() {
+            const cost = 10; // Cost of one Gold Nugget
+            if (DirtBlock >= cost) {
+                DirtBlock = DirtBlock - cost;
+                GoldNugget = GoldNugget + 1;
+                update();
+            } else {
+                alert('You don\'t have enough dirt blocks.');
+            }
+        }
+
+        function sellWood() {
+            const cost = 12; // Cost of one Gold Nugget
+            if (WoodBlock >= cost) {
+                WoodBlock = WoodBlock - cost;
+                GoldNugget = GoldNugget + 2;
+                update();
+            } else {
+                alert('You don\'t have enough Wood blocks.');
+            }
+        }
+
+        function sellStone() {
+            const cost = 20; // Cost of one Gold Nugget
+            if (StoneBlock >= cost) {
+                StoneBlock = StoneBlock - cost;
+                GoldNugget = GoldNugget + 3;
+                update();
+            } else {
+                alert('You don\'t have enough Stone blocks.');
+            }
+        }
+    </script>
+
+    <br><br>
+    <div id="buttonHolder">
+        <button><a href="#" onClick="save()">Save</a></button>
+        <button><a href="#" onclick="load()">Load</a></button>
+        <br><br>
+        <hr>
+        <p id="ammountDirtMultiplier">Dirt Multiplier Upgrade x2</p>
+        <button><a href="#" onClick="buyDirtMultiplier()"><span id="ammountDirtMultiplier2">x2</span></a></button>
+        <p id="costDirtMultiplier">100 Gold Nuggets</p>
+        <p id="currentDirtMultiplier">Your current Dirt Multiplier is x1</p>
+        <br>
+        <hr>
+        <p id="ammountWoodMultiplier">Wood Multiplier Upgrade x2</p>
+        <button><a href="#" onClick="buyWoodMultiplier()"><span id="ammountWoodMultiplier2">x2</span></a></button>
+        <p id="costWoodMultiplier">200 Gold Nuggets</p>
+        <p id="currentWoodMultiplier">Your current Wood Multiplier is x1</p>
+        <br>
+        <hr>
+        <p id="ammountStoneMultiplier">Stone Multiplier Upgrade x2</p>
+        <button><a href="#" onClick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></a></button>
+        <p id="costStoneMultiplier">300 Gold Nuggets</p>
+        <p id="currentStoneMultiplier">Your current Multiplier is x1</p>
+        <br>
+        <hr>
+        <p id="buy">Buy 1 Wood cutter</p>
+        <button><a href="#" onClick="buyWood()"><img src="https://i.pinimg.com/736x/12/3f/f2/123ff2fe58086262ea9aad1811ffd2e8--block-wall-wood-blocks.jpg" width="50px" height="50px"></a></button>
+        <p id="costWood">12 Gold Nuggets</p>
+        <p id="ammountWood">You Own 0 Wood cutters</p>
+        <br>
+        <hr>
+        <p id="buy">Buy 1 Stone miner</p>
+        <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
+        <p id="costStone">15 Gold nuggets</p>
+        <p id="ammountStone">Stone miners</p>
+    </div>
+
+    <script>
+        function save() {
+            localStorage.setItem("GoldNugget", GoldNugget);
+            localStorage.setItem("DirtBlock", DirtBlock);
+            localStorage.setItem("WoodBlock", WoodBlock);
+            localStorage.setItem("StoneBlock", StoneBlock);
+            localStorage.setItem("Wood", Wood);
+            localStorage.setItem("Stone", Stone);
+            localStorage.setItem("DirtMultiplier", DirtMultiplier);
+            localStorage.setItem("WoodMultiplier", WoodMultiplier);
+            localStorage.setItem("StoneMultiplier", StoneMultiplier);
+        }
+
+        function load() {
+            GoldNugget = parseInt(localStorage.getItem("GoldNugget")) || 10000;
+            DirtBlock = parseInt(localStorage.getItem("DirtBlock")) || 0;
+            WoodBlock = parseInt(localStorage.getItem("WoodBlock")) || 0;
+            StoneBlock = parseInt(localStorage.getItem("StoneBlock")) || 0;
+            Wood = parseInt(localStorage.getItem("Wood")) || 0;
+            Stone = parseInt(localStorage.getItem("Stone")) || 0;
+            DirtMultiplier = parseInt(localStorage.getItem("DirtMultiplier")) || 1;
+            WoodMultiplier = parseInt(localStorage.getItem("WoodMultiplier")) || 1;
+            StoneMultiplier = parseInt(localStorage.getItem("StoneMultiplier")) || 1;
+            update();
+        }
+
+        function buyWood() {
+            if (GoldNugget >= ((Wood + 1) * 12)) {
+                GoldNugget = GoldNugget - ((Wood + 1) * 12);
+                Wood = Wood + 1;
+                update();
+            }
+        }
+
+        function buyStone() {
+            if (GoldNugget >= ((Stone + 1) * 15)) {
+                GoldNugget = GoldNugget - ((Stone + 1) * 15);
+                Stone = Stone + 1;
+                update();
+            }
+        }
+
+        function buyDirtMultiplier() {
+            if (GoldNugget >= ((DirtMultiplier + 1) * 100)) {
+                GoldNugget = GoldNugget - ((DirtMultiplier + 1) * 100);
+                DirtMultiplier = DirtMultiplier + 1;
+                update();
+            }
+        }
+
+        function buyWoodMultiplier() {
+            if (GoldNugget >= ((WoodMultiplier + 1) * 200)) {
+                GoldNugget = GoldNugget - ((WoodMultiplier + 1) * 200);
+                WoodMultiplier = WoodMultiplier + 1;
+                update();
+            }
+        }
+
+        function buyStoneMultiplier() {
+            if (GoldNugget >= ((StoneMultiplier + 1) * 300)) {
+                GoldNugget = GoldNugget - ((StoneMultiplier + 1) * 300);
+                StoneMultiplier = StoneMultiplier + 1;
+                update();
+            }
+        }
+    </script>
+
+    <style>
+        /* Your CSS styles here */
+    </style>
 
 </body>
 </html>
+
+
+
+
