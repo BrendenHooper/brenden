@@ -1,1 +1,266 @@
-h
+<body>
+
+    
+    <h1 align=center>T1A02-Lists-and-Tables-by-Brenden</h1>
+    
+
+    <a href="https://brendenhooper.github.io/brenden/public/t1a02-tables-brendan.html"><input type="button" id="button1" value="other webpage"/></a> <br> 
+
+
+
+    <h2> Lists with number</h2>
+    
+    <ol> this will be the only one that not in a list <h1>you can change the heading</h1>
+      <li>starting here you get the list
+        <li>this will be number because if the ol in bracket 
+          <li>you can change it to this one</ol><ul>
+            <li>this should work
+              <li>but there a space in between them
+    </ul>
+    
+    <ul> City in B.C.
+      <li>Mission
+        <li>Langly
+          <li>Surry
+            <li>Maple Ridge
+              <li>Abbotsford
+                <li>Port Coquitlem
+    </ul>
+    
+      Make a list inside of a list of multiple items
+    
+    
+    <ol>
+      <li>You can make a list like this
+        <li>But...
+          <li>you can make one like this<ul>
+            <li>so this is here
+              <li>and this
+            </ul>
+            <li>ta da
+    </ol>
+    
+    <p>you can use ol in v bracket to make it listed and ul to make it dod</p>
+
+    <h1>here a example of what u would use this for</h1><br>
+    <ul>
+        <li>Pizza<ul>
+            <li>pineapple
+            <li>pineapple
+            <li>pineapple
+        </ul>
+        <li>soup<ul>
+            <li>chicken
+                <li>beef
+                </ul>
+                </li>
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+    <h2> Tables with a border = 1,2,3</h2>
+    
+    <table border=1>
+      <tr><td>H</td><td>E</td></tr>
+      <tr><td>L</td><td>P</td></tr>
+    </table><br>
+
+    <table border=2>
+        <tr><td>H</td><td>E</td></tr>
+        <tr><td>L</td><td>P</td></tr>
+      </table><br>
+
+      <table border=3>
+        <tr><td>H</td><td>E</td></tr>
+        <tr><td>L</td><td>P</td></tr>
+      </table><br>
+
+
+    <h1>Simple Calculator</h1>
+    <table border="1">
+        <tr>
+            <td colspan="4"><input type="text" id="display" readonly></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendToDisplay('7')">7</button></td>
+            <td><button onclick="appendToDisplay('8')">8</button></td>
+            <td><button onclick="appendToDisplay('9')">9</button></td>
+            <td><button onclick="appendToDisplay('+')">+</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendToDisplay('4')">4</button></td>
+            <td><button onclick="appendToDisplay('5')">5</button></td>
+            <td><button onclick="appendToDisplay('6')">6</button></td>
+            <td><button onclick="appendToDisplay('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendToDisplay('1')">1</button></td>
+            <td><button onclick="appendToDisplay('2')">2</button></td>
+            <td><button onclick="appendToDisplay('3')">3</button></td>
+            <td><button onclick="appendToDisplay('*')">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendToDisplay('0')">0</button></td>
+            <td><button onclick="appendToDisplay('.')">.</button></td>
+            <td><button onclick="clearDisplay()">C</button></td>
+            <td><button onclick="calculate()">=</button></td>
+        </tr>
+    </table>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            try {
+                const result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+
+
+
+
+    
+ <h1>this picture is very hot</h1><br><br><br>
+    
+    <table border=0>
+      <tr><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td></tr>
+      <tr><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td></tr>
+      <tr><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td></tr>
+      <tr><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td><td><img width=200 src="https://th.bing.com/th/id/OIP.lNgpqGl16U0ft3rS8TdFcgEsEe?pid=ImgDet&rs=1"></td></tr>
+    </table><br>
+    
+    
+    
+    
+    
+    
+    <h2>Advanced use the button or wasd</h2>
+    <h1>you can make a picture move by making it a div</h1>
+
+    
+    
+   
+    <table>
+        <tr>
+            <td>
+                <img id="myImage01" src="https://c.tenor.com/4gPD1ccxrVgAAAAC/rick-ashley-dance.gif" style="position:relative; left:0; top:0; width:50; height:50;">
+            </td>
+            <td>
+                <table border="2">
+                    <tr>
+                        <td>
+                            <input type="button" value="→" onclick="moveRight()">
+                        </td>
+                        <td>
+                            <input type="button" value="↑" onclick="moveUp()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="←" onclick="moveLeft()">
+                        </td>
+                        <td>
+                            <input type="button" value="↓" onclick="moveDown()">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+    <div id="myDiv01">Use W, A, S, D keys to move the image.</div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            switch (event.key) {
+                case 'w':
+                case 'W':
+                    moveUp();
+                    break;
+                case 'a':
+                case 'A':
+                    moveLeft();
+                    break;
+                case 's':
+                case 'S':
+                    moveDown();
+                    break;
+                case 'd':
+                case 'D':
+                    moveRight();
+                    break;
+            }
+        });
+
+        function moveRight() {
+            document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) + 30 + 'px';
+            document.getElementById('myDiv01').innerHTML = 'It went right';
+        }
+
+        function moveUp() {
+            document.getElementById('myImage01').style.top = parseInt(document.getElementById('myImage01').style.top) - 30 + 'px';
+            document.getElementById('myDiv01').innerHTML = 'It went up';
+        }
+
+        function moveLeft() {
+            document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) - 30 + 'px';
+            document.getElementById('myDiv01').innerHTML = 'Cool';
+        }
+
+        function moveDown() {
+            document.getElementById('myImage01').style.top = parseInt(document.getElementById('myImage01').style.top) + 30 + 'px';
+            document.getElementById('myDiv01').innerHTML = 'It went down';
+        }
+    </script>
+
+
+
+    
+      <style>
+
+        input {
+         padding: 2px;
+        }
+        
+        #button1{
+           background-color: #d85ec4;
+       }
+       #button1:hover{
+           background-color: #33fc13;
+       }
+        #button1:active {
+           background-color: #33fc13;
+       }
+       #button1 {
+    font-size: 30px;
+       }
+  
+   body {
+              background-color: black;
+              color: white;
+          }
+          
+    </style>
+      
+      </body>
+    
