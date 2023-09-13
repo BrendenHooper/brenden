@@ -1,70 +1,5 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-    <title>minecraft clicker</title>
-</head>
-<body>
-
-<p id="Woodpersecond">You are gaining 0 Wood per/s</p>
-<p id="Stonepersecond">You are gaining 0 Stone per/s</p>
-
-<a href="#" onclick="addDirt()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3856_i147_w750.jpeg" width="50px" height="50px"></a>
-<br><br>
-You got: <br>
-<input type="text" id="text01" disabled style="text-align:center" value="0"> <br>
-<input type="text" id="text02" disabled style="text-align:center" value="0"> <button onclick="sellDirt()">sell 10 dirt for 1 gold nugget</button><br>
-<input type="text" id="text03" disabled style="text-align:center" value="0"> <button onclick="sellWood()">sell 12 wood for 2 gold nugget</button><br>
-<input type="text" id="text04" disabled style="text-align:center" value="0"> <button onclick="sellStone()">sell 20 stone for 3 gold nugget</button><br>
-
-<script>
-    // Define global variables
-    var DirtMultiplier = 1;
-    var WoodMultiplier = 1;
-    var StoneMultiplier = 1;
-
-    var GoldNugget = 10000;
-    var DirtBlock = 0;
-    var WoodBlock = 0;
-    var StoneBlock = 0;
-
-    var Wood = 0;
-    var Stone = 0;
-    
-    var WoodGainPerSecond = 0;
-    var StoneGainPerSecond = 0;
-
-    function update() {
-        document.getElementById('text01').value = GoldNugget + " Gold Nugget";
-        document.getElementById('text02').value = DirtBlock + " Dirt Block";
-        document.getElementById('text03').value = WoodBlock + " Wood Block";
-        document.getElementById('text04').value = StoneBlock + " Stone Block";
-
-        document.getElementById('ammountDirtMultiplier').innerHTML = "Dirt Multiplier Upgrade x" + (DirtMultiplier + 1);
-        document.getElementById('ammountDirtMultiplier2').innerHTML = "x" + (DirtMultiplier + 1);
-        document.getElementById('costDirtMultiplier').innerHTML = ((DirtMultiplier + 1) * 100) + " Gold Nugget";
-        document.getElementById('currentDirtMultiplier').innerHTML = "Your current Dirt Multiplier is x" + DirtMultiplier;
-
-        document.getElementById('ammountWoodMultiplier').innerHTML = "Wood Multiplier Upgrade x" + (WoodMultiplier + 1);
-        document.getElementById('ammountWoodMultiplier2').innerHTML = "x" + (WoodMultiplier + 1);
-        document.getElementById('costWoodMultiplier').innerHTML = ((WoodMultiplier + 1) * 200) + " Wood Block";
-        document.getElementById('currentWoodMultiplier').innerHTML = "Your current Wood Multiplier is x" + WoodMultiplier;
-
-        document.getElementById('ammountStoneMultiplier').innerHTML = "Stone Multiplier Upgrade x" + (StoneMultiplier + 1);
-        document.getElementById('ammountStoneMultiplier2').innerHTML = "x" + (StoneMultiplier + 1);
-        document.getElementById('costStoneMultiplier').innerHTML = ((StoneMultiplier + 1) * 300) + " Stone Block";
-        document.getElementById('currentStoneMultiplier').innerHTML = "Your current Stone Multiplier is x" + StoneMultiplier;
-
-        document.getElementById('ammountWood').innerHTML = "You Own " + Wood + " Wood cutter ";
-        document.getElementById('costWood').innerHTML = ((Wood + 1) * 12) + " Gold Nugget";
-
-        document.getElementById('ammountStone').innerHTML = "You Own " + Stone + "  Stone miner";
-        document.getElementById('costStone').innerHTML = ((Stone + 1) * 15) + " Gold Nugget";
-
-        document.getElementById('Woodpersecond').innerHTML = "You are gaining " + WoodGainPerSecond + " Wood per/s";
-        document.getElementById('Stonepersecond').innerHTML = "You are gaining " + StoneGainPerSecond + " Stone per/s";
-    }
-
-    <!DOCTYPE html>
 <html>
 <head>
     <title>Minecraft Clicker</title>
@@ -80,6 +15,30 @@ You got: <br>
             padding: 5px;
             max-height: 200px;
             overflow-y: auto;
+        }
+
+        #multipliers {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #crafting-popup {
+            display: none;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 300px;
         }
     </style>
 </head>
@@ -103,7 +62,47 @@ You got: <br>
         <button onclick="sellWood()">Sell 12 wood for 2 gold nuggets</button>
         <p id="inventoryStone">Stone: 0</p>
         <button onclick="sellStone()">Sell 20 stone for 3 gold nuggets</button>
+        <p id="inventorySticks">Sticks: 0</p>
+        <p id="inventoryWoodenShovel">Wooden Shovel: 0</p>
+        <p id="inventoryWoodenPickaxe">Wooden Pickaxe: 0</p>
+        <p id="inventoryWoodenAxe">Wooden Axe: 0</p>
         <!-- Add more inventory items as needed -->
+    </div>
+
+    <!-- Multiplier Button -->
+    <button onclick="toggleMultipliers()">Multipliers</button>
+
+    <!-- Multiplier Dropdown -->
+    <div id="multipliers">
+        <h3>Multipliers</h3>
+        <p id="ammountDirtMultiplier">Dirt Multiplier Upgrade x2</p>
+        <button onclick="buyDirtMultiplier()"><span id="ammountDirtMultiplier2">x2</span></button>
+        <p id="costDirtMultiplier">100 Gold Nuggets</p>
+        <p id="currentDirtMultiplier">Your current Dirt Multiplier is x1</p>
+
+        <p id="ammountWoodMultiplier">Wood Multiplier Upgrade x2</p>
+        <button onclick="buyWoodMultiplier()"><span id="ammountWoodMultiplier2">x2</span></button>
+        <p id="costWoodMultiplier">200 Gold Nuggets</p>
+        <p id="currentWoodMultiplier">Your current Wood Multiplier is x1</p>
+
+        <p id="ammountStoneMultiplier">Stone Multiplier Upgrade x2</p>
+        <button onclick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></button>
+        <p id="costStoneMultiplier">300 Gold Nuggets</p>
+        <p id="currentStoneMultiplier">Your current Stone Multiplier is x1</p>
+        <!-- Add more multipliers as needed -->
+    </div>
+
+    <!-- Crafting Button -->
+    <button onclick="toggleCraftingPopup()">Crafting</button>
+
+    <!-- Crafting Popup -->
+    <div id="crafting-popup">
+        <h3>Crafting</h3>
+        <button onclick="craftSticks()">Craft 4 Sticks (1 Wood)</button>
+        <button onclick="craftWoodenShovel()">Craft Wooden Shovel (1 Wood, 2 Sticks)</button>
+        <button onclick="craftWoodenPickaxe()">Craft Wooden Pickaxe (3 Wood, 2 Sticks)</button>
+        <button onclick="craftWoodenAxe()">Craft Wooden Axe (3 Wood, 2 Sticks)</button>
+        <!-- Add crafting options here -->
     </div>
 
     <script>
@@ -116,6 +115,10 @@ You got: <br>
         var DirtBlock = 0;
         var WoodBlock = 0;
         var StoneBlock = 0;
+        var Sticks = 0;
+        var WoodenShovel = 0;
+        var WoodenPickaxe = 0;
+        var WoodenAxe = 0;
 
         var Wood = 0;
         var Stone = 0;
@@ -128,6 +131,14 @@ You got: <br>
             document.getElementById('inventoryDirt').textContent = "Dirt: " + DirtBlock;
             document.getElementById('inventoryWood').textContent = "Wood: " + WoodBlock;
             document.getElementById('inventoryStone').textContent = "Stone: " + StoneBlock;
+            document.getElementById('inventorySticks').textContent = "Sticks: " + Sticks;
+            document.getElementById('inventoryWoodenShovel').textContent = "Wooden Shovel: " + WoodenShovel;
+            document.getElementById('inventoryWoodenPickaxe').textContent = "Wooden Pickaxe: " + WoodenPickaxe;
+            document.getElementById('inventoryWoodenAxe').textContent = "Wooden Axe: " + WoodenAxe;
+            document.getElementById('inventoryGoldNugget').textContent = "Gold Nugget: " + GoldNugget;
+            document.getElementById('inventoryDirt').textContent = "Dirt: " + DirtBlock;
+            document.getElementById('inventoryWood').textContent = "Wood: " + WoodBlock;
+            document.getElementById('inventoryStone').textContent = "Stone: " + StoneBlock;
 
             document.getElementById('ammountDirtMultiplier').textContent = "Dirt Multiplier Upgrade x" + (DirtMultiplier + 1);
             document.getElementById('ammountDirtMultiplier2').textContent = "x" + (DirtMultiplier + 1);
@@ -136,12 +147,12 @@ You got: <br>
 
             document.getElementById('ammountWoodMultiplier').textContent = "Wood Multiplier Upgrade x" + (WoodMultiplier + 1);
             document.getElementById('ammountWoodMultiplier2').textContent = "x" + (WoodMultiplier + 1);
-            document.getElementById('costWoodMultiplier').textContent = ((WoodMultiplier + 1) * 200) + " Wood Blocks";
+            document.getElementById('costWoodMultiplier').textContent = ((WoodMultiplier + 1) * 200) + " Gold Nuggets";
             document.getElementById('currentWoodMultiplier').textContent = "Your current Wood Multiplier is x" + WoodMultiplier;
 
             document.getElementById('ammountStoneMultiplier').textContent = "Stone Multiplier Upgrade x" + (StoneMultiplier + 1);
             document.getElementById('ammountStoneMultiplier2').textContent = "x" + (StoneMultiplier + 1);
-            document.getElementById('costStoneMultiplier').textContent = ((StoneMultiplier + 1) * 300) + " Stone Blocks";
+            document.getElementById('costStoneMultiplier').textContent = ((StoneMultiplier + 1) * 300) + " Gold Nuggets";
             document.getElementById('currentStoneMultiplier').textContent = "Your current Stone Multiplier is x" + StoneMultiplier;
 
             document.getElementById('ammountWood').textContent = "You Own " + Wood + " Wood cutters";
@@ -164,6 +175,26 @@ You got: <br>
             }
         }
 
+        // Function to toggle the multiplier dropdown
+        function toggleMultipliers() {
+            var multipliers = document.getElementById('multipliers');
+            if (multipliers.style.display === "none" || multipliers.style.display === "") {
+                multipliers.style.display = "block";
+            } else {
+                multipliers.style.display = "none";
+            }
+        }
+
+        // Function to toggle the crafting popup
+        function toggleCraftingPopup() {
+            var craftingPopup = document.getElementById('crafting-popup');
+            if (craftingPopup.style.display === "none" || craftingPopup.style.display === "") {
+                craftingPopup.style.display = "block";
+            } else {
+                craftingPopup.style.display = "none";
+            }
+        }
+
         function timer() {
             WoodGainPerSecond = Wood * WoodMultiplier;
             StoneGainPerSecond = Stone * StoneMultiplier;
@@ -180,7 +211,8 @@ You got: <br>
         }
 
         function addDirt() {
-            DirtBlock = DirtBlock + 1;
+            var dirtPerClick = 1 + DirtMultiplier; // Calculate dirt per click based on Dirt Multiplier
+            DirtBlock += dirtPerClick;
             update();
         }
 
@@ -226,45 +258,7 @@ You got: <br>
                 alert('You don\'t have enough Stone blocks.');
             }
         }
-    </script>
 
-    <br><br>
-    <div id="buttonHolder">
-        <button><a href="#" onClick="save()">Save</a></button>
-        <button><a href="#" onclick="load()">Load</a></button>
-        <br><br>
-        <hr>
-        <p id="ammountDirtMultiplier">Dirt Multiplier Upgrade x2</p>
-        <button><a href="#" onClick="buyDirtMultiplier()"><span id="ammountDirtMultiplier2">x2</span></a></button>
-        <p id="costDirtMultiplier">100 Gold Nuggets</p>
-        <p id="currentDirtMultiplier">Your current Dirt Multiplier is x1</p>
-        <br>
-        <hr>
-        <p id="ammountWoodMultiplier">Wood Multiplier Upgrade x2</p>
-        <button><a href="#" onClick="buyWoodMultiplier()"><span id="ammountWoodMultiplier2">x2</span></a></button>
-        <p id="costWoodMultiplier">200 Gold Nuggets</p>
-        <p id="currentWoodMultiplier">Your current Wood Multiplier is x1</p>
-        <br>
-        <hr>
-        <p id="ammountStoneMultiplier">Stone Multiplier Upgrade x2</p>
-        <button><a href="#" onClick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></a></button>
-        <p id="costStoneMultiplier">300 Gold Nuggets</p>
-        <p id="currentStoneMultiplier">Your current Multiplier is x1</p>
-        <br>
-        <hr>
-        <p id="buy">Buy 1 Wood cutter</p>
-        <button><a href="#" onClick="buyWood()"><img src="https://i.pinimg.com/736x/12/3f/f2/123ff2fe58086262ea9aad1811ffd2e8--block-wall-wood-blocks.jpg" width="50px" height="50px"></a></button>
-        <p id="costWood">12 Gold Nuggets</p>
-        <p id="ammountWood">You Own 0 Wood cutters</p>
-        <br>
-        <hr>
-        <p id="buy">Buy 1 Stone miner</p>
-        <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
-        <p id="costStone">15 Gold nuggets</p>
-        <p id="ammountStone">Stone miners</p>
-    </div>
-
-    <script>
         function save() {
             localStorage.setItem("GoldNugget", GoldNugget);
             localStorage.setItem("DirtBlock", DirtBlock);
@@ -329,15 +323,89 @@ You got: <br>
                 update();
             }
         }
+
+        function craftItem() {
+            const craftCost = 10; // Cost of crafting an item
+            if (GoldNugget >= craftCost) {
+                GoldNugget -= craftCost;
+                // Add logic to craft the item here
+                // For example, increase an item count or do something else
+                update();
+            } else {
+                alert('You don\'t have enough Gold Nuggets to craft.');
+            }
+        }
+
+
+        function craftSticks() {
+            const woodCost = 1; // Cost of crafting sticks
+            if (WoodBlock >= woodCost) {
+                WoodBlock -= woodCost;
+                Sticks += 4;
+                update();
+            } else {
+                alert('You don\'t have enough Wood to craft sticks.');
+            }
+        }
+
+        function craftWoodenShovel() {
+            const woodCost = 1; // Cost of crafting wooden shovel
+            const stickCost = 2; // Cost of crafting wooden shovel
+            if (WoodBlock >= woodCost && Sticks >= stickCost) {
+                WoodBlock -= woodCost;
+                Sticks -= stickCost;
+                WoodenShovel += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Wooden Shovel.');
+            }
+        }
+
+        function craftWoodenPickaxe() {
+            const woodCost = 3; // Cost of crafting wooden pickaxe
+            const stickCost = 2; // Cost of crafting wooden pickaxe
+            if (WoodBlock >= woodCost && Sticks >= stickCost) {
+                WoodBlock -= woodCost;
+                Sticks -= stickCost;
+                WoodenPickaxe += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Wooden Pickaxe.');
+            }
+        }
+
+        function craftWoodenAxe() {
+            const woodCost = 3; // Cost of crafting wooden axe
+            const stickCost = 2; // Cost of crafting wooden axe
+            if (WoodBlock >= woodCost && Sticks >= stickCost) {
+                WoodBlock -= woodCost;
+                Sticks -= stickCost;
+                WoodenAxe += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Wooden Axe.');
+            }
+        }
     </script>
 
-    <style>
-        /* Your CSS styles here */
-    </style>
+    <br><br>
+<div id="buttonHolder">
+    <button><a href="#" onClick="save()">Save</a></button>
+    <button><a href="#" onclick="load()">Load</a></button>
+    <br><br>
+    <hr>
+    
+    <p id="buy">Buy 1 Wood cutter</p>
+    <button><a href="#" onClick="buyWood()"><img src="https://i.pinimg.com/736x/12/3f/f2/123ff2fe58086262ea9aad1811ffd2e8--block-wall-wood-blocks.jpg" width="50px" height="50px"></a></button>
+    <p id="costWood">12 Gold Nuggets</p>
+    <p id="ammountWood">You Own 0 Wood cutters</p>
+    <br>
+    <hr>
+    <p id="buy">Buy 1 Stone miner</p>
+    <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
+    <p id="costStone">15 Gold nuggets</p>
+    <p id="ammountStone">Stone miners</p>
+</div>
 
 </body>
 </html>
-
-
-
-
