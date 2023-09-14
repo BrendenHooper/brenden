@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Form Example</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+
+    <script>
+        function orderPizza() {
+            // Your code to handle ordering pizza here
+            alert("The order is in the kitchen.");
+        }
+
+        function resetForm() {
+            // Reset the form without reloading the page
+            document.getElementById('orderForm').reset();
+        }
+    </script>
+</body>
+</html>
+
+    <title>Advanced Form Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: DodgerBlue;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="checkbox"],
+        input[type="radio"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"],
+        input[type="reset"],
+        button {
+            background-color: DodgerBlue;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover,
+        button:hover {
+            background-color: RoyalBlue;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        a {
+            color: DodgerBlue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Form Example</h1>
+
+    <div class="container">
+        <form>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" value="">
+
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" value="">
+
+            <label>Choose your toppings:</label>
+            Nachos<input type="Radio" id="Nachos">
+            Pizza<input type="Radio" id="Pizza">
+            spaghetti:<input type="Radio" id="spaghetti">
+            <input type="text" id="veggie-type" placeholder="toppings">
+
+            <label>Select Dish Size:</label>
+            Large<input type="radio" name="dish-size" value="large">
+            medium<input type="radio" name="dish-size" value="medium">
+            Small<input type="radio" name="dish-size" value="small">
+
+            <label for="myArea01">Additional Notes:</label>
+            <textarea id="myArea01" cols="60" rows="5" placeholder="Write any questions you have"></textarea>
+
+
+            <label for="mySelect01">Select a Number:</label>
+            <select id="mySelect01">
+                <option value="myOne">One</option>
+                <option value="myTwo">Two</option>
+                <option value="myThree">Three</option>
+            </select>
+        
+            <button onclick="orderPizza()">sumbit</button>
+            <input type="reset" onclick="resetForm()">     
+        
+          </form>
+    </div>
+
+    
+    
+    
+</body>
+</html>
