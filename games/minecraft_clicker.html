@@ -4,46 +4,45 @@
     <title>Minecraft Clicker</title>
     <style>
         /* Add your CSS styles here */
-        #inventory {
+        #inventory, #multipliers, #crafting-popup, #smelting-popup {
             display: none;
             position: absolute;
-            top: 60px;
-            right: 10px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        #multipliers {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 10px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        #crafting-popup {
-            display: none;
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
             background-color: white;
             border: 1px solid #ccc;
             padding: 10px;
             max-width: 300px;
+            z-index: 1;
+        }
+
+        #inventory {
+            top: 60px;
+            right: 10px;
+        }
+
+        #multipliers {
+            top: 60px;
+            right: 10px;
+        }
+
+        #crafting-popup {
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #smelting-popup {
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
 <body>
     <p id="Woodpersecond">You are gaining 0 Wood per/s</p>
     <p id="Stonepersecond">You are gaining 0 Stone per/s</p>
+    <p id="Coalpersecond">You are gaining 0 Coal per/s</p>
+    <p id="Ironpersecond">You are gaining 0 Iron per/s</p>
+
     
 
     <a href="#" onclick="addDirt()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3856_i147_w750.jpeg" width="50px" height="50px"></a>
@@ -59,6 +58,9 @@
         <p id="inventoryDirt">Dirt: 0</p>
         <p id="inventoryWood">Wood: 0</p>
         <p id="inventoryStone">Stone: 0</p>
+        <p id="inventoryCoal">Coal: 0</p>
+        <p id="inventoryIron">Iron: 0</p>
+        <p id="inventoryIronIngot">Iron Ingot: 0</p>
         <p id="inventorySticks">Sticks: 0</p>
         <p id="inventoryWoodenShovel">Wooden Shovel: 0</p>
         <p id="inventoryWoodenPickaxe">Wooden Pickaxe: 0</p>
@@ -89,6 +91,16 @@
         <button onclick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></button>
         <p id="costStoneMultiplier">300 Gold Nuggets</p>
         <p id="currentStoneMultiplier">Your current Stone Multiplier is x1</p>
+
+        <p id="ammountCoalMultiplier">Coal Multiplier Upgrade x2</p>
+        <button onclick="buyCoalMultiplier()"><span id="ammountCoalMultiplier2">x2</span></button>
+        <p id="costCoalMultiplier">300 Gold Nuggets</p>
+        <p id="currentCoalMultiplier">Your current Coal Multiplier is x1</p>
+
+        <p id="ammountIronMultiplier">Iron Multiplier Upgrade x2</p>
+        <button onclick="buyIronMultiplier()"><span id="ammountIronMultiplier2">x2</span></button>
+        <p id="costIronMultiplier">300 Gold Nuggets</p>
+        <p id="currentIronMultiplier">Your current Iron Multiplier is x1</p>
         <!-- Add more multipliers as needed -->
     </div>
 
@@ -96,28 +108,48 @@
     <button onclick="toggleCraftingPopup()">Crafting</button>
 
     <!-- Crafting Popup -->
-    <div id="crafting-popup">
-        <h3>Crafting</h3>
-        <button onclick="craftSticks()">Craft 4 Sticks (1 Wood)</button>
-        <button onclick="craftWoodenShovel()">Craft Wooden Shovel (1 Wood, 2 Sticks)</button>
-        <button onclick="craftWoodenPickaxe()">Craft Wooden Pickaxe (3 Wood, 2 Sticks)</button>
-        <button onclick="craftWoodenAxe()">Craft Wooden Axe (3 Wood, 2 Sticks)</button>
-        <button onclick="craftStoneShovel()">Craft Stone Shovel (1 Stone, 2 Sticks)</button>
-        <button onclick="craftStonePickaxe()">Craft Stone Pickaxe (3 Stone, 2 Sticks)</button>
-        <button onclick="craftStoneAxe()">Craft Stone Axe (3 Stone, 2 Sticks)</button>
-        <!-- Add crafting options here -->
+    <!-- Crafting Popup -->
+<div id="crafting-popup">
+    <h3>Crafting</h3>
+    <button onclick="craftSticks()">Craft 4 Sticks (1 Wood)</button>
+    <button onclick="craftWoodenShovel()">Craft Wooden Shovel (1 Wood, 2 Sticks)</button>
+    <button onclick="craftWoodenPickaxe()">Craft Wooden Pickaxe (3 Wood, 2 Sticks)</button>
+    <button onclick="craftWoodenAxe()">Craft Wooden Axe (3 Wood, 2 Sticks)</button>
+    <button onclick="craftStoneShovel()">Craft Stone Shovel (1 Stone, 2 Sticks)</button>
+    <button onclick="craftStonePickaxe()">Craft Stone Pickaxe (3 Stone, 2 Sticks)</button>
+    <button onclick="craftStoneAxe()">Craft Stone Axe (3 Stone, 2 Sticks)</button>
+    <button onclick="craftIronAxe()">Craft Iron Axe (3 Iron Ingots, 2 Sticks)</button>
+    <button onclick="craftIronPickaxe()">Craft Iron Pickaxe (3 Iron Ingots, 2 Sticks)</button>
+    <!-- Add crafting options for other Iron tools here -->
+</div>
+
+
+
+    <button onclick="smeltIronIngots()">Smelt Iron Ingots</button>
+
+    <div id="smelting-popup">
+        <h3>Smelting</h3>
+        <!-- Add smelting options here -->
+        <button onclick="smeltIronOre()">Smelt Iron Ore (1 Iron Ore)</button>
+        <!-- Add more smelting options as needed -->
     </div>
+    
 
     <script>
         // Define global variables
         var DirtMultiplier = 1;
         var WoodMultiplier = 1;
         var StoneMultiplier = 1;
+        var CoalMultiplier = 1;
+        var IronMultiplier = 1;
+
 
         var GoldNugget = 10000;
         var DirtBlock = 0;
         var WoodBlock = 0;
         var StoneBlock = 0;
+        var CoalBlock = 0;
+        var IronBlock = 0;
         var Sticks = 0;
         var WoodenShovel = 0;
         var WoodenPickaxe = 0;
@@ -128,15 +160,26 @@
 
         var Wood = 0;
         var Stone = 0;
+        var Coal = 0;
+        var Iron = 0;
+        var IronIngot = 0;
+
+
 
         var WoodGainPerSecond = 0;
         var StoneGainPerSecond = 0;
+        var CoalGainPerSecond = 0;
+        var IronGainPerSecond = 0;
+
 
         function update() {
             document.getElementById('inventoryGoldNugget').textContent = "Gold Nugget: " + GoldNugget;
             document.getElementById('inventoryDirt').textContent = "Dirt: " + DirtBlock;
             document.getElementById('inventoryWood').textContent = "Wood: " + WoodBlock;
             document.getElementById('inventoryStone').textContent = "Stone: " + StoneBlock;
+            document.getElementById('inventoryCoal').textContent = "Coal: " + CoalBlock;
+            document.getElementById('inventoryIron').textContent = "Iron: " + IronBlock;
+            document.getElementById('inventoryIronIngot').textContent = "Iron Ingot: " + IronIngot;
             document.getElementById('inventorySticks').textContent = "Sticks: " + Sticks;
             document.getElementById('inventoryWoodenShovel').textContent = "Wooden Shovel: " + WoodenShovel;
             document.getElementById('inventoryWoodenPickaxe').textContent = "Wooden Pickaxe: " + WoodenPickaxe;
@@ -160,14 +203,32 @@
             document.getElementById('costStoneMultiplier').textContent = ((StoneMultiplier + 1) * 300) + " Gold Nuggets";
             document.getElementById('currentStoneMultiplier').textContent = "Your current Stone Multiplier is x" + StoneMultiplier;
 
+            document.getElementById('ammountCoalMultiplier').textContent = "Coal Multiplier Upgrade x" + (CoalMultiplier + 1);
+            document.getElementById('ammountCoalMultiplier2').textContent = "x" + (CoalMultiplier + 1);
+            document.getElementById('costCoalMultiplier').textContent = ((CoalMultiplier + 1) * 300) + " Gold Nuggets";
+            document.getElementById('currentCoalMultiplier').textContent = "Your current Coal Multiplier is x" + CoalMultiplier;
+
+            document.getElementById('ammountIronMultiplier').textContent = "Iron Multiplier Upgrade x" + (IronMultiplier + 1);
+            document.getElementById('ammountIronMultiplier2').textContent = "x" + (IronMultiplier + 1);
+            document.getElementById('costIronMultiplier').textContent = ((IronMultiplier + 1) * 300) + " Gold Nuggets";
+            document.getElementById('currentIronMultiplier').textContent = "Your current Iron Multiplier is x" + IronMultiplier;
+
             document.getElementById('ammountWood').textContent = "You Own " + Wood + " Wood cutters";
             document.getElementById('costWood').textContent = ((Wood + 1) * 12) + " Gold Nuggets";
 
             document.getElementById('ammountStone').textContent = "You Own " + Stone + " Stone miners";
             document.getElementById('costStone').textContent = ((Stone + 1) * 15) + " Gold Nuggets";
 
+            document.getElementById('ammountCoal').textContent = "You Own " + Coal + " Coal miners";
+            document.getElementById('costCoal').textContent = ((Coal + 1) * 15) + " Gold Nuggets";
+
+            document.getElementById('ammountIron').textContent = "You Own " + Iron + " Iron miners";
+            document.getElementById('costIron').textContent = ((Iron + 1) * 15) + " Gold Nuggets";
+
             document.getElementById('Woodpersecond').textContent = "You are gaining " + WoodGainPerSecond + " Wood per/s";
             document.getElementById('Stonepersecond').textContent = "You are gaining " + StoneGainPerSecond + " Stone per/s";
+            document.getElementById('Coalpersecond').textContent = "You are gaining " + CoalGainPerSecond + " Coal per/s";
+            document.getElementById('Ironpersecond').textContent = "You are gaining " + IronGainPerSecond + " Iron per/s";
         }
 
         // Function to toggle the inventory dropdown
@@ -190,6 +251,8 @@
             }
         }
 
+        
+
         // Function to toggle the crafting popup
         function toggleCraftingPopup() {
             var craftingPopup = document.getElementById('crafting-popup');
@@ -203,8 +266,12 @@
         function timer() {
             WoodGainPerSecond = Wood * WoodMultiplier;
             StoneGainPerSecond = Stone * StoneMultiplier;
+            CoalGainPerSecond = Coal * CoalMultiplier;
+            IronGainPerSecond = Iron * IronMultiplier;
             WoodBlock += WoodGainPerSecond;
             StoneBlock += StoneGainPerSecond;
+            CoalBlock +=CoalGainPerSecond;
+            IronBlock += IronGainPerSecond;
             update();
         }
 
@@ -228,6 +295,16 @@
 
         function addStone() {
             StoneBlock = StoneBlock + 1;
+            update();
+        }
+
+        function addCoal() {
+            CoalBlock = CoalBlock + 1;
+            update();
+        }
+
+        function addIron() {
+            IronBlock = IronBlock + 1;
             update();
         }
 
@@ -264,16 +341,55 @@
             }
         }
 
+        function sellCoal() {
+            const cost = 20; // Cost of one Gold Nugget
+            if (CoalBlock >= cost) {
+                CoalBlock = CoalBlock - cost;
+                GoldNugget = GoldNugget + 3;
+                update();
+            } else {
+                alert('You don\'t have enough Coal blocks.');
+            }
+        }
+
+        function sellIron() {
+            const cost = 20; // Cost of one Gold Nugget
+            if (IronBlock >= cost) {
+                IronBlock = IronBlock - cost;
+                GoldNugget = GoldNugget + 3;
+                update();
+            } else {
+                alert('You don\'t have enough Iron blocks.');
+            }
+        }
+
+        function sellIronIngot() {
+            const cost = 20; // Cost of one Gold Nugget
+            if (IronIngotBlock >= cost) {
+                IronIngotBlock = IronIngotBlock - cost;
+                GoldNugget = GoldNugget + 3;
+                update();
+            } else {
+                alert('You don\'t have enough Iron Ingot blocks.');
+            }
+        }
+
         function save() {
     localStorage.setItem("GoldNugget", GoldNugget);
     localStorage.setItem("DirtBlock", DirtBlock);
     localStorage.setItem("WoodBlock", WoodBlock);
     localStorage.setItem("StoneBlock", StoneBlock);
+    localStorage.setItem("IronBlock", IronBlock);
     localStorage.setItem("Wood", Wood);
     localStorage.setItem("Stone", Stone);
+    localStorage.setItem("Coal", Coal);
+    localStorage.setItem("Iron", Iron);
+    localStorage.setItem("IronIngot", IronIngot);
     localStorage.setItem("DirtMultiplier", DirtMultiplier);
     localStorage.setItem("WoodMultiplier", WoodMultiplier);
     localStorage.setItem("StoneMultiplier", StoneMultiplier);
+    localStorage.setItem("CoalMultiplier", CoalMultiplier);
+    localStorage.setItem("IronMultiplier", IronMultiplier);
     localStorage.setItem("Sticks", Sticks);
     localStorage.setItem("WoodenShovel", WoodenShovel);
     localStorage.setItem("WoodenPickaxe", WoodenPickaxe);
@@ -288,11 +404,17 @@ function load() {
     DirtBlock = parseInt(localStorage.getItem("DirtBlock")) || 0;
     WoodBlock = parseInt(localStorage.getItem("WoodBlock")) || 0;
     StoneBlock = parseInt(localStorage.getItem("StoneBlock")) || 0;
+    IronBlock = parseInt(localStorage.getItem("IronBlock")) || 0;
     Wood = parseInt(localStorage.getItem("Wood")) || 0;
-    Stone = parseInt(localStorage.getItem("Stone")) || 0;
+    Iron = parseInt(localStorage.getItem("Stone")) || 0;
+    Coal = parseInt(localStorage.getItem("Coal")) || 0;
+    Iron = parseInt(localStorage.getItem("Iron")) || 0;
+    IronIngot = parseInt(localStorage.getItem("IronIngot")) || 0;
     DirtMultiplier = parseInt(localStorage.getItem("DirtMultiplier")) || 1;
     WoodMultiplier = parseInt(localStorage.getItem("WoodMultiplier")) || 1;
     StoneMultiplier = parseInt(localStorage.getItem("StoneMultiplier")) || 1;
+    CoalMultiplier = parseInt(localStorage.getItem("CoalMultiplier")) || 1;
+    IronMultiplier = parseInt(localStorage.getItem("IronMultiplier")) || 1;
     Sticks = parseInt(localStorage.getItem("Sticks")) || 0;
     WoodenShovel = parseInt(localStorage.getItem("WoodenShovel")) || 0;
     WoodenPickaxe = parseInt(localStorage.getItem("WoodenPickaxe")) || 0;
@@ -320,6 +442,22 @@ function load() {
             }
         }
 
+        function buyCoal() {
+            if (GoldNugget >= ((Coal + 1) * 15)) {
+                GoldNugget = GoldNugget - ((Coal + 1) * 20);
+                Coal = Coal + 1;
+                update();
+            }
+        }
+
+        function buyIron() {
+            if (GoldNugget >= ((Iron + 1) * 15)) {
+                GoldNugget = GoldNugget - ((Iron + 1) * 30);
+                Iron = Iron + 1;
+                update();
+            }
+        }
+
         function buyDirtMultiplier() {
             if (GoldNugget >= ((DirtMultiplier + 1) * 100)) {
                 GoldNugget = GoldNugget - ((DirtMultiplier + 1) * 100);
@@ -340,6 +478,22 @@ function load() {
             if (GoldNugget >= ((StoneMultiplier + 1) * 300)) {
                 GoldNugget = GoldNugget - ((StoneMultiplier + 1) * 300);
                 StoneMultiplier = StoneMultiplier + 1;
+                update();
+            }
+        }
+
+        function buyCoalMultiplier() {
+            if (GoldNugget >= ((CoalMultiplier + 1) * 300)) {
+                GoldNugget = GoldNugget - ((CoalMultiplier + 1) * 300);
+                CoalMultiplier = CoalMultiplier + 1;
+                update();
+            }
+        }
+
+        function buyIronMultiplier() {
+            if (GoldNugget >= ((IronMultiplier + 1) * 300)) {
+                GoldNugget = GoldNugget - ((IronMultiplier + 1) * 300);
+                IronMultiplier = IronMultiplier + 1;
                 update();
             }
         }
@@ -444,6 +598,24 @@ function load() {
                 alert('You don\'t have enough resources to craft a Stone Axe.');
             }
         }
+        
+        // Function to smelt Iron Ingots
+function smeltIronIngots() {
+    const ironRequired = 8;
+    const coalRequired = 1;
+
+    if (IronBlock >= ironRequired && CoalBlock >= coalRequired) {
+        IronBlock -= ironRequired;
+        CoalBlock -= coalRequired;
+        IronIngot += 8; // You produce 8 Iron Ingots
+        update();
+    } else {
+        alert('You don\'t have enough resources to smelt Iron Ingots.');
+    }
+}
+
+    
+
     </script>
 
 <br><br>
@@ -463,6 +635,18 @@ function load() {
     <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
     <p id="costStone">15 Gold nuggets</p>
     <p id="ammountStone">Stone miners</p>
+    <br>
+    <hr>
+    <p id="buy">Buy 1 Coal miner</p>
+    <button><a href="#" onClick="buyCoal()"><img src="https://th.bing.com/th/id/OIP.LTuwzC4L_wFu7ZsQxYIEPwHaHa?pid=ImgDet&rs=1" width="50px" height="50px"></a></button>
+    <p id="costCoal">20 Gold nuggets</p>
+    <p id="ammountCoal">Coal miners</p>
+    <br>
+    <hr>
+    <p id="buy">Buy 1 Iron miner</p>
+    <button><a href="#" onClick="buyIron()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3860_i150_w640.jpeg" width="50px" height="50px"></a></button>
+    <p id="costIron">30 Gold nuggets</p>
+    <p id="ammountIron">Iron miners</p>
 </div>
 
 </body>
