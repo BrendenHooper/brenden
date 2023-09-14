@@ -56,11 +56,17 @@
         <h3>Inventory</h3>
         <p id="inventoryGoldNugget">Gold Nugget: 0</p>
         <p id="inventoryDirt">Dirt: 0</p>
+        <button onclick="sellDirt()">sell dirt</button>
         <p id="inventoryWood">Wood: 0</p>
+        <button onclick="sellWood()">sell Wood</button>
         <p id="inventoryStone">Stone: 0</p>
+        <button onclick="sellStone()">sell Stone</button>
         <p id="inventoryCoal">Coal: 0</p>
+        <button onclick="sellCoal()">sell Coal</button>
         <p id="inventoryIron">Iron: 0</p>
+        <button onclick="sellIron()">sell Iron</button>
         <p id="inventoryIronIngot">Iron Ingot: 0</p>
+        <button onclick="sellIronIngot()">sell IronIngot</button>
         <p id="inventorySticks">Sticks: 0</p>
         <p id="inventoryWoodenShovel">Wooden Shovel: 0</p>
         <p id="inventoryWoodenPickaxe">Wooden Pickaxe: 0</p>
@@ -68,6 +74,9 @@
         <p id="inventoryStoneShovel">Stone Shovel: 0</p>
         <p id="inventoryStonePickaxe">Stone Pickaxe: 0</p>
         <p id="inventoryStoneAxe">Stone Axe: 0</p>
+        <p id="inventoryIronShovel">Iron Shovel: 0</p>
+        <p id="inventoryIronPickaxe">Iron Pickaxe: 0</p>
+        <p id="inventoryIronAxe">Iron Axe: 0</p>
         <!-- Add more inventory items as needed -->
     </div>
 
@@ -118,8 +127,9 @@
     <button onclick="craftStoneShovel()">Craft Stone Shovel (1 Stone, 2 Sticks)</button>
     <button onclick="craftStonePickaxe()">Craft Stone Pickaxe (3 Stone, 2 Sticks)</button>
     <button onclick="craftStoneAxe()">Craft Stone Axe (3 Stone, 2 Sticks)</button>
-    <button onclick="craftIronAxe()">Craft Iron Axe (3 Iron Ingots, 2 Sticks)</button>
+    <button onclick="craftIronShovel()">Craft Iron Shovel (1 Iron, 2 Sticks)</button>
     <button onclick="craftIronPickaxe()">Craft Iron Pickaxe (3 Iron Ingots, 2 Sticks)</button>
+    <button onclick="craftIronAxe()">Craft Iron Axe (3 Iron Ingots, 2 Sticks)</button>
     <!-- Add crafting options for other Iron tools here -->
 </div>
 
@@ -157,6 +167,9 @@
         var StoneShovel = 0;
         var StonePickaxe = 0;
         var StoneAxe = 0;
+        var IronShovel = 0;
+        var IronPickaxe = 0;
+        var IronAxe = 0;
 
         var Wood = 0;
         var Stone = 0;
@@ -187,6 +200,9 @@
             document.getElementById('inventoryStoneShovel').textContent = "Stone Shovel: " + StoneShovel;
             document.getElementById('inventoryStonePickaxe').textContent = "Stone Pickaxe: " + StonePickaxe;
             document.getElementById('inventoryStoneAxe').textContent = "Stone Axe: " + StoneAxe;
+            document.getElementById('inventoryIronShovel').textContent = "Iron Shovel: " + IronShovel;
+            document.getElementById('inventoryIronPickaxe').textContent = "Iron Pickaxe: " + IronPickaxe;
+            document.getElementById('inventoryIronAxe').textContent = "Iron Axe: " + IronAxe;
 
             document.getElementById('ammountDirtMultiplier').textContent = "Dirt Multiplier Upgrade x" + (DirtMultiplier + 1);
             document.getElementById('ammountDirtMultiplier2').textContent = "x" + (DirtMultiplier + 1);
@@ -365,12 +381,12 @@
 
         function sellIronIngot() {
             const cost = 20; // Cost of one Gold Nugget
-            if (IronIngotBlock >= cost) {
-                IronIngotBlock = IronIngotBlock - cost;
+            if (IronIngot >= cost) {
+                IronIngot = IronIngot - cost;
                 GoldNugget = GoldNugget + 3;
                 update();
             } else {
-                alert('You don\'t have enough Iron Ingot blocks.');
+                alert('You don\'t have enough Iron Ingots.');
             }
         }
 
@@ -397,6 +413,9 @@
     localStorage.setItem("StoneShovel", StoneShovel);
     localStorage.setItem("StonePickaxe", StonePickaxe);
     localStorage.setItem("StoneAxe", StoneAxe);
+    localStorage.setItem("IronShovel", IronShovel);
+    localStorage.setItem("IronPickaxe", IronPickaxe);
+    localStorage.setItem("IronAxe", IronAxe);
 }
 
 function load() {
@@ -422,6 +441,9 @@ function load() {
     StoneShovel = parseInt(localStorage.getItem("StoneShovel")) || 0;
     StonePickaxe = parseInt(localStorage.getItem("StonePickaxe")) || 0;
     StoneAxe = parseInt(localStorage.getItem("StoneAxe")) || 0;
+    IronShovel = parseInt(localStorage.getItem("IronShovel")) || 0;
+    IronPickaxe = parseInt(localStorage.getItem("IronPickaxe")) || 0;
+    IronAxe = parseInt(localStorage.getItem("IronAxe")) || 0;
     update();
 }
 
@@ -596,6 +618,45 @@ function load() {
                 update();
             } else {
                 alert('You don\'t have enough resources to craft a Stone Axe.');
+            }
+        }
+
+        function craftIronShovel() {
+            const IronCost = 1; // Cost of crafting Iron shovel
+            const stickCost = 2; // Cost of crafting Iron shovel
+            if (IronBlock >= IronCost && Sticks >= stickCost) {
+                IronBlock -= IronCost;
+                Sticks -= stickCost;
+                IronShovel += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Iron Shovel.');
+            }
+        }
+
+        function craftIronPickaxe() {
+            const IronCost = 3; // Cost of crafting Iron pickaxe
+            const stickCost = 2; // Cost of crafting Iron pickaxe
+            if (IronBlock >= IronCost && Sticks >= stickCost) {
+                IronBlock -= IronCost;
+                Sticks -= stickCost;
+                IronPickaxe += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Iron Pickaxe.');
+            }
+        }
+
+        function craftIronAxe() {
+            const IronCost = 3; // Cost of crafting Iron axe
+            const stickCost = 2; // Cost of crafting Iron axe
+            if (IronBlock >= IronCost && Sticks >= stickCost) {
+                IronBlock -= IronCost;
+                Sticks -= stickCost;
+                IronAxe += 1;
+                update();
+            } else {
+                alert('You don\'t have enough resources to craft a Iron Axe.');
             }
         }
         
