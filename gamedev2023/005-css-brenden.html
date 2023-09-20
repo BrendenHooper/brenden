@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        var colors = ["red", "blue","purple", "green", "magenta","cyan","lime","yellow"];
+        var colorIndex = 0;
+        function changeColor() {
+            var col = document.getElementById("body");
+            if( colorIndex >= colors.length ) {
+                colorIndex = 0;
+            }
+            col.style.backgroundColor = colors[colorIndex];
+            colorIndex++;
+        }
+    </script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <audio id="audio" src="https://brendenhooper.github.io/brenden/pic/flashbanggg.mp3"></audio>
+  <button id="playButton">Throw Flashbang</button>
+
+  <script>
+      const audio = document.getElementById('audio');
+      const playButton = document.getElementById('playButton');
+
+      playButton.addEventListener('click', () => {
+          // Play the audio
+          audio.play();
+
+          // Change background color to white
+          document.body.style.backgroundColor = 'white';
+
+          //change font color to black
+          document.body.style.color = 'black'
+      });
+  </script>
+  <br>
+</body>
+
+        <body id='body'>
+        <button id="button2" onclick="changeColor();">Change color</button>
+        </body>
+<br>
+        <a href="https://brendenhooper.github.io/brenden/public/t1a04-css-by-Brenden.html"><input type="button" id="button1" value="other webpage"/></a> <br> 
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T1A04 CSS by brenden</title>
+  <style>
+    /* CSS styles go here */
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #7E5109;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+      display: none;
+    }
+
+    .popup .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #7E5109;
+      width: 450px;
+      height: 220px;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .popup .close-btn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 30px;
+      height: 30px;
+      background: #222;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+    }
+
+    .popup.active .overlay {
+      display: block;
+    }
+
+    .popup.active .content {
+      transition: all 300ms ease-in-out;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    textarea {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 50px;
+    }
+  </style>
+  <script>
+    function togglePopup() {
+      document.getElementById("popup-1").classList.toggle("active");
+    }
+  </script>
+</head>
+<body>
+  <h1 id="title1">T1A04 CSS by Brenden</h1>
+  <p>
+    Reference Link: <a href="https://www.w3schools.com/cssref/default.asp">w3Schools</a>
+  </p>
+  <p>
+    Properly done with a .css file listening to all CSS commands for your website.
+    Another way to do CSS (Cascading Style Sheets: determine colors, locations, extra effects on the tags on your web page).
+  </p>
+  <p>Here is a typical inline style:</p>
+  <pre>
+    b {
+      color: #00ff00;
+    }
+  </pre>
+  <p>I prefer to do CSS inside the tag, which can override other styles:</p>
+  <b>This is bold</b><br>
+  <b id="myB1" style="color: #00ff00; background-color: blue;">This is bold</b>
+  <input type="button" value="Change" onclick="{
+    document.getElementById('myB1').style.color = 'red';
+    document.getElementById('myB1').style.backgroundColor = 'yellow';
+  }"><br><br><br>
+
+<input type="text" id="newtext" placeholder="Enter new title color">
+<input type="button" value="Change Title" onclick="changeTitleColor()">
+
+<script>
+function changeTitleColor() {
+    
+  const color = document.getElementById('newtext').value;
+  document.getElementById('title1').style.color = color;
+}
+</script>
+
+
+
+
+
+
+  
+<br><br><br>
+  <textarea style="position: relative; left: 0; top: 0; width: 200px; height: 50px;">
+    Advanced: see if you move this textarea
+  </textarea><br>
+
+  <div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="close-btn" onclick="togglePopup()">&times;</div>
+      <div style="position: relative; height: 60px;">
+        <img src="https://avatars.githubusercontent.com/u/5605614?v=4"
+          style="position: relative; top: -500px; left: -380px; width: 400px; height: 100px; border: none;"
+          alt="photo of Jeremy Ellis"
+          title="Photo of Jeremy Ellis" />
+        <img src="https://as1.ftcdn.net/v2/jpg/01/22/06/50/1000_F_122065003_dolgUjKVql7xrQ13u7uqcFQ3aJmR1DyU.jpg"
+          style="position: relative; top: -600px; left: -380px; width: 65px; height: 65px; border: none;"
+          alt="photo of Hand"
+          title="Photo of Hand" />
+      </div>
+    </div>
+    <button onclick="togglePopup()">Show Popup</button>
+  </div>
+
+
+
+  <style>
+
+    input {
+     padding: 2px;
+    }
+    
+    #button1{
+       background-color: #d85ec4;
+   }
+   #button1:hover{
+       background-color: #33fc13;
+   }
+    #button1:active {
+       background-color: #33fc13;
+   }
+   #button1 {
+font-size: 30px;
+   }
+
+body {
+          background-color: black;
+          color: white;
+      }
+
+
+
+
+
+
+
+      input {
+     padding: 2px;
+    }
+    
+    #button2{
+       background-color: #ff0000;
+   }
+   #button2:hover{
+       background-color: #5900ff;
+   }
+    #button2:active {
+       background-color: #ff008c;
+   }
+   #button2 {
+font-size: 30px;
+   }
+
+body {
+          background-color: black;
+          color: white;
+      }
+      
+</style>
+</body>
+</html>
