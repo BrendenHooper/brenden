@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video flax</title>
+</head>
+<body>
+    <script>
+        let myOutArray = [];
+
+        function myPrint(x) {
+            let myAnimal;
+            for (let i = 1; i <= x; i++) {
+                myAnimal = 'cat';
+                if (i <= 3) {
+                    myAnimal = 'kitten';
+                }
+                myOutArray.push('the ' + myAnimal + ' is ' + i + ' years old<br>');
+            }
+            document.write(myOutArray.join(' '));
+        }
+
+        myPrint(7);
+    </script>
+</body>
+</html>
