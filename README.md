@@ -1,8 +1,8 @@
 # brenden
 https://brendenhooper.github.io/brenden/games/
 <br>
-https://garticphone.com/en/?c=00d0af5d14
-<br>
+[https://garticphone.com/en/?c=00d0af5d14
+](https://skribbl.io/?D2C37QxX)<br>
 
 
 
