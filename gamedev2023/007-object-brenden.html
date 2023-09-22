@@ -1,1 +1,27 @@
-h
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zombie Checker</title>
+</head>
+<body>
+  <h3 align="center">Objects</h3>
+  <label>
+    Is <input type="text" id="nameInput" value="jon"> a zombie?
+  </label>
+  <br>
+  <input type="button" value="Check it" onclick="checkZombie()">
+  <br>
+  <div id="myDiv01"></div>
+  
+  <script>
+    function checkZombie() {
+      var name = document.getElementById("nameInput").value;
+      if (name.toLowerCase() === "jon") {
+        alert("Jon is a zombie!");
+      } else {
+        alert(name + " is not a zombie.");
+      }
+    }
+  </script>
+</body>
+</html>
