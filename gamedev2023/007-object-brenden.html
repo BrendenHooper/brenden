@@ -2,9 +2,54 @@
 <html>
 <head>
   <title>Zombie Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    label {
+      font-size: 18px;
+      margin: 10px 0;
+      display: block;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    input[type="button"] {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    input[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    #myDiv01 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h3 align="center">Objects</h3>
+  <h3>Objects</h3>
   <label>
     Is <input type="text" id="nameInput" value="jon"> a zombie?
   </label>
@@ -19,16 +64,14 @@
       "jon": true, 
       "bob": true, 
       "joe": true,
-
-
     };
 
     function checkZombie() {
       var name = document.getElementById("nameInput").value.toLowerCase();
       if (zombies[name]) {
-        alert(name + " is a zombie!");
+        document.getElementById("myDiv01").textContent = name + " is a zombie, run!";
       } else {
-        alert(name + " is not a zombie.");
+        document.getElementById("myDiv01").textContent = name + " is not a zombie.";
       }
     }
   </script>
