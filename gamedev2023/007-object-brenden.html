@@ -14,10 +14,19 @@
   <div id="myDiv01"></div>
   
   <script>
+    // Create an object to store zombie information
+    var zombies = {
+      "jon": true, 
+      "bob": true, 
+      "joe": true,
+
+
+    };
+
     function checkZombie() {
-      var name = document.getElementById("nameInput").value;
-      if (name.toLowerCase() === "jon") {
-        alert("Jon is a zombie!");
+      var name = document.getElementById("nameInput").value.toLowerCase();
+      if (zombies[name]) {
+        alert(name + " is a zombie!");
       } else {
         alert(name + " is not a zombie.");
       }
