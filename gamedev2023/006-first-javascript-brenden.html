@@ -4,22 +4,34 @@
     <title>Video flax</title>
 </head>
 <body>
+    <label for="numInput">how old is the cat?:</label>
+    <input type="text" id="numInput">
+    <button onclick="updateOutput()">Submit</button>
+    <div id="output"></div>
+
     <script>
-        let myOutArray = [];
+        function updateOutput() {
+            let myOutArray = [];
+            let inputElement = document.getElementById("numInput");
+            let inputValue = parseInt(inputElement.value);
 
-        function myPrint(x) {
-            let myAnimal;
-            for (let i = 1; i <= x; i++) {
-                myAnimal = 'cat';
-                if (i <= 3) {
-                    myAnimal = 'kitten';
+            if (!isNaN(inputValue)) {
+                let myAnimal;
+                for (let i = 1; i <= inputValue; i++) {
+                    myAnimal = 'cat';
+                    if (i <= 3) {
+                        myAnimal = 'kitten';
+                    }
+                    if (i >= 14) {
+                        myAnimal = ' cat is died';
+                    }
+                    myOutArray.push('the ' + myAnimal + ' is ' + i + ' years old<br>');
                 }
-                myOutArray.push('the ' + myAnimal + ' is ' + i + ' years old<br>');
+                document.getElementById("output").innerHTML = myOutArray.join(' ');
+            } else {
+                document.getElementById("output").innerHTML = "Please enter a valid number.";
             }
-            document.write(myOutArray.join(' '));
         }
-
-        myPrint(7);
     </script>
 </body>
 </html>
