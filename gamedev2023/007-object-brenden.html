@@ -46,27 +46,47 @@
       color: #333;
       margin-top: 20px;
     }
+
+    /* Additional CSS for styling */
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
   </style>
 </head>
 <body>
-  <h3>Objects</h3>
-  <label>
-    Select a name:
-    <select id="nameDropdown"></select>
-  </label>
-  <label>
-    Is <input type="text" id="nameInput" placeholder="Enter a new name"> a zombie?
-    <input type="button" value="Add" onclick="addName()">
-  </label>
-  <br>
-  <input type="button" value="Check it" onclick="checkZombie()">
-  <br>
-  <div id="myDiv01"></div>
+  <div id="container">
+    <h3>Objects</h3>
+    <label>
+      Select a name:
+      <select id="nameDropdown"></select>
+    </label>
+    <label>
+      Is <input type="text" id="nameInput" placeholder="Enter a new name"> a zombie?
+      <input type="button" value="Add" onclick="addName()">
+    </label>
+    <br>
+    <input type="button" value="Check it" onclick="checkZombie()">
+    <br>
+    <div id="myDiv01"></div>
+  </div>
   
   <script>
     // Initialize the dropdown with names from local storage
     var nameDropdown = document.getElementById("nameDropdown");
     var storedNames = JSON.parse(localStorage.getItem("names")) || [];
+    var zombies = JSON.parse(localStorage.getItem("zombies")) || {};
     updateDropdown();
 
     function updateDropdown() {
@@ -84,19 +104,19 @@
       var newName = document.getElementById("nameInput").value.toLowerCase();
       if (newName && !storedNames.includes(newName)) {
         storedNames.push(newName);
+
+        // Randomly assign zombie status if it doesn't exist
+        if (zombies[newName] === undefined) {
+          zombies[newName] = Math.random() < 0.5;
+        }
+
         localStorage.setItem("names", JSON.stringify(storedNames));
+        localStorage.setItem("zombies", JSON.stringify(zombies));
         updateDropdown();
         nameDropdown.value = newName;
         document.getElementById("nameInput").value = "";
       }
     }
-
-    // Create an object to store zombie information
-    var zombies = {
-      "jon": true, 
-      "bob": true, 
-      "joe": true,
-    };
 
     function checkZombie() {
       var selectedName = nameDropdown.value.toLowerCase();
