@@ -1,3 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>t1z04-Classes-by-Fred</title>
+</head>
+
+<body>
+    <h2 align=center>t1z04-Classes-by-Fred.html</h2>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.myName = name;
+                this.myAge = age;
+            }
+
+            myShow() {
+                document.getElementById('myDive1').innerHTML = 'Hello ' + this.myName + '. You are ' + this.myAge + ' years old.';
+            }
+        }
+
+        class Animal {
+            constructor(species, sound) {
+                this.mySpecies = species;
+                this.mySound = sound;
+            }
+
+            myMakeSound() {
+                document.getElementById('myDive2').innerHTML = 'The ' + this.mySpecies + ' makes the sound: ' + this.mySound;
+            }
+        }
+
+        function createPerson() {
+            const myCharacter = new Person('Elon', 52);
+            myCharacter.myShow();
+        }
+
+        function createAnimal() {
+            const myPet = new Animal('Dog', 'Woof');
+            myPet.myMakeSound();
+        }
+    </script>
+
+    <input type="button" value="Create Person" onclick="createPerson()">
+    <input type="button" value="Create Animal" onclick="createAnimal()">
+
+    <div id="myDive1">...</div>
+    <div id="myDive2">...</div>
+</body>
+
+</html>
 ﻿
 <h2 align=center>t1z04-Classes-by-Fred.html</h2>
 <script>
