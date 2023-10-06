@@ -8,16 +8,17 @@
     <title>Trivia Game</title>
 </head>
 <body>
-
     <style>
         #results {
             border-radius: 50px;  
         }
-        #score{
+        #score {
             padding: 50px;
             background-color: grey;
             border-radius: 25px;
-
+        }
+        .answer-option {
+            cursor: pointer;
         }
     </style>
     <div class="container mt-5">
@@ -33,12 +34,11 @@
                 <hr>
                 <div class="form-group">
                     <label for="answerSelect">Choose an Answer:</label>
-                    <select id="answerSelect" class="form-control">
-                        <option value="" disabled selected><i class="fa-solid fa-circle-notch fa-spin"></i></option>
-                    </select>
+                    <div id="answerOptions">
+                        <!-- Answer options will be populated here -->
+                    </div>
                 </div>
                 <br>
-                <button class="btn btn-primary" onclick="checkAnswer()">Submit</button> <br>
                 <div id="results"></div>
                 <hr> 
                 <div id="score" class="card-title"> Score: <span id="scoreNumber">0</span></div>
@@ -54,85 +54,87 @@
 
     <script>
         let correctAnswer;
-let shuffledAnswers = [];
-let score = 0;
-async function init() {
-    const myData = await fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple');
-    const myTemp = await myData.json();
-    correctAnswer = myTemp.results[0].correct_answer;
+        let shuffledAnswers = [];
+        let score = 0;
 
-    // Shuffle the answers (correct and incorrect)
-    const allAnswers = myTemp.results[0].incorrect_answers.concat(correctAnswer);
-    shuffledAnswers = shuffleArray(allAnswers);
+        async function init() {
+            const myData = await fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple');
+            const myTemp = await myData.json();
+            correctAnswer = myTemp.results[0].correct_answer;
 
-    document.getElementById('myDiv01').innerHTML = `
-        <div class="card-body">
-            <h5 class="card-title">Question</h5>
-            <p class="card-text">${myTemp.results[0].question}</p>
-        </div>
-    `;
+            // Shuffle the answers (correct and incorrect)
+            const allAnswers = myTemp.results[0].incorrect_answers.concat(correctAnswer);
+            shuffledAnswers = shuffleArray(allAnswers);
 
-    const answerSelect = document.getElementById('answerSelect');
-    answerSelect.innerHTML = '<option value="" disabled selected>Choose an Answer:</option>';
+            document.getElementById('myDiv01').innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Question</h5>
+                    <p class="card-text">${myTemp.results[0].question}</p>
+                </div>
+            `;
 
-    // Populate the <select> element with shuffled answers
-    shuffledAnswers.forEach((answer, index) => {
-        answerSelect.innerHTML += `<option value="${index}">${answer}</option>`;
-    });
+            const answerOptions = document.getElementById('answerOptions');
+            answerOptions.innerHTML = ''; // Clear previous options
 
-    document.getElementById('myDiv02').innerHTML = `
-        <div class="card-body">
-            <h5 class="card-title">Trivia Data</h5>
-            <pre class="card-text">${JSON.stringify(myTemp, null, 4)}</pre>
-        </div>
-    `;
-}
+            // Populate the answer options with shuffled answers
+            shuffledAnswers.forEach((answer, index) => {
+                const option = document.createElement('div');
+                option.classList.add('answer-option');
+                option.innerHTML = answer;
+                option.addEventListener('click', () => checkAnswer(index)); // Check answer on click
+                answerOptions.appendChild(option);
+            });
 
-function shuffleArray(array) {
-    // Create a copy of the array to shuffle
-    const shuffled = array.slice();
+            document.getElementById('myDiv02').innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Trivia Data</h5>
+                    <pre class="card-text">${JSON.stringify(myTemp, null, 4)}</pre>
+                </div>
+            `;
+        }
 
-    // Fisher-Yates shuffle algorithm
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
+        function shuffleArray(array) {
+            // Create a copy of the array to shuffle
+            const shuffled = array.slice();
 
-    return shuffled;
-}
-function checkAnswer() {
-    const selectedValue = parseInt(document.getElementById('answerSelect').value, 10);
+            // Fisher-Yates shuffle algorithm
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
 
-    const resultsDiv = document.getElementById('results');
+            return shuffled;
+        }
 
-    if (selectedValue === shuffledAnswers.indexOf(correctAnswer)) {
-        resultsDiv.innerHTML = `
-            <div class="card-body text-success bg-success">
-                <p class="card-text" style="color: white">Correct!</p>
-            </div>
-        `;
-        score++
-        document.getElementById("scoreNumber").innerHTML = score;
-    } else {
-        resultsDiv.innerHTML = `
-            <div class="card-body text-danger bg-danger">
-                <p class="card-text" style="color: white">Wrong. Correct answer is: ${correctAnswer}</p>
-            </div>
-        `;
-    }
-    init();
-    setTimeout(() => {
-        resultsDiv.innerHTML = ""
-    }, 1000);
-}
-init();
+        function checkAnswer(selectedIndex) {
+            const resultsDiv = document.getElementById('results');
 
+            if (selectedIndex === shuffledAnswers.indexOf(correctAnswer)) {
+                resultsDiv.innerHTML = `
+                    <div class="card-body text-success bg-success">
+                        <p class="card-text" style="color: white">Correct!</p>
+                    </div>
+                `;
+                score++;
+                document.getElementById("scoreNumber").innerHTML = score;
+            } else {
+                resultsDiv.innerHTML = `
+                    <div class="card-body text-danger bg-danger">
+                        <p class="card-text" style="color: white">Wrong. Correct answer is: ${correctAnswer}</p>
+                    </div>
+                `;
+            }
+            setTimeout(() => {
+                resultsDiv.innerHTML = "";
+                init();
+            }, 1000);
+        }
+
+        init();
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  
 </body>
 </html>
