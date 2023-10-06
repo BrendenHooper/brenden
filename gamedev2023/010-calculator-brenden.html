@@ -1,1 +1,125 @@
-v
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <input type="text" id="result" value="0">
+    <br>
+    <table>
+        <tr>
+            <td><button onclick="addToResult('7')">7</button></td>
+            <td><button onclick="addToResult('8')">8</button></td>
+            <td><button onclick="addToResult('9')">9</button></td>
+            <td><button onclick="addToResult('+')">+</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToResult('4')">4</button></td>
+            <td><button onclick="addToResult('5')">5</button></td>
+            <td><button onclick="addToResult('6')">6</button></td>
+            <td><button onclick="addToResult('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToResult('1')">1</button></td>
+            <td><button onclick="addToResult('2')">2</button></td>
+            <td><button onclick="addToResult('3')">3</button></td>
+            <td><button onclick="addToResult('*')">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="addToResult('0')">0</button></td>
+            <td><button onclick="addToResult('.')">.</button></td>
+            <td><button onclick="calculateResult()">=</button></td>
+            <td><button onclick="addToResult('/')">/</button></td>
+        </tr>
+        <tr>
+            <td colspan="4"><button onclick="clearResult()">C</button></td>
+        </tr>
+    </table>
+    <br>
+    <button onclick="toggleHistory()">Toggle History</button>
+    <button onclick="clearHistory()">Clear History</button>
+    <br>
+    <h2>History</h2>
+    <ul id="history">
+    </ul>
+
+    <script>
+        let historyVisible = true;
+
+        // Function to toggle the visibility of the history
+        function toggleHistory() {
+            const historyList = document.getElementById('history');
+            historyVisible = !historyVisible;
+            historyList.style.display = historyVisible ? 'block' : 'none';
+        }
+
+        // Function to clear the history
+        function clearHistory() {
+            const historyList = document.getElementById('history');
+            historyList.innerHTML = '';
+        }
+
+        // Function to add characters to the result field
+        function addToResult(value) {
+            const resultField = document.getElementById('result');
+            resultField.value += value;
+        }
+
+        // Function to calculate and display the result
+        function calculateResult() {
+            const resultField = document.getElementById('result');
+            try {
+                const result = eval(resultField.value);
+                resultField.value = result;
+                addToHistory(resultField.value);
+            } catch (error) {
+                resultField.value = 'Error';
+            }
+        }
+
+        // Function to clear the result field
+        function clearResult() {
+            const resultField = document.getElementById('result');
+            resultField.value = '';
+        }
+
+        // Function to add a calculation to the history
+        function addToHistory(calculation) {
+            const historyList = document.getElementById('history');
+            const listItem = document.createElement('li');
+            listItem.textContent = calculation;
+            historyList.appendChild(listItem);
+        }
+
+        // Event listener for keyboard input
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            if (key.match(/[0-9+\-*/.=]|Enter|Escape/)) {
+                event.preventDefault(); // Prevent normal browser behavior
+                if (key === 'Enter') {
+                    calculateResult();
+                } else if (key === 'Escape') {
+                    clearResult();
+                } else {
+                    addToResult(key);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
