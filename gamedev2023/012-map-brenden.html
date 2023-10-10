@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        /* Set the map div to full screen */
+        #map {
+            width: 100%;
+            height: 80vh;
+        }
+    </style>
+</head>
+<body>
+    <h2>t1a07-map-fred.html</h2>
+    Using <a href="https://www.openstreetmap.org">www.openstreetmap.org</a> and the API of leafletjs <a href="https://leafletjs.com/reference.html">https://leafletjs.com/reference.html</a> <br> <br>
+    <div id="map"></div>
+    <button id="createRectangle">Create Rectangle</button>
+    <div id="markerList"></div>
+    <script>
+        const map = L.map('map').setView([49.143, -122.31], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for a sample location
+        const marker01 = L.marker([49.141257498981886, -122.31341050380524]).addTo(map).bindPopup('Marker 1: This is a sample location.');
+
+        // Function to add a marker when the map is clicked
+        function onMapClick(e) {
+            const popupText = prompt('Enter a description for this location:');
+            if (popupText) {
+                const marker = L.marker(e.latlng).addTo(map).bindPopup(popupText);
+                saveMarker(popupText, e.latlng);
+                displayMarkers();
+            }
+        }
+
+        // Register the click event listener for the map
+        map.on('click', onMapClick);
+
+        // Create a rectangle when the "Create Rectangle" button is clicked
+        document.getElementById("createRectangle").addEventListener("click", function() {
+            const bounds = map.getBounds();
+            const rectangle = L.rectangle(bounds, { color: 'red' }).addTo(map);
+        });
+
+        // Function to save a marker in local storage
+        function saveMarker(description, latlng) {
+            let markers = JSON.parse(localStorage.getItem('markers')) || [];
+            markers.push({ description, latlng });
+            localStorage.setItem('markers', JSON.stringify(markers));
+        }
+
+        // Function to display saved markers
+        function displayMarkers() {
+            const markerList = document.getElementById('markerList');
+            markerList.innerHTML = '';
+            const markers = JSON.parse(localStorage.getItem('markers')) || [];
+
+            markers.forEach((marker, index) => {
+                const markerItem = document.createElement('div');
+                markerItem.innerHTML = `<strong>Marker ${index + 1}:</strong> ${marker.description}`;
+                markerList.appendChild(markerItem);
+            });
+        }
+
+        // Initial marker display
+        displayMarkers();
+    </script>
+</body>
+</html>
