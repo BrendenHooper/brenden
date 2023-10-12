@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spinning 3D Model</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/fflate@0.8.0/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+   
+        
+<script>
+// Create a scene
+const scene = new THREE.Scene();
+
+    // Create the camera
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+
+
+// Create a directional light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0);
+directionalLight.position.set(1, 1, 1);
+scene.add(directionalLight);
+
+// Create an ambient light for overall scene illumination
+const ambientLight = new THREE.AmbientLight(0x404040, 1.5, 100); // Adjust the color as needed
+scene.add(ambientLight);
+
+// Create a point light for localized illumination (e.g., spotlight)
+const pointLight = new THREE.PointLight(0x404040, 100, 100); // Color, intensity, distance
+pointLight.position.set(0, 2, 0); // Adjust the position
+scene.add(pointLight);
+
+
+
+const textureLoader = new THREE.TextureLoader();
+
+    const texture = textureLoader.load('https://i.imgur.com/7gsPP4X.jpg');
+
+    // Create the skybox geometry
+    const skyboxGeometry = new THREE.SphereGeometry(1000, 32, 32);
+
+    // Create the skybox material with the loaded texture
+    const skyboxMaterial = new THREE.MeshStandardMaterial({
+        map: texture,
+        side: THREE.BackSide
+    });
+    // Create the skybox mesh
+    const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
+    skybox.position.set(0, 0, 0);
+
+    // Add the skybox to the scene
+    scene.add(skybox);
+
+
+directionalLight.position.set(1, 1, 1);
+directionalLight.castShadow = true; // Enable shadow casting
+
+// Configure shadow properties
+directionalLight.shadow.mapSize.width = 1024; // Shadow map width
+directionalLight.shadow.mapSize.height = 1024; // Shadow map height
+directionalLight.shadow.camera.near = 0.1; // Near plane of the shadow camera
+directionalLight.shadow.camera.far = 10; // Far plane of the shadow camera
+
+scene.add(directionalLight);
+
+// Create a renderer
+renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // Enable smooth camera movement
+controls.dampingFactor = 1; // Adjust the damping factor for smoother movement
+controls.rotateSpeed = 0.2; // Adjust the rotation speed
+
+
+
+
+
+let model; //init model variable
+const loader1 = new THREE.FBXLoader();
+
+loader1.load('https://theactualzenaldv2.github.io/gamedev/public2/extra/SciFiRifle.fbx', function (object) {
+    model = object;
+    model.scale.set(0.003, 0.003, 0.003); // Set the scale of the gun model
+    scene.add(model); // Add the loaded model to the scene
+    // Set the position of the camera behind the gun
+const cameraDistance = 5; // Adjust the distance as needed
+const cameraHeight = 0;   // Adjust the height as needed
+
+camera.position.set(
+    model.position.x - cameraDistance,
+    model.position.y + cameraHeight,
+    model.position.z
+);
+
+// Point the camera at the gun
+camera.lookAt(model.position);
+
+
+
+
+
+
+});
+
+// Set up animation
+const animate = () => {
+    requestAnimationFrame(animate);
+
+    // Rotate the model (change 'model' to 'gun')
+    if (model) {
+        model.rotation.y -= 0.005;
+        skybox.rotation.y -= 0.001;
+
+
+    }
+
+    renderer.render(scene, camera);
+};
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+
+    camera.aspect = newWidth / newHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(newWidth, newHeight);
+});
+
+animate();
+
+    </script>
+</body>
+</html>
