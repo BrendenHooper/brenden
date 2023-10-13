@@ -19,16 +19,17 @@
     <script>
         function check() {
             let myNum01 = parseFloat(document.getElementById('Mynum01').value);
+            let myName = document.getElementById('Mytext01').value;
             if (myNum01 <= 3) {
-                document.getElementById('MyDiv01').innerHTML = 'You are a baby';
+                document.getElementById('MyDiv01').innerHTML = myName + ' is a baby';
             } else if (myNum01 <= 12) {
-                document.getElementById('MyDiv01').innerHTML = 'You are a kid';
+                document.getElementById('MyDiv01').innerHTML = myName + ' is a kid';
             } else if (myNum01 <= 17) {
-                document.getElementById('MyDiv01').innerHTML = 'You are a teen';
+                document.getElementById('MyDiv01').innerHTML = myName + ' is a teen';
             } else if (myNum01 <= 64) {
-                document.getElementById('MyDiv01').innerHTML = 'You are a adult';
+                document.getElementById('MyDiv01').innerHTML = myName + ' is an adult';
             } else {
-                document.getElementById('MyDiv01').innerHTML = 'you are either a senior or died';
+                document.getElementById('MyDiv01').innerHTML = myName + ' is either a senior or has passed away';
             }
         }
     </script>
