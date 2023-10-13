@@ -11,6 +11,7 @@
     <input type="text" id="Mytext01" value="Brenden"><br>
     <input type="number" id="Mynum01" value="17"><br>
     <input type="button" id="button" onclick="check()" value="Check age"><br>
+    <input type="button" id="button1" onclick="clearAge()" value="Clear age">
 
     <br>
 
@@ -29,10 +30,16 @@
             } else if (myNum01 <= 64) {
                 document.getElementById('MyDiv01').innerHTML = myName + ' is an adult';
             } else if (myNum01 == 69) {
-                document.getElementById('MyDiv01').innerHTML = myName + ' get no bitches';
+                document.getElementById('MyDiv01').innerHTML = myName + ' gets no bitches';
             } else {
                 document.getElementById('MyDiv01').innerHTML = myName + ' is either a senior or has passed away';
             }
+        }
+
+        function clearAge() {
+            var textbox = document.getElementById("Mynum01");
+            // Reset the text box content to an empty string
+            textbox.value = "";
         }
     </script>
 </body>
