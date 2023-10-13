@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fun code</title>
+</head>
+
+<body>
+    <h1 align="center">Fun code by Brenden</h1>
+
+    <input type="text" id="Mytext01" value="Brenden"><br>
+    <input type="number" id="Mynum01" value="17"><br>
+    <input type="button" id="button" onclick="check()" value="Check age"><br>
+
+    <br>
+
+    <div id="MyDiv01">...</div>
+
+    <script>
+        function check() {
+            let myNum01 = parseFloat(document.getElementById('Mynum01').value);
+            if (myNum01 <= 3) {
+                document.getElementById('MyDiv01').innerHTML = 'You are a baby';
+            } else if (myNum01 <= 12) {
+                document.getElementById('MyDiv01').innerHTML = 'You are a kid';
+            } else if (myNum01 <= 17) {
+                document.getElementById('MyDiv01').innerHTML = 'You are a teen';
+            } else if (myNum01 <= 64) {
+                document.getElementById('MyDiv01').innerHTML = 'You are a adult';
+            } else {
+                document.getElementById('MyDiv01').innerHTML = 'you are either a senior or died';
+            }
+        }
+    </script>
+</body>
+
+</html>
