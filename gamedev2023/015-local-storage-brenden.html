@@ -1,6 +1,130 @@
-<h2>local storage</h2>
-use local storage to make a to do list 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List</title>
+    <style>
+        #taskContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .taskItem {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    <input type="text" id="task" placeholder="Add a new task">
+    <button onclick="addTask()">Add</button>
+    <button onclick="toggleList()">Toggle List</button>
+    <button onclick="deleteCheckedTasks()">Delete Checked</button>
+    <div id="taskContainer"></div>
 
-<body onload="{
-  mystorage = localstorage.getelement
-}
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('task');
+            const taskContainer = document.getElementById('taskContainer');
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            const taskItem = document.createElement('div');
+            taskItem.className = 'taskItem';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+                    taskItem.style.order = 1;
+                } else {
+                    taskItem.style.order = -1;
+                }
+            });
+
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+
+            taskItem.appendChild(checkbox);
+            taskItem.appendChild(taskSpan);
+
+            taskContainer.appendChild(taskItem);
+            taskInput.value = '';
+
+            updateLocalStorage();
+        }
+
+        function toggleList() {
+            const taskContainer = document.getElementById('taskContainer');
+            if (taskContainer.style.display === 'none' || !taskContainer.style.display) {
+                taskContainer.style.display = 'flex';
+            } else {
+                taskContainer.style.display = 'none';
+            }
+        }
+
+        function deleteCheckedTasks() {
+            const taskContainer = document.getElementById('taskContainer');
+            const taskItems = taskContainer.querySelectorAll('.taskItem');
+
+            taskItems.forEach((taskItem) => {
+                const checkbox = taskItem.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    taskContainer.removeChild(taskItem);
+                }
+            });
+
+            updateLocalStorage();
+        }
+
+        function updateLocalStorage() {
+            const taskContainer = document.getElementById('taskContainer');
+            const tasks = [];
+
+            const taskItems = taskContainer.querySelectorAll('.taskItem');
+            taskItems.forEach((taskItem) => {
+                const taskSpan = taskItem.querySelector('span');
+                const checkbox = taskItem.querySelector('input[type="checkbox"]');
+                tasks.push({ text: taskSpan.textContent, checked: checkbox.checked });
+            });
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const taskContainer = document.getElementById('taskContainer');
+            const savedTasks = localStorage.getItem('tasks');
+
+            if (savedTasks) {
+                const tasks = JSON.parse(savedTasks);
+                tasks.forEach((task) => {
+                    const taskItem = document.createElement('div');
+                    taskItem.className = 'taskItem';
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = task.checked;
+
+                    const taskSpan = document.createElement('span');
+                    taskSpan.textContent = task.text;
+
+                    taskItem.appendChild(checkbox);
+                    taskItem.appendChild(taskSpan);
+
+                    if (task.checked) {
+                        taskItem.style.order = 1;
+                    }
+
+                    taskContainer.appendChild(taskItem);
+                });
+            }
+        }
+
+        loadTasks();
+    </script>
+</body>
+</html>
