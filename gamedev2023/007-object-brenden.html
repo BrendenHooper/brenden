@@ -2,36 +2,8 @@
 <html>
 <head>
   <title>Zombie Checker</title>
-
-
- <a href="https://brendenhooper.github.io/brenden/public/t2a12-objects-by-Brenden.html"><input type="button" id="button1" value="other webpage"/></a> <br>
-
-   <style>
-
-        input {
-         padding: 2px;
-        }
-        
-        #button1{
-           background-color: #d85ec4;
-       }
-       #button1:hover{
-           background-color: #33fc13;
-       }
-        #button1:active {
-           background-color: #33fc13;
-       }
-       #button1 {
-    font-size: 30px;
-       }
   
-   body {
-              background-color: black;
-              color: white;
-          }
-          
-    </style>
-  
+  <!-- CSS styles -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -39,6 +11,7 @@
       text-align: center;
       margin: 0;
       padding: 0;
+      color: #333; /* Set a text color for the body */
     }
 
     h3 {
@@ -79,6 +52,10 @@
 
     /* Additional CSS for styling */
     #container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
@@ -92,7 +69,6 @@
       flex-direction: column;
       align-items: center;
     }
-
   </style>
 </head>
 <body>
@@ -110,10 +86,12 @@
     <input type="button" value="Check it" onclick="checkZombie()">
     <br>
     <div id="myDiv01"></div>
+    <img id="zombieImage" src="https://static.wikia.nocookie.net/deadliestfiction/images/c/ca/PVZ_Zombie_Suit.png/revision/latest?cb=20131126175343" alt="Zombie Image" width="100px" style="display: none;">
+    <img id="personImage" src="https://cdn.geekwire.com/wp-content/uploads/2012/02/nerd-bigstock_Extreme_Computer_Nerd_1520708.jpg" alt="Person Image" width="200px" style="display: none;">
   </div>
   
   <script>
-    // Initialize the dropdown with names from local storage
+    // JavaScript code
     var nameDropdown = document.getElementById("nameDropdown");
     var storedNames = JSON.parse(localStorage.getItem("names")) || [];
     var zombies = JSON.parse(localStorage.getItem("zombies")) || {};
@@ -129,17 +107,13 @@
       }
     }
 
-    // Function to add a new name to the dropdown and local storage
     function addName() {
       var newName = document.getElementById("nameInput").value.toLowerCase();
       if (newName && !storedNames.includes(newName)) {
         storedNames.push(newName);
-
-        // Randomly assign zombie status if it doesn't exist
         if (zombies[newName] === undefined) {
           zombies[newName] = Math.random() < 0.5;
         }
-
         localStorage.setItem("names", JSON.stringify(storedNames));
         localStorage.setItem("zombies", JSON.stringify(zombies));
         updateDropdown();
@@ -152,8 +126,12 @@
       var selectedName = nameDropdown.value.toLowerCase();
       if (zombies[selectedName]) {
         document.getElementById("myDiv01").textContent = selectedName + " is a zombie!";
+        document.getElementById("zombieImage").style.display = "block";
+        document.getElementById("personImage").style.display = "none";
       } else {
         document.getElementById("myDiv01").textContent = selectedName + " is not a zombie.";
+        document.getElementById("zombieImage").style.display = "none";
+        document.getElementById("personImage").style.display = "block";
       }
     }
   </script>
