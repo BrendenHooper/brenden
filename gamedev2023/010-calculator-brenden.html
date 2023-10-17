@@ -60,33 +60,36 @@
 
     <script>
         let historyVisible = true;
+        const historyList = document.getElementById('history');
+        const resultField = document.getElementById('result');
 
         // Function to toggle the visibility of the history
         function toggleHistory() {
-            const historyList = document.getElementById('history');
             historyVisible = !historyVisible;
             historyList.style.display = historyVisible ? 'block' : 'none';
         }
 
         // Function to clear the history
         function clearHistory() {
-            const historyList = document.getElementById('history');
+            localStorage.removeItem('calculatorHistory');
             historyList.innerHTML = '';
         }
 
         // Function to add characters to the result field
         function addToResult(value) {
-            const resultField = document.getElementById('result');
+            if (resultField.value === '0' && value !== '.') {
+                resultField.value = '';  // Clear the initial '0' when a new input is provided.
+            }
             resultField.value += value;
         }
 
         // Function to calculate and display the result
         function calculateResult() {
-            const resultField = document.getElementById('result');
             try {
-                const result = eval(resultField.value);
+                const calculation = resultField.value;
+                const result = eval(calculation);
                 resultField.value = result;
-                addToHistory(resultField.value);
+                addToHistory(calculation, result);
             } catch (error) {
                 resultField.value = 'Error';
             }
@@ -94,23 +97,33 @@
 
         // Function to clear the result field
         function clearResult() {
-            const resultField = document.getElementById('result');
-            resultField.value = '';
+            resultField.value = '0';
         }
 
         // Function to add a calculation to the history
-        function addToHistory(calculation) {
-            const historyList = document.getElementById('history');
+        function addToHistory(calculation, result) {
             const listItem = document.createElement('li');
-            listItem.textContent = calculation;
+            listItem.textContent = `${calculation} = ${result}`;
             historyList.appendChild(listItem);
+
+            const storedHistory = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+            storedHistory.push({ calculation, result });
+            localStorage.setItem('calculatorHistory', JSON.stringify(storedHistory));
         }
+
+        // Load history from Local Storage when the page loads
+        window.onload = function () {
+            const storedHistory = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+            storedHistory.forEach(item => {
+                addToHistory(item.calculation, item.result);
+            });
+        };
 
         // Event listener for keyboard input
         document.addEventListener('keydown', function(event) {
             const key = event.key;
             if (key.match(/[0-9+\-*/.=]|Enter|Escape/)) {
-                event.preventDefault(); // Prevent normal browser behavior
+                event.preventDefault();
                 if (key === 'Enter') {
                     calculateResult();
                 } else if (key === 'Escape') {
