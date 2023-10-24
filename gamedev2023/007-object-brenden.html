@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>Zombie Checker</title>
-  
-  <!-- CSS styles -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,24 +9,20 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      color: #333; /* Set a text color for the body */
+      color: #333;
     }
-
     h3 {
       color: #333;
     }
-
     label {
       font-size: 18px;
       margin: 10px 0;
       display: block;
     }
-
     select, input[type="text"] {
       padding: 5px;
       font-size: 16px;
     }
-
     input[type="button"] {
       padding: 10px 20px;
       background-color: #007bff;
@@ -38,19 +32,15 @@
       font-size: 18px;
       margin-top: 10px;
     }
-
     input[type="button"]:hover {
       background-color: #0056b3;
     }
-
     #myDiv01 {
       font-size: 24px;
       font-weight: bold;
       color: #333;
       margin-top: 20px;
     }
-
-    /* Additional CSS for styling */
     #container {
       display: flex;
       flex-direction: column;
@@ -63,7 +53,6 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
     }
-
     label {
       display: flex;
       flex-direction: column;
@@ -89,9 +78,7 @@
     <img id="zombieImage" src="https://brendenhooper.github.io/brenden/pic/download.jpg" alt="Zombie Image" width="100px" style="display: none;">
     <img id="personImage" src="https://cdn.geekwire.com/wp-content/uploads/2012/02/nerd-bigstock_Extreme_Computer_Nerd_1520708.jpg" alt="Person Image" width="200px" style="display: none;">
   </div>
-  
   <script>
-    // JavaScript code
     var nameDropdown = document.getElementById("nameDropdown");
     var storedNames = JSON.parse(localStorage.getItem("names")) || [];
     var zombies = JSON.parse(localStorage.getItem("zombies")) || {};
