@@ -414,11 +414,6 @@
        showMessage()
        reset()
     }
-    if ( myHitOther('myImg01','myImg87') ){
-        remove()
-       showMessage()
-       reset()
-    }
     if ( myHitOther('myImg01','myImg88') ){
         remove()
        showMessage()
@@ -614,11 +609,11 @@
        showMessage()
        reset()
     }
-    if ( myHitOther('myImg01','myImg146') ){
+    if ( myHitOther('myImg01','myImg147') ){
         remove()
        showMessage()
        reset()
-    }
+    } 
 
 
 
@@ -820,8 +815,8 @@
 
 
     if ( myHitOther('myImg01','myImg145') ){
-        document.getElementById('myImg146').style.left = '700px'
-        document.getElementById('myImg146').style.top = '200px'
+        document.getElementById('myImg146').style.height = '0px'
+        document.getElementById('myImg146').style.width = '10px'
     }
 
 
@@ -835,7 +830,7 @@
  
     // YOU WIN and go to next level!
  
-    if ( myHitOther('myImg01','myImg1111') ){
+    if ( myHitOther('myImg01','myImg147') ){
         alert('You Win, now go to the next level')
        location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1'
     }
@@ -843,6 +838,44 @@
     // more if statements here
  
  }
+
+
+
+
+
+
+ // Function to check if two elements have collided
+function hasCollided(element1, element2) {
+    var rect1 = element1.getBoundingClientRect();
+    var rect2 = element2.getBoundingClientRect();
+
+    return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+    );
+}
+
+// Function to remove an element from the DOM
+function removeElement(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.parentNode.removeChild(element);
+    }
+}
+
+// Check for collision between image1 and image6
+var myImg01 = document.getElementById("myImg01");
+var myImg05 = document.getElementById("myImg146");
+
+if (hasCollided(myImg01, myImg146)) {
+    // If they have collided, remove image04
+    removeElement("myImg147");
+}
+
+ 
+ 
  
  
  </script>
@@ -1283,6 +1316,45 @@ cover
       }, 5000);
       var audio = document.getElementById('myAudio');
   audio.play();    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
 
 
 
@@ -2178,6 +2250,7 @@ function room1_11() {
 
 
 
+   
 
 
    
