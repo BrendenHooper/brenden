@@ -414,11 +414,6 @@
        showMessage()
        reset()
     }
-    if ( myHitOther('myImg01','myImg87') ){
-        remove()
-       showMessage()
-       reset()
-    }
     if ( myHitOther('myImg01','myImg88') ){
         remove()
        showMessage()
@@ -839,6 +834,44 @@
     // more if statements here
  
  }
+
+
+
+
+
+
+ // Function to check if two elements have collided
+function hasCollided(element1, element2) {
+    var rect1 = element1.getBoundingClientRect();
+    var rect2 = element2.getBoundingClientRect();
+
+    return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+    );
+}
+
+// Function to remove an element from the DOM
+function removeElement(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.parentNode.removeChild(element);
+    }
+}
+
+// Check for collision between image1 and image6
+var myImg01 = document.getElementById("myImg01");
+var myImg05 = document.getElementById("myImg146");
+
+if (hasCollided(myImg01, myImg146)) {
+    // If they have collided, remove image04
+    removeElement("myImg147");
+}
+
+ 
+ 
  
  
  </script>
