@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const player = {
+      x: 50,
+      y: 50,
+      width: 30,
+      height: 30,
+      color: 'blue',
+      speed: 2,
+      dx: 0,
+      dy: 0
+    };
+
+    const finishLine = {
+      x: 350,
+      y: 350,
+      width: 30,
+      height: 30,
+      color: 'green'
+    };
+
+    const obstacles = [
+      { x: 200, y: 220, width: 30, height: 30, color: 'red', dx: 2, dy: 0 },
+      { x: 100, y: 250, width: 30, height: 30, color: 'red', dx: -2, dy: 0 },
+      { x: 250, y: 100, width: 30, height: 30, color: 'red', dx: 3, dy: 0 },
+      { x: 300, y: 50, width: 30, height: 30, color: 'red', dx: -2, dy: 0 },
+      { x: 50, y: 300, width: 30, height: 30, color: 'red', dx: 2, dy: 0 },
+      { x: 150, y: 150, width: 30, height: 30, color: 'red', dx: -3, dy: 0 },
+      { x: 350, y: 200, width: 30, height: 30, color: 'red', dx: 3, dy: 0 },
+      { x: 250, y: 250, width: 30, height: 30, color: 'red', dx: 0, dy: 2 },
+      { x: 200, y: 50, width: 30, height: 30, color: 'red', dx: 0, dy: -2 },
+      { x: 100, y: 100, width: 30, height: 30, color: 'red', dx: 0, dy: 2 },
+      { x: 300, y: 300, width: 30, height: 30, color: 'red', dx: 0, dy: -2 },
+      { x: 50, y: 150, width: 30, height: 30, color: 'red', dx: 0, dy: 2 },
+    ];
+
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawFinishLine() {
+      ctx.fillStyle = finishLine.color;
+      ctx.fillRect(finishLine.x, finishLine.y, finishLine.width, finishLine.height);
+    }
+
+    function drawObstacle(obstacle) {
+      ctx.fillStyle = obstacle.color;
+      ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    }
+
+    function moveObstacle(obstacle) {
+      obstacle.x += obstacle.dx;
+      obstacle.y += obstacle.dy;
+
+      // Bounce off the canvas boundaries horizontally
+      if (obstacle.x < 0 || obstacle.x + obstacle.width > canvas.width) {
+        obstacle.dx *= -1;
+      }
+
+      // Bounce off the canvas boundaries vertically
+      if (obstacle.y < 0 || obstacle.y + obstacle.height > canvas.height) {
+        obstacle.dy *= -1;
+      }
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawPlayer();
+      drawFinishLine();
+      
+      for (const obstacle of obstacles) {
+        drawObstacle(obstacle);
+        moveObstacle(obstacle);
+
+        // Check for collision with the player
+        if (
+          player.x < obstacle.x + obstacle.width &&
+          player.x + player.width > obstacle.x &&
+          player.y < obstacle.y + obstacle.height &&
+          player.y + player.height > obstacle.y
+        ) {
+          // Collision detected - restart the game
+          player.x = 50;
+          player.y = 50;
+        }
+      }
+
+      // Check if the player has reached the finish line
+      if (
+        player.x < finishLine.x + finishLine.width &&
+        player.x + player.width > finishLine.x &&
+        player.y < finishLine.y + finishLine.height &&
+        player.y + player.height > finishLine.y
+      ) {
+        alert("Congratulations! You've reached the finish line!");
+      }
+
+      player.x += player.dx;
+      player.y += player.dy;
+
+      // Boundary checks to prevent the player from going outside the canvas
+      if (player.x < 0) {
+        player.x = 0;
+      }
+      if (player.x + player.width > canvas.width) {
+        player.x = canvas.width - player.width;
+      }
+      if (player.y < 0) {
+        player.y = 0;
+      }
+      if (player.y + player.height > canvas.height) {
+        player.y = canvas.height - player.height;
+      }
+    }
+
+    function keyDownHandler(e) {
+      if (e.key === 'a') {
+        player.dx = -player.speed;
+      } else if (e.key === 'd') {
+        player.dx = player.speed;
+      } else if (e.key === 'w') {
+        player.dy = -player.speed;
+      } else if (e.key === 's') {
+        player.dy = player.speed;
+      }
+    }
+
+    function keyUpHandler(e) {
+      if (e.key === 'a' || e.key === 'd') {
+        player.dx = 0;
+      } else if (e.key === 'w' || e.key === 's') {
+        player.dy = 0;
+      }
+    }
+
+    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keyup', keyUpHandler);
+
+    function gameLoop() {
+      update();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>
