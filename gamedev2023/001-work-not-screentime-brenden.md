@@ -3,5 +3,5 @@
 -make a game  
 -work on my capstone  
 October 26: im working on mymaze game like thing. im on my phone to make a blueprint
-
+nov 09 trying to make a maze solver 
 
