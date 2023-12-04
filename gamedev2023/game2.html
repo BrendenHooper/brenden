@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Platforming Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    canvas {
+      border: 2px solid black;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="240" height="880"></canvas>
+
+  <script>
+    const maze = [
+[1,1,1,1,1,1,1,1,1,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,4,1],
+[1,0,0,0,0,0,0,0,0,0,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,1,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,1,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,1,1,0,0,0,0,0,3,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,2,0,0,0,1],
+[1,0,1,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,1,1],
+[1,0,0,0,3,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,1,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,1,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,2,2,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,1,0,0,0,0,0,0,1,1],
+[1,0,0,0,0,0,0,1,0,0,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,2,0,0,0,0,0,0,0,0,1,1],
+[1,0,0,0,0,0,2,2,2,0,0,1],
+[1,0,0,1,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,3,1],
+[1,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,1,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,3,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,3,0,0,0,0,0,0,3,1],
+[1,0,0,3,0,0,0,0,0,0,0,1],
+[1,0,0,3,0,0,0,1,1,0,0,1],
+[1,0,1,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,1,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,1,0,0,0,2,2,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const blockSize = 20; // Size of each block
+    const numRows = maze.length;
+    const numCols = maze[0].length;
+
+    let player = {
+      x: blockSize, // Spawning in the bottom left open spot
+      y: canvas.height - blockSize * 2,
+      width: blockSize,
+      height: blockSize,
+      speed: 3,
+      jumping: false,
+      velY: 0,
+      grounded: false
+    };
+
+    function drawMaze() {
+      for (let i = 0; i < numRows; i++) {
+        for (let j = 0; j < numCols; j++) {
+          let tileX = j * blockSize;
+          let tileY = i * blockSize;
+
+          if (maze[i][j] === 1) {
+            ctx.fillStyle = 'black'; // Walls
+            ctx.fillRect(tileX, tileY, blockSize, blockSize);
+          } else if (maze[i][j] === 2) {
+            ctx.fillStyle = 'grey'; // Passable wall
+            ctx.fillRect(tileX, tileY, blockSize, blockSize);
+          } else if (maze[i][j] === 3) {
+            ctx.fillStyle = 'green'; // Green platform
+            ctx.fillRect(tileX, tileY, blockSize, blockSize);
+          } else if (maze[i][j] === 4) {
+            ctx.fillStyle = 'red'; // Finish
+            ctx.fillRect(tileX, tileY, blockSize, blockSize);
+          }
+        }
+      }
+    }
+
+    function update() {
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'a') {
+          player.x -= player.speed;
+        } else if (event.key === 'd') {
+          player.x += player.speed;
+        } else if (event.key === ' ') {
+          if (player.grounded) {
+            player.velY = -player.speed * 2;
+            player.grounded = false;
+          }
+        }
+      });
+
+      if (!player.grounded) {
+        player.velY += 0.3;
+      }
+
+      player.y += player.velY;
+
+      for (let i = 0; i < numRows; i++) {
+        for (let j = 0; j < numCols; j++) {
+          if (maze[i][j] === 1 || maze[i][j] === 2 || maze[i][j] === 3) {
+            let wallX = j * blockSize;
+            let wallY = i * blockSize;
+
+            if (
+              player.x < wallX + blockSize &&
+              player.x + player.width > wallX &&
+              player.y < wallY + blockSize &&
+              player.y + player.height > wallY
+            ) {
+              let oX = player.x - player.velX;
+              let oY = player.y - player.velY;
+
+              if (
+                oX < wallX + blockSize &&
+                oX + player.width > wallX &&
+                oY < wallY + blockSize &&
+                oY + player.height > wallY
+              ) {
+                player.x -= player.velX;
+                player.y -= player.velY;
+                player.velY = 0;
+              }
+            }
+          } else if (maze[i][j] === 4) {
+            let wallX = j * blockSize;
+            let wallY = i * blockSize;
+
+            if (
+              player.x < wallX + blockSize &&
+              player.x + player.width > wallX &&
+              player.y < wallY + blockSize &&
+              player.y + player.height > wallY
+            ) {
+              console.log("You've reached the finish!");
+              // You can add more logic for completing the level here
+            }
+          }
+        }
+      }
+
+      if (player.y + player.height >= canvas.height) {
+        player.y = canvas.height - player.height;
+        player.grounded = true;
+        player.velY = 0;
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawMaze();
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>
