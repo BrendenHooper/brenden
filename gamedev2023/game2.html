@@ -1,202 +1,247 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Platforming Game</title>
+  <title>Game Template</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    canvas {
-      border: 2px solid black;
-      display: block;
-      margin: 20px auto;
+    /* Add your CSS styles here */
+    /* Example style for the images */
+    .hoverImage {
+      width: 100px;
+      height: 80px;
+      position: absolute;
     }
   </style>
 </head>
-<body>
-  <canvas id="gameCanvas" width="240" height="880"></canvas>
-
-  <script>
-    const maze = [
-[1,1,1,1,1,1,1,1,1,1,1,1],
-[1,0,0,0,0,0,0,0,0,0,4,1],
-[1,0,0,0,0,0,0,0,0,0,1,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,1,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,1,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,1,1,0,0,0,0,0,3,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,2,0,0,0,1],
-[1,0,1,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,1,1],
-[1,0,0,0,3,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,1,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,1,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,1,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,2,2,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,1,0,0,0,0,0,0,1,1],
-[1,0,0,0,0,0,0,1,0,0,1,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,2,0,0,0,0,0,0,0,0,1,1],
-[1,0,0,0,0,0,2,2,2,0,0,1],
-[1,0,0,1,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,3,1],
-[1,0,0,0,0,0,0,1,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,1,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,1,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,3,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,3,0,0,0,0,0,0,3,1],
-[1,0,0,3,0,0,0,0,0,0,0,1],
-[1,0,0,3,0,0,0,1,1,0,0,1],
-[1,0,1,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,0,0,1,0,0,0,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,0,0,1,0,0,0,2,2,0,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1]
-    ];
-
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const blockSize = 20; // Size of each block
-    const numRows = maze.length;
-    const numCols = maze[0].length;
-
-    let player = {
-      x: blockSize, // Spawning in the bottom left open spot
-      y: canvas.height - blockSize * 2,
-      width: blockSize,
-      height: blockSize,
-      speed: 3,
-      jumping: false,
-      velY: 0,
-      grounded: false
-    };
-
-    function drawMaze() {
-      for (let i = 0; i < numRows; i++) {
-        for (let j = 0; j < numCols; j++) {
-          let tileX = j * blockSize;
-          let tileY = i * blockSize;
-
-          if (maze[i][j] === 1) {
-            ctx.fillStyle = 'black'; // Walls
-            ctx.fillRect(tileX, tileY, blockSize, blockSize);
-          } else if (maze[i][j] === 2) {
-            ctx.fillStyle = 'grey'; // Passable wall
-            ctx.fillRect(tileX, tileY, blockSize, blockSize);
-          } else if (maze[i][j] === 3) {
-            ctx.fillStyle = 'green'; // Green platform
-            ctx.fillRect(tileX, tileY, blockSize, blockSize);
-          } else if (maze[i][j] === 4) {
-            ctx.fillStyle = 'red'; // Finish
-            ctx.fillRect(tileX, tileY, blockSize, blockSize);
-          }
-        }
-      }
-    }
-
-    function update() {
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'a') {
-          player.x -= player.speed;
-        } else if (event.key === 'd') {
-          player.x += player.speed;
-        } else if (event.key === ' ') {
-          if (player.grounded) {
-            player.velY = -player.speed * 2;
-            player.grounded = false;
-          }
-        }
-      });
-
-      if (!player.grounded) {
-        player.velY += 0.3;
-      }
-
-      player.y += player.velY;
-
-      for (let i = 0; i < numRows; i++) {
-        for (let j = 0; j < numCols; j++) {
-          if (maze[i][j] === 1 || maze[i][j] === 2 || maze[i][j] === 3) {
-            let wallX = j * blockSize;
-            let wallY = i * blockSize;
-
-            if (
-              player.x < wallX + blockSize &&
-              player.x + player.width > wallX &&
-              player.y < wallY + blockSize &&
-              player.y + player.height > wallY
-            ) {
-              let oX = player.x - player.velX;
-              let oY = player.y - player.velY;
-
-              if (
-                oX < wallX + blockSize &&
-                oX + player.width > wallX &&
-                oY < wallY + blockSize &&
-                oY + player.height > wallY
-              ) {
-                player.x -= player.velX;
-                player.y -= player.velY;
-                player.velY = 0;
-              }
+<body id="myBody" style="background-repeat: repeat; background-size: 80%" background="https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1"  onkeydown="{
+   document.all.myText01.value = event.key
+   if (controlsChanged) {
+          document.onkeydown = function (e) {
+            switch (e.key) {
+              case 'w':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px';
+                break;
+              case 's':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
+                break;
+              case 'a':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
+                break;
+              case 'd':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
+                break;
             }
-          } else if (maze[i][j] === 4) {
-            let wallX = j * blockSize;
-            let wallY = i * blockSize;
-
-            if (
-              player.x < wallX + blockSize &&
-              player.x + player.width > wallX &&
-              player.y < wallY + blockSize &&
-              player.y + player.height > wallY
-            ) {
-              console.log("You've reached the finish!");
-              // You can add more logic for completing the level here
-            }
-          }
+            myCheckHit(); // Check for collision after the new controls
+          };
         }
-      }
+        else if (controlsChanged1) {
+          document.onkeydown = function (e) {
+            switch (e.key) {
+              case 'w':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
+                break;
+              case 's':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
+                break;
+              case 'a':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
+                break;
+              case 'd':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px';
+                break;
+            }
+            myCheckHit(); // Check for collision after the new controls
+          };
+        }
+         else if (controlsChanged2) {
+          document.onkeydown = function (e) {
+            switch (e.key) {
+              case 'w':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
+                break;
+              case 's':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px';
+                break;
+              case 'a':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
+                break;
+              case 'd':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
+                break;
+            }
+            myCheckHit(); // Check for collision after the new controls
+          };
+        }
+        else if (controlsChanged3) {
+          document.onkeydown = function (e) {
+            switch (e.key) {
+              case 'w':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 20 + 'px';
+                break;
+              case 's':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 20 + 'px';
+                break;
+              case 'a':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 20 + 'px';
+                break;
+              case 'd':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 20 + 'px';
+                break;
+            }
+            myCheckHit(); // Check for collision after the new controls
+          };
+        }
+         else {
+          document.onkeydown = function (e) {
+            switch (e.key) {
+              case 'w':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
+                break;
+              case 's':
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
+                break;
+              case 'a':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px';
+                break;
+              case 'd':
+                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
+                break;
+            }
+            myCheckHit(); // Check for collision after the new controls
+          };
+        }
+        invertedControls = !invertedControls; // Toggle inverted controls
+                                                                                                                       
+   myCheckHit()     // checks for all collisions
+}">
+  
+<h1 align="center">Game Template</h1>
 
-      if (player.y + player.height >= canvas.height) {
-        player.y = canvas.height - player.height;
-        player.grounded = true;
-        player.velY = 0;
-      }
+
+<script>
+  // Global variables
+  let myGlobalX = 0;
+  let myClock;
+  let myScore = 1;
+  let controlsChanged = false;
+  let invertedControls = false;
+  let controlsChanged1 = false;
+  let invertedControls1 = false;
+  let controlsChanged2 = false;
+  let invertedControls2 = false;
+  let controlsChanged3 = false;
+  let invertedControls3 = false;
+
+  // Function to check collision between elements
+  function myHitOther(my1, my2) {
+    let left1 = parseInt(document.getElementById(my1).style.left);
+    let right1 = left1 + parseInt(document.getElementById(my1).style.width);
+    let top1 = parseInt(document.getElementById(my1).style.top);
+    let bottom1 = top1 + parseInt(document.getElementById(my1).style.height);
+    let left2 = parseInt(document.getElementById(my2).style.left);
+    let right2 = left2 + parseInt(document.getElementById(my2).style.width);
+    let top2 = parseInt(document.getElementById(my2).style.top);
+    let bottom2 = top2 + parseInt(document.getElementById(my2).style.height);
+    
+    if (
+      right1 >= left2 &&
+      bottom1 >= top2 &&
+      left1 <= right2 &&
+      top1 <= bottom2
+    ) {
+      return true;
+    }
+  }
+
+  // Function to check collisions and update score
+  function myCheckHit() {
+    document.all.myText01.value = myScore; // Show the present score
+
+    if (myHitOther('myImg01', 'myImg02')) {
+      document.all.myText01.value = 'You hit myImg04 and you win the game!';
+      alert('You Win, now go to the next level');
+      document.getElementById('myImg01').style.left = '20px';
+      location = 'https://th.bing.com/th/id/OIP.4-wZ8oWD6c04da9KHhMHUgHaHa?pid=ImgDet&rs=1';
     }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawMaze();
-      ctx.fillStyle = 'blue';
-      ctx.fillRect(player.x, player.y, player.width, player.height);
+    if (myHitOther('myImg01', 'myImg05')) {
+         
     }
 
-    function gameLoop() {
-      update();
-      draw();
-      requestAnimationFrame(gameLoop);
+    if (myHitOther('myImg01', 'myImg06')) {
+          
     }
 
-    gameLoop();
-  </script>
+    if (myHitOther('myImg01', 'myImg03')) {
+    controlsChanged = false;
+    invertedControls = false; 
+    controlsChanged1 = false;
+    invertedControls1 = false;
+    controlsChanged2 = false;
+    invertedControls2 = false;
+    }
+
+    // Rest of your collision logic here...
+
+    if (myScore <= 0) {
+      document.all.myText01.value = 'You Lose score at zero!';
+      alert('Sorry you lose');
+      location.reload();
+    }
+
+    if (myHitOther('myImg01', 'myImg04')) {
+
+    }
+  }
+</script>
+
+<input type="text" id="myText01" value="Score" readonly>
+
+<div>
+  <span id="wKey"></span>
+  <span id="aKey"></span>
+  <span id="sKey"></span>
+  <span id="dKey"></span>
+</div>
+
+player
+<img id="myImg01" class="hoverImage" style="width:28px; height:28px; top:401px; left:151px;" src="https://s-i.huffpost.com/gen/816673/images/o-IM-WITH-STUPID-SIGN-facebook.jpg">
+finish
+<img id="myImg02" class="hoverImage" style="width:30px; height:30px; top:450px; left:780px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5SPjj7Zop3sSolBOU-rlfKqXN6Rce7wm5r4coTp6WLYunylS9pYg0r3eSv2ZA37LM2dU&usqp=CAU">
+walls
+<img id="myImg03" class="hoverImage" style="width:720px; height:10px; top:100px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg04" class="hoverImage" style="width:10px; height:390px; top:100px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg05" class="hoverImage" style="width:720px; height:10px; top:480px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg06" class="hoverImage" style="width:10px; height:390px; top:100px; left:810px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg07" class="hoverImage" style="width:10px; height:240px; top:110px; left:220px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg08" class="hoverImage" style="width:230px; height:10px; top:340px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg09" class="hoverImage" style="width:50px; height:10px; top:440px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg10" class="hoverImage" style="width:50px; height:10px; top:440px; left:100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg11" class="hoverImage" style="width:10px; height:50px; top:400px; left:140px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg12" class="hoverImage" style="width:290px; height:10px; top:400px; left:140px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg13" class="hoverImage" style="width:50px; height:10px; top:160px; left:220px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg14" class="hoverImage" style="width:50px; height:10px; top:160px; left:220px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg15" class="hoverImage" style="width:10px; height:50px; top:160px; left:260px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg16" class="hoverImage" style="width:50px; height:10px; top:200px; left:260px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg17" class="hoverImage" style="width:10px; height:110px; top:200px; left:300px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg18" class="hoverImage" style="width:70px; height:10px; top:300px; left:280px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg19" class="hoverImage" style="width:10px; height:50px; top:300px; left:280px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg20" class="hoverImage" style="width:50px; height:10px; top:260px; left:300px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg21" class="hoverImage" style="width:90px; height:10px; top:220px; left:300px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg22" class="hoverImage" style="width:10px; height:130px; top:200px; left:380px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg23" class="hoverImage" style="width:10px; height:10px; top:200px; left:380px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg24" class="hoverImage" style="width:130px; height:10px; top:200px; left:380px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg25" class="hoverImage" style="width:50px; height:10px; top:280px; left:380px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg26" class="hoverImage" style="width:30px; height:10px; top:320px; left:380px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg27" class="hoverImage" style="width:50px; height:10px; top:360px; left:360px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg28" class="hoverImage" style="width:10px; height:50px; top:360px; left:360px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+<img id="myImg29" class="hoverImage" style="width:10px; height:70px; top:340px; left:320px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_w0pFCd-Zj9znkD3T7DoY8qAYG_XCARBOdKcEy3vdJgVCXLMtYsSOZDpv_iiEanKMkik&usqp=CAU">
+
+
+
+
+
+
+
+
 </body>
 </html>
