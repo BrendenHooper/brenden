@@ -29,10 +29,10 @@
                 document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
                 break;
               case 'a':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
                 break;
               case 'd':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
+                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
                 break;
             }
             myCheckHit(); // Check for collision after the new controls
@@ -57,44 +57,7 @@
             myCheckHit(); // Check for collision after the new controls
           };
         }
-         else if (controlsChanged2) {
-          document.onkeydown = function (e) {
-            switch (e.key) {
-              case 'w':
-                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
-                break;
-              case 's':
-                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px';
-                break;
-              case 'a':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px';
-                break;
-              case 'd':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px';
-                break;
-            }
-            myCheckHit(); // Check for collision after the new controls
-          };
-        }
-        else if (controlsChanged3) {
-          document.onkeydown = function (e) {
-            switch (e.key) {
-              case 'w':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 20 + 'px';
-                break;
-              case 's':
-                document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 20 + 'px';
-                break;
-              case 'a':
-                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 20 + 'px';
-                break;
-              case 'd':
-                document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 20 + 'px';
-                break;
-            }
-            myCheckHit(); // Check for collision after the new controls
-          };
-        }
+
          else {
           document.onkeydown = function (e) {
             switch (e.key) {
@@ -130,10 +93,6 @@
   let invertedControls = false;
   let controlsChanged1 = false;
   let invertedControls1 = false;
-  let controlsChanged2 = false;
-  let invertedControls2 = false;
-  let controlsChanged3 = false;
-  let invertedControls3 = false;
 
   // Function to check collision between elements
   function myHitOther(my1, my2) {
@@ -180,17 +139,8 @@
     invertedControls = false; 
     controlsChanged1 = false;
     invertedControls1 = false;
-    controlsChanged2 = false;
-    invertedControls2 = false;
     }
-
-    // Rest of your collision logic here...
-
-    if (myScore <= 0) {
-      document.all.myText01.value = 'You Lose score at zero!';
-      alert('Sorry you lose');
-      location.reload();
-    }
+  
 
     if (myHitOther('myImg01', 'myImg04')) {
       location.reload()
@@ -278,6 +228,8 @@
     if (myHitOther('myImg01', 'myImg127')) {
       document.getElementById('myImg01').style.left = '551px';
       document.getElementById('myImg01').style.top = '451px';
+      controlsChanged = false;
+    invertedControls = false;
     }
     if (myHitOther('myImg01', 'myImg128')) {
       document.getElementById('myImg01').style.left = '151px';
@@ -349,6 +301,9 @@
     if (myHitOther('myImg01', 'myImg145')) {
       document.getElementById('myImg01').style.left = '271px';
       document.getElementById('myImg01').style.top = '511px';
+      controlsChanged1 = true;
+    invertedControls1 = true;
+
     }
     if (myHitOther('myImg01', 'myImg146')) {
       window.close()
@@ -389,10 +344,13 @@
       document.getElementById('myImg01').style.left = '291px';
       document.getElementById('myImg01').style.top = '371px';
     }
+    if (myHitOther('myImg01', 'myImg179')) {
+      document.getElementById('myImg01').style.left = '341px';
+      document.getElementById('myImg01').style.top = '321px';
+    }
 
 
-
-
+    
 
     if (myHitOther('myImg01', 'myImg164')) {
       document.getElementById('myImg78').style.left = '270px';
@@ -454,7 +412,81 @@
       document.getElementById('myImg66').style.left = '220px';
       document.getElementById('myImg66').style.top = '590px';
     }
+    if (myHitOther('myImg01', 'myImg160')) {
+      document.getElementById('myImg74').style.left = '400px';
+      document.getElementById('myImg74').style.top = '500px';
+      document.getElementById('myImg79').style.left = '400px';
+      document.getElementById('myImg79').style.top = '500px';
+      document.getElementById('myImg66').style.left = '140px';
+      document.getElementById('myImg66').style.top = '550px';
+    }
+    if (myHitOther('myImg01', 'myImg159')) {
+      document.getElementById('myImg84').style.left = '400px';
+      document.getElementById('myImg84').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg165')) {
+      document.getElementById('myImg84').style.left = '110px';
+      document.getElementById('myImg84').style.top = '580px';
+    }
+    if (myHitOther('myImg01', 'myImg170')) {
+      document.getElementById('myImg89').style.left = '110px';
+      document.getElementById('myImg89').style.top = '580px';
+    }
+    if (myHitOther('myImg01', 'myImg170')) {
+      document.getElementById('myImg89').style.left = '110px';
+      document.getElementById('myImg89').style.top = '580px';
+    }
+    if (myHitOther('myImg01', 'myImg175')) {
+      document.getElementById('myImg89').style.left = '110px';
+      document.getElementById('myImg89').style.top = '660px';
+      document.getElementById('myImg58').style.left = '400px';
+      document.getElementById('myImg58').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg176')) {
+      document.getElementById('myImg80').style.left = '110px';
+      document.getElementById('myImg80').style.top = '660px';
+      document.getElementById('myImg58').style.left = '140px';
+      document.getElementById('myImg58').style.top = '670px';
+    }
+    if (myHitOther('myImg01', 'myImg171')) {
+      document.getElementById('myImg62').style.left = '400px';
+      document.getElementById('myImg62').style.top = '500px';
+      document.getElementById('myImg63').style.left = '400px';
+      document.getElementById('myImg63').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg172')) {
+      document.getElementById('myImg62').style.left = '180px';
+      document.getElementById('myImg62').style.top = '630px';
+    }
+    if (myHitOther('myImg01', 'myImg177')) {
+      document.getElementById('myImg68').style.left = '400px';
+      document.getElementById('myImg68').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg178')) {
+      document.getElementById('myImg92').style.left = '400px';
+      document.getElementById('myImg92').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg173')) {
+      document.getElementById('myImg72').style.left = '400px';
+      document.getElementById('myImg72').style.top = '500px';
+    }
+    if (myHitOther('myImg01', 'myImg174')) {
+      document.getElementById('myImg93').style.left = '400px';
+      document.getElementById('myImg93').style.top = '500px';
+    }
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -673,8 +705,11 @@ tp
 <img id="myImg176" class="hoverImage" style="width:10px; height:10px; top:680px; left:160px;" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1">
 <img id="myImg177" class="hoverImage" style="width:10px; height:10px; top:680px; left:200px;" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1">
 <img id="myImg178" class="hoverImage" style="width:10px; height:10px; top:680px; left:240px;" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1">
-<img id="myImg179" class="hoverImage" style="width:10px; height:10px; top:680px; left:280px;" src="https://th.bing.com/th/id/OIP.7eEKda8dOr97-i2VTlabtQHaHa?pid=ImgDet&rs=1">
+<img id="myImg179" class="hoverImage" style="width:30px; height:30px; top:670px; left:270px;" src="https://lwlies.com/wp-content/uploads/2019/02/blue-derek-jarman.jpg">
 
+changers
+<img id="myImg180" class="hoverImage" style="width:10px; height:10px; top:370px; left:220px;" src="https://th.bing.com/th/id/OIP.dbdjMXeXeids14Gw4FIKkgHaEK">
+<img id="myImg181" class="hoverImage" style="width:10px; height:10px; top:260px; left:440px;" src="https://th.bing.com/th/id/OIP.dbdjMXeXeids14Gw4FIKkgHaEK">
 
 
 
