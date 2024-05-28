@@ -1,715 +1,373 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Clicker</title>
     <style>
-        /* Add your CSS styles here */
-        #inventory, #multipliers, #crafting-popup, #smelting-popup {
-            display: none;
+        #game {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        #resourceContainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .resource {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .resource img {
+            width: 100px;
+            height: 100px;
+        }
+        .resource span {
+            margin-top: 10px;
+        }
+        #openCraftButton, #openInventoryButton {
             position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            max-width: 300px;
+            top: 10px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+        }
+        #openCraftButton {
+            left: 10px;
+            background: url('https://i.pinimg.com/474x/bb/74/18/bb7418d135b0139e94e0c5eaeb7956d8.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        #openInventoryButton {
+            left: 70px;
+            background: url('https://i.pinimg.com/474x/bb/74/18/bb7418d135b0139e94e0c5eaeb7956d8.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        #amounts {
+            position: absolute;
+            top: 80px;
+            right: 10px;
+            text-align: left;
+        }
+        #craftModal, #inventoryModal {
+            display: none;
+            position: fixed;
             z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
         }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .craft-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .craft-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .craft-item button {
+            margin-top: 10px;
+        }
+        #inventoryModal .modal-content {
+            flex-direction: column;
+        }
+        #inventoryModal .resource-item {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+        #inventoryModal .resource-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        
 
-        #inventory {
-            top: 60px;
-            right: 10px;
-        }
+        /* CSS for inventory modal content */
+.inventory-content {
+    justify-content: flex-end; /* Align content to right */
+}
 
-        #multipliers {
-            top: 60px;
-            right: 10px;
-        }
+.inventory-row {
+    display: flex;
+}
 
-        #crafting-popup {
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.inventory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px;
+    width: 20%; /* Set each item to occupy 20% of the width */
+}
 
-        #smelting-popup {
-            top: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.inventory-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px; /* Adjust spacing between image and text */
+}
+
+
+
     </style>
 </head>
 <body>
-    <p id="Woodpersecond">You are gaining 0 Wood per/s</p>
-    <p id="Stonepersecond">You are gaining 0 Stone per/s</p>
-    <p id="Coalpersecond">You are gaining 0 Coal per/s</p>
-    <p id="Ironpersecond">You are gaining 0 Iron per/s</p>
+    <div id="game">
+        <h1>Minecraft Clicker</h1>
+        <button id="openCraftButton"></button>
+        <button id="openInventoryButton"></button>
+        <div id="resourceContainer">
+            <div id="dirtImage" class="resource">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7OeF1I54rVVGhYZfYhN1TPeuQBD-L170oakZcns-dngBEUh2kWPdZG2P7fKBjoaMeFyQ&usqp=CAU" alt="Dirt">
+                <span id="dirtScoreValue">0</span>
+            </div>
+            <div id="woodImage" class="resource">
+                <img src="https://i.pinimg.com/564x/9d/2b/fb/9d2bfbece72785cab98ba8d82463b424.jpg" alt="Wood">
+                <span id="woodScoreValue">0</span>
+            </div>
+       
 
-    
 
-    <a href="#" onclick="addDirt()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3856_i147_w750.jpeg" width="50px" height="50px"></a>
-    <br><br>
-    
-    <!-- Inventory Button -->
-    <button onclick="toggleInventory()">Inventory</button>
-    
-    <!-- Inventory Dropdown -->
-    <div id="inventory">
-        <h3>Inventory</h3>
-        <p id="inventoryGoldNugget">Gold Nugget: 0</p>
-        <p id="inventoryDirt">Dirt: 0</p>
-        <button onclick="sellDirt()">sell dirt</button>
-        <p id="inventoryWood">Wood: 0</p>
-        <button onclick="sellWood()">sell Wood</button>
-        <p id="inventoryStone">Stone: 0</p>
-        <button onclick="sellStone()">sell Stone</button>
-        <p id="inventoryCoal">Coal: 0</p>
-        <button onclick="sellCoal()">sell Coal</button>
-        <p id="inventoryIron">Iron: 0</p>
-        <button onclick="sellIron()">sell Iron</button>
-        <p id="inventoryIronIngot">Iron Ingot: 0</p>
-        <button onclick="sellIronIngot()">sell IronIngot</button>
-        <p id="inventorySticks">Sticks: 0</p>
-        <p id="inventoryWoodenShovel">Wooden Shovel: 0</p>
-        <p id="inventoryWoodenPickaxe">Wooden Pickaxe: 0</p>
-        <p id="inventoryWoodenAxe">Wooden Axe: 0</p>
-        <p id="inventoryStoneShovel">Stone Shovel: 0</p>
-        <p id="inventoryStonePickaxe">Stone Pickaxe: 0</p>
-        <p id="inventoryStoneAxe">Stone Axe: 0</p>
-        <p id="inventoryIronShovel">Iron Shovel: 0</p>
-        <p id="inventoryIronPickaxe">Iron Pickaxe: 0</p>
-        <p id="inventoryIronAxe">Iron Axe: 0</p>
-        <!-- Add more inventory items as needed -->
+    <!-- The Crafting Modal -->
+<div id="craftModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="craft-item">
+            <img id="craftPlanks" src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
+            <span>Craft 4 Planks (1 Wood)</span>
+        </div>
+        <div class="craft-item">
+            <img id="craftSticks" src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
+            <span>Craft 4 Sticks (2 Planks)</span>
+        </div>
+        <div class="craft-item">
+            <img id="craftSword" src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
+            <span>Craft 1 Sword (2 Planks, 1 Stick)</span>
+        </div>
+        <div class="craft-item">
+            <img id="craftPickaxe" src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
+            <span>Craft 1 Pickaxe (3 Planks, 2 Sticks)</span>
+        </div>
+        <div class="craft-item">
+            <img id="craftAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
+            <span>Craft 1 Wooden Axe (3 Planks, 2 Sticks)</span>
+        </div>
     </div>
+</div>
 
-    <!-- Multiplier Button -->
-    <button onclick="toggleMultipliers()">Multipliers</button>
 
-    <!-- Multiplier Dropdown -->
-    <div id="multipliers">
-        <h3>Multipliers</h3>
-        <p id="ammountDirtMultiplier">Dirt Multiplier Upgrade x2</p>
-        <button onclick="buyDirtMultiplier()"><span id="ammountDirtMultiplier2">x2</span></button>
-        <p id="costDirtMultiplier">100 Gold Nuggets</p>
-        <p id="currentDirtMultiplier">Your current Dirt Multiplier is x1</p>
-
-        <p id="ammountWoodMultiplier">Wood Multiplier Upgrade x2</p>
-        <button onclick="buyWoodMultiplier()"><span id="ammountWoodMultiplier2">x2</span></button>
-        <p id="costWoodMultiplier">200 Gold Nuggets</p>
-        <p id="currentWoodMultiplier">Your current Wood Multiplier is x1</p>
-
-        <p id="ammountStoneMultiplier">Stone Multiplier Upgrade x2</p>
-        <button onclick="buyStoneMultiplier()"><span id="ammountStoneMultiplier2">x2</span></button>
-        <p id="costStoneMultiplier">300 Gold Nuggets</p>
-        <p id="currentStoneMultiplier">Your current Stone Multiplier is x1</p>
-
-        <p id="ammountCoalMultiplier">Coal Multiplier Upgrade x2</p>
-        <button onclick="buyCoalMultiplier()"><span id="ammountCoalMultiplier2">x2</span></button>
-        <p id="costCoalMultiplier">300 Gold Nuggets</p>
-        <p id="currentCoalMultiplier">Your current Coal Multiplier is x1</p>
-
-        <p id="ammountIronMultiplier">Iron Multiplier Upgrade x2</p>
-        <button onclick="buyIronMultiplier()"><span id="ammountIronMultiplier2">x2</span></button>
-        <p id="costIronMultiplier">300 Gold Nuggets</p>
-        <p id="currentIronMultiplier">Your current Iron Multiplier is x1</p>
-        <!-- Add more multipliers as needed -->
+<!-- The Inventory Modal -->
+<div id="inventoryModal" class="modal">
+    <div class="modal-content inventory-content">
+        <span class="close">&times;</span>
+        <div class="inventory-row">
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Dirt">
+                <span id="dirtInventory">Dirt: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
+                <span id="woodInventory">Wood: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
+                <span id="plankInventory">Planks: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
+                <span id="stickInventory">Sticks: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
+                <span id="swordInventory">Swords: 0</span>
+            </div>
+        </div>
+        <div class="inventory-row">
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
+                <span id="pickaxeInventory">Pickaxes: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
+                <span id="axeInventory">Axes: 0</span>
+            </div>
+        </div>
     </div>
-
-    <!-- Crafting Button -->
-    <button onclick="toggleCraftingPopup()">Crafting</button>
-
-    <!-- Crafting Popup -->
-    <!-- Crafting Popup -->
-<div id="crafting-popup">
-    <h3>Crafting</h3>
-    <button onclick="craftSticks()">Craft 4 Sticks (1 Wood)</button>
-    <button onclick="craftWoodenShovel()">Craft Wooden Shovel (1 Wood, 2 Sticks)</button>
-    <button onclick="craftWoodenPickaxe()">Craft Wooden Pickaxe (3 Wood, 2 Sticks)</button>
-    <button onclick="craftWoodenAxe()">Craft Wooden Axe (3 Wood, 2 Sticks)</button>
-    <button onclick="craftStoneShovel()">Craft Stone Shovel (1 Stone, 2 Sticks)</button>
-    <button onclick="craftStonePickaxe()">Craft Stone Pickaxe (3 Stone, 2 Sticks)</button>
-    <button onclick="craftStoneAxe()">Craft Stone Axe (3 Stone, 2 Sticks)</button>
-    <button onclick="craftIronShovel()">Craft Iron Shovel (1 Iron, 2 Sticks)</button>
-    <button onclick="craftIronPickaxe()">Craft Iron Pickaxe (3 Iron Ingots, 2 Sticks)</button>
-    <button onclick="craftIronAxe()">Craft Iron Axe (3 Iron Ingots, 2 Sticks)</button>
-    <!-- Add crafting options for other Iron tools here -->
 </div>
 
 
 
-    <button onclick="smeltIronIngots()">Smelt Iron Ingots</button>
 
-    <div id="smelting-popup">
-        <h3>Smelting</h3>
-        <!-- Add smelting options here -->
-        <button onclick="smeltIronOre()">Smelt Iron Ore (1 Iron Ore)</button>
-        <!-- Add more smelting options as needed -->
-    </div>
-    
 
     <script>
-        // Define global variables
-        var DirtMultiplier = 1;
-        var WoodMultiplier = 1;
-        var StoneMultiplier = 1;
-        var CoalMultiplier = 1;
-        var IronMultiplier = 1;
+        var dirtScore = 0;
+        var woodScore = 0;
+        var plankScore = 0;
+        var stickScore = 0;
+        var swordScore = 0;
+        var pickaxeScore = 0;
 
+        var dirtImage = document.getElementById("dirtImage");
+        var woodImage = document.getElementById("woodImage");
+        var dirtScoreDisplay = document.getElementById("dirtScoreValue");
+        var woodScoreDisplay = document.getElementById("woodScoreValue");
+        var plankAmountDisplay = document.getElementById("plankAmount");
+        var stickAmountDisplay = document.getElementById("stickAmount");
+        var swordAmountDisplay = document.getElementById("swordAmount");
+        var pickaxeAmountDisplay = document.getElementById("pickaxeAmount");
+        var dirtInventoryDisplay = document.getElementById("dirtInventory");
+        var woodInventoryDisplay = document.getElementById("woodInventory");
+        var plankInventoryDisplay = document.getElementById("plankInventory");
+        var stickInventoryDisplay = document.getElementById("stickInventory");
+        var swordInventoryDisplay = document.getElementById("swordInventory");
+        var pickaxeInventoryDisplay = document.getElementById("pickaxeInventory");
+        var woodClicked = false;
 
-        var GoldNugget = 10000;
-        var DirtBlock = 0;
-        var WoodBlock = 0;
-        var StoneBlock = 0;
-        var CoalBlock = 0;
-        var IronBlock = 0;
-        var Sticks = 0;
-        var WoodenShovel = 0;
-        var WoodenPickaxe = 0;
-        var WoodenAxe = 0;
-        var StoneShovel = 0;
-        var StonePickaxe = 0;
-        var StoneAxe = 0;
-        var IronShovel = 0;
-        var IronPickaxe = 0;
-        var IronAxe = 0;
+        dirtImage.addEventListener("click", function() {
+            dirtScore++;
+            dirtScoreDisplay.textContent = dirtScore;
+            dirtInventoryDisplay.textContent = `Dirt: ${dirtScore}`;
+        });
 
-        var Wood = 0;
-        var Stone = 0;
-        var Coal = 0;
-        var Iron = 0;
-        var IronIngot = 0;
+        woodImage.addEventListener("click", function() {
+            if (!woodClicked) {
+                woodClicked = true;
+                setTimeout(function() {
+                    woodScore++;
+                    woodScoreDisplay.textContent = woodScore;
+                    woodInventoryDisplay.textContent = `Wood: ${woodScore}`;
+                    woodClicked = false;
+                }, 1000);
+            }
+        });
 
+        var openCraftButton = document.getElementById("openCraftButton");
+        var openInventoryButton = document.getElementById("openInventoryButton");
+        var craftModal = document.getElementById("craftModal");
+        var inventoryModal = document.getElementById("inventoryModal");
+        var craftClose = document.querySelector("#craftModal .close");
+        var inventoryClose = document.querySelector("#inventoryModal .close");
 
-
-        var WoodGainPerSecond = 0;
-        var StoneGainPerSecond = 0;
-        var CoalGainPerSecond = 0;
-        var IronGainPerSecond = 0;
-
-
-        function update() {
-            document.getElementById('inventoryGoldNugget').textContent = "Gold Nugget: " + GoldNugget;
-            document.getElementById('inventoryDirt').textContent = "Dirt: " + DirtBlock;
-            document.getElementById('inventoryWood').textContent = "Wood: " + WoodBlock;
-            document.getElementById('inventoryStone').textContent = "Stone: " + StoneBlock;
-            document.getElementById('inventoryCoal').textContent = "Coal: " + CoalBlock;
-            document.getElementById('inventoryIron').textContent = "Iron: " + IronBlock;
-            document.getElementById('inventoryIronIngot').textContent = "Iron Ingot: " + IronIngot;
-            document.getElementById('inventorySticks').textContent = "Sticks: " + Sticks;
-            document.getElementById('inventoryWoodenShovel').textContent = "Wooden Shovel: " + WoodenShovel;
-            document.getElementById('inventoryWoodenPickaxe').textContent = "Wooden Pickaxe: " + WoodenPickaxe;
-            document.getElementById('inventoryWoodenAxe').textContent = "Wooden Axe: " + WoodenAxe;
-            document.getElementById('inventoryStoneShovel').textContent = "Stone Shovel: " + StoneShovel;
-            document.getElementById('inventoryStonePickaxe').textContent = "Stone Pickaxe: " + StonePickaxe;
-            document.getElementById('inventoryStoneAxe').textContent = "Stone Axe: " + StoneAxe;
-            document.getElementById('inventoryIronShovel').textContent = "Iron Shovel: " + IronShovel;
-            document.getElementById('inventoryIronPickaxe').textContent = "Iron Pickaxe: " + IronPickaxe;
-            document.getElementById('inventoryIronAxe').textContent = "Iron Axe: " + IronAxe;
-
-            document.getElementById('ammountDirtMultiplier').textContent = "Dirt Multiplier Upgrade x" + (DirtMultiplier + 1);
-            document.getElementById('ammountDirtMultiplier2').textContent = "x" + (DirtMultiplier + 1);
-            document.getElementById('costDirtMultiplier').textContent = ((DirtMultiplier + 1) * 100) + " Gold Nuggets";
-            document.getElementById('currentDirtMultiplier').textContent = "Your current Dirt Multiplier is x" + DirtMultiplier;
-
-            document.getElementById('ammountWoodMultiplier').textContent = "Wood Multiplier Upgrade x" + (WoodMultiplier + 1);
-            document.getElementById('ammountWoodMultiplier2').textContent = "x" + (WoodMultiplier + 1);
-            document.getElementById('costWoodMultiplier').textContent = ((WoodMultiplier + 1) * 200) + " Gold Nuggets";
-            document.getElementById('currentWoodMultiplier').textContent = "Your current Wood Multiplier is x" + WoodMultiplier;
-
-            document.getElementById('ammountStoneMultiplier').textContent = "Stone Multiplier Upgrade x" + (StoneMultiplier + 1);
-            document.getElementById('ammountStoneMultiplier2').textContent = "x" + (StoneMultiplier + 1);
-            document.getElementById('costStoneMultiplier').textContent = ((StoneMultiplier + 1) * 300) + " Gold Nuggets";
-            document.getElementById('currentStoneMultiplier').textContent = "Your current Stone Multiplier is x" + StoneMultiplier;
-
-            document.getElementById('ammountCoalMultiplier').textContent = "Coal Multiplier Upgrade x" + (CoalMultiplier + 1);
-            document.getElementById('ammountCoalMultiplier2').textContent = "x" + (CoalMultiplier + 1);
-            document.getElementById('costCoalMultiplier').textContent = ((CoalMultiplier + 1) * 300) + " Gold Nuggets";
-            document.getElementById('currentCoalMultiplier').textContent = "Your current Coal Multiplier is x" + CoalMultiplier;
-
-            document.getElementById('ammountIronMultiplier').textContent = "Iron Multiplier Upgrade x" + (IronMultiplier + 1);
-            document.getElementById('ammountIronMultiplier2').textContent = "x" + (IronMultiplier + 1);
-            document.getElementById('costIronMultiplier').textContent = ((IronMultiplier + 1) * 300) + " Gold Nuggets";
-            document.getElementById('currentIronMultiplier').textContent = "Your current Iron Multiplier is x" + IronMultiplier;
-
-            document.getElementById('ammountWood').textContent = "You Own " + Wood + " Wood cutters";
-            document.getElementById('costWood').textContent = ((Wood + 1) * 12) + " Gold Nuggets";
-
-            document.getElementById('ammountStone').textContent = "You Own " + Stone + " Stone miners";
-            document.getElementById('costStone').textContent = ((Stone + 1) * 15) + " Gold Nuggets";
-
-            document.getElementById('ammountCoal').textContent = "You Own " + Coal + " Coal miners";
-            document.getElementById('costCoal').textContent = ((Coal + 1) * 15) + " Gold Nuggets";
-
-            document.getElementById('ammountIron').textContent = "You Own " + Iron + " Iron miners";
-            document.getElementById('costIron').textContent = ((Iron + 1) * 15) + " Gold Nuggets";
-
-            document.getElementById('Woodpersecond').textContent = "You are gaining " + WoodGainPerSecond + " Wood per/s";
-            document.getElementById('Stonepersecond').textContent = "You are gaining " + StoneGainPerSecond + " Stone per/s";
-            document.getElementById('Coalpersecond').textContent = "You are gaining " + CoalGainPerSecond + " Coal per/s";
-            document.getElementById('Ironpersecond').textContent = "You are gaining " + IronGainPerSecond + " Iron per/s";
+        openCraftButton.onclick = function() {
+            craftModal.style.display = "block";
         }
 
-        // Function to toggle the inventory dropdown
-        function toggleInventory() {
-            var inventory = document.getElementById('inventory');
-            if (inventory.style.display === "none" || inventory.style.display === "") {
-                inventory.style.display = "block";
+        openInventoryButton.onclick = function() {
+            inventoryModal.style.display = "block";
+        }
+
+        craftClose.onclick = function() {
+            craftModal.style.display = "none";
+        }
+
+        inventoryClose.onclick = function() {
+            inventoryModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == craftModal) {
+                craftModal.style.display = "none";
+            }
+            if (event.target == inventoryModal) {
+                inventoryModal.style.display = "none";
+            }
+        }
+
+        document.getElementById("craftPlanks").addEventListener("click", function() {
+            if (woodScore > 0) {
+                woodScore--;
+                woodScoreDisplay.textContent = woodScore;
+                woodInventoryDisplay.textContent = `Wood: ${woodScore}`;
+                plankScore += 4;
+                plankAmountDisplay.textContent = plankScore;
+                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
             } else {
-                inventory.style.display = "none";
+                alert("Not enough wood to craft planks");
             }
-        }
+        });
 
-        // Function to toggle the multiplier dropdown
-        function toggleMultipliers() {
-            var multipliers = document.getElementById('multipliers');
-            if (multipliers.style.display === "none" || multipliers.style.display === "") {
-                multipliers.style.display = "block";
+        document.getElementById("craftSticks").addEventListener("click", function() {
+            if (plankScore >= 2) {
+                plankScore -= 2;
+                plankAmountDisplay.textContent = plankScore;
+                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
+                stickScore += 4;
+                stickAmountDisplay.textContent = stickScore;
+                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
             } else {
-                multipliers.style.display = "none";
+                alert("Not enough planks to craft sticks");
             }
-        }
+        });
 
-        
-
-        // Function to toggle the crafting popup
-        function toggleCraftingPopup() {
-            var craftingPopup = document.getElementById('crafting-popup');
-            if (craftingPopup.style.display === "none" || craftingPopup.style.display === "") {
-                craftingPopup.style.display = "block";
+        document.getElementById("craftSword").addEventListener("click", function() {
+            if (plankScore >= 2 && stickScore >= 1) {
+                plankScore -= 2;
+                stickScore -= 1;
+                plankAmountDisplay.textContent = plankScore;
+                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
+                stickAmountDisplay.textContent = stickScore;
+                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
+                swordScore++;
+                swordAmountDisplay.textContent = swordScore;
+                swordInventoryDisplay.textContent = `Swords: ${swordScore}`;
             } else {
-                craftingPopup.style.display = "none";
+                alert("Not enough resources to craft sword");
             }
-        }
+        });
 
-        function timer() {
-            WoodGainPerSecond = Wood * WoodMultiplier;
-            StoneGainPerSecond = Stone * StoneMultiplier;
-            CoalGainPerSecond = Coal * CoalMultiplier;
-            IronGainPerSecond = Iron * IronMultiplier;
-            WoodBlock += WoodGainPerSecond;
-            StoneBlock += StoneGainPerSecond;
-            CoalBlock +=CoalGainPerSecond;
-            IronBlock += IronGainPerSecond;
-            update();
-        }
-
-        setInterval(timer, 1000);
-
-        function addGoldNugget() {
-            GoldNugget = GoldNugget + 1;
-            update();
-        }
-
-        function addDirt() {
-            var dirtPerClick = 1 + DirtMultiplier; // Calculate dirt per click based on Dirt Multiplier
-            DirtBlock += dirtPerClick;
-            update();
-        }
-
-        function addWood() {
-            WoodBlock = WoodBlock + 1;
-            update();
-        }
-
-        function addStone() {
-            StoneBlock = StoneBlock + 1;
-            update();
-        }
-
-        function addCoal() {
-            CoalBlock = CoalBlock + 1;
-            update();
-        }
-
-        function addIron() {
-            IronBlock = IronBlock + 1;
-            update();
-        }
-
-        function sellDirt() {
-            const cost = 10; // Cost of one Gold Nugget
-            if (DirtBlock >= cost) {
-                DirtBlock = DirtBlock - cost;
-                GoldNugget = GoldNugget + 1;
-                update();
+        document.getElementById("craftPickaxe").addEventListener("click", function() {
+            if (plankScore >= 3 && stickScore >= 2) {
+                plankScore -= 3;
+                stickScore -= 2;
+                plankAmountDisplay.textContent = plankScore;
+                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
+                stickAmountDisplay.textContent = stickScore;
+                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
+                pickaxeScore++;
+                pickaxeAmountDisplay.textContent = pickaxeScore;
+                pickaxeInventoryDisplay.textContent = `Pickaxes: ${pickaxeScore}`;
             } else {
-                alert('You don\'t have enough dirt blocks.');
+                alert("Not enough resources to craft pickaxe");
             }
-        }
-
-        function sellWood() {
-            const cost = 12; // Cost of one Gold Nugget
-            if (WoodBlock >= cost) {
-                WoodBlock = WoodBlock - cost;
-                GoldNugget = GoldNugget + 2;
-                update();
-            } else {
-                alert('You don\'t have enough Wood blocks.');
-            }
-        }
-
-        function sellStone() {
-            const cost = 20; // Cost of one Gold Nugget
-            if (StoneBlock >= cost) {
-                StoneBlock = StoneBlock - cost;
-                GoldNugget = GoldNugget + 3;
-                update();
-            } else {
-                alert('You don\'t have enough Stone blocks.');
-            }
-        }
-
-        function sellCoal() {
-            const cost = 20; // Cost of one Gold Nugget
-            if (CoalBlock >= cost) {
-                CoalBlock = CoalBlock - cost;
-                GoldNugget = GoldNugget + 3;
-                update();
-            } else {
-                alert('You don\'t have enough Coal blocks.');
-            }
-        }
-
-        function sellIron() {
-            const cost = 20; // Cost of one Gold Nugget
-            if (IronBlock >= cost) {
-                IronBlock = IronBlock - cost;
-                GoldNugget = GoldNugget + 3;
-                update();
-            } else {
-                alert('You don\'t have enough Iron blocks.');
-            }
-        }
-
-        function sellIronIngot() {
-            const cost = 20; // Cost of one Gold Nugget
-            if (IronIngot >= cost) {
-                IronIngot = IronIngot - cost;
-                GoldNugget = GoldNugget + 3;
-                update();
-            } else {
-                alert('You don\'t have enough Iron Ingots.');
-            }
-        }
-
-        function save() {
-    localStorage.setItem("GoldNugget", GoldNugget);
-    localStorage.setItem("DirtBlock", DirtBlock);
-    localStorage.setItem("WoodBlock", WoodBlock);
-    localStorage.setItem("StoneBlock", StoneBlock);
-    localStorage.setItem("IronBlock", IronBlock);
-    localStorage.setItem("Wood", Wood);
-    localStorage.setItem("Stone", Stone);
-    localStorage.setItem("Coal", Coal);
-    localStorage.setItem("Iron", Iron);
-    localStorage.setItem("IronIngot", IronIngot);
-    localStorage.setItem("DirtMultiplier", DirtMultiplier);
-    localStorage.setItem("WoodMultiplier", WoodMultiplier);
-    localStorage.setItem("StoneMultiplier", StoneMultiplier);
-    localStorage.setItem("CoalMultiplier", CoalMultiplier);
-    localStorage.setItem("IronMultiplier", IronMultiplier);
-    localStorage.setItem("Sticks", Sticks);
-    localStorage.setItem("WoodenShovel", WoodenShovel);
-    localStorage.setItem("WoodenPickaxe", WoodenPickaxe);
-    localStorage.setItem("WoodenAxe", WoodenAxe);
-    localStorage.setItem("StoneShovel", StoneShovel);
-    localStorage.setItem("StonePickaxe", StonePickaxe);
-    localStorage.setItem("StoneAxe", StoneAxe);
-    localStorage.setItem("IronShovel", IronShovel);
-    localStorage.setItem("IronPickaxe", IronPickaxe);
-    localStorage.setItem("IronAxe", IronAxe);
-}
-
-function load() {
-    GoldNugget = parseInt(localStorage.getItem("GoldNugget")) || 10000;
-    DirtBlock = parseInt(localStorage.getItem("DirtBlock")) || 0;
-    WoodBlock = parseInt(localStorage.getItem("WoodBlock")) || 0;
-    StoneBlock = parseInt(localStorage.getItem("StoneBlock")) || 0;
-    IronBlock = parseInt(localStorage.getItem("IronBlock")) || 0;
-    Wood = parseInt(localStorage.getItem("Wood")) || 0;
-    Iron = parseInt(localStorage.getItem("Stone")) || 0;
-    Coal = parseInt(localStorage.getItem("Coal")) || 0;
-    Iron = parseInt(localStorage.getItem("Iron")) || 0;
-    IronIngot = parseInt(localStorage.getItem("IronIngot")) || 0;
-    DirtMultiplier = parseInt(localStorage.getItem("DirtMultiplier")) || 1;
-    WoodMultiplier = parseInt(localStorage.getItem("WoodMultiplier")) || 1;
-    StoneMultiplier = parseInt(localStorage.getItem("StoneMultiplier")) || 1;
-    CoalMultiplier = parseInt(localStorage.getItem("CoalMultiplier")) || 1;
-    IronMultiplier = parseInt(localStorage.getItem("IronMultiplier")) || 1;
-    Sticks = parseInt(localStorage.getItem("Sticks")) || 0;
-    WoodenShovel = parseInt(localStorage.getItem("WoodenShovel")) || 0;
-    WoodenPickaxe = parseInt(localStorage.getItem("WoodenPickaxe")) || 0;
-    WoodenAxe = parseInt(localStorage.getItem("WoodenAxe")) || 0;
-    StoneShovel = parseInt(localStorage.getItem("StoneShovel")) || 0;
-    StonePickaxe = parseInt(localStorage.getItem("StonePickaxe")) || 0;
-    StoneAxe = parseInt(localStorage.getItem("StoneAxe")) || 0;
-    IronShovel = parseInt(localStorage.getItem("IronShovel")) || 0;
-    IronPickaxe = parseInt(localStorage.getItem("IronPickaxe")) || 0;
-    IronAxe = parseInt(localStorage.getItem("IronAxe")) || 0;
-    update();
-}
-
-
-        function buyWood() {
-            if (GoldNugget >= ((Wood + 1) * 12)) {
-                GoldNugget = GoldNugget - ((Wood + 1) * 12);
-                Wood = Wood + 1;
-                update();
-            }
-        }
-
-        function buyStone() {
-            if (GoldNugget >= ((Stone + 1) * 15)) {
-                GoldNugget = GoldNugget - ((Stone + 1) * 15);
-                Stone = Stone + 1;
-                update();
-            }
-        }
-
-        function buyCoal() {
-            if (GoldNugget >= ((Coal + 1) * 15)) {
-                GoldNugget = GoldNugget - ((Coal + 1) * 20);
-                Coal = Coal + 1;
-                update();
-            }
-        }
-
-        function buyIron() {
-            if (GoldNugget >= ((Iron + 1) * 15)) {
-                GoldNugget = GoldNugget - ((Iron + 1) * 30);
-                Iron = Iron + 1;
-                update();
-            }
-        }
-
-        function buyDirtMultiplier() {
-            if (GoldNugget >= ((DirtMultiplier + 1) * 100)) {
-                GoldNugget = GoldNugget - ((DirtMultiplier + 1) * 100);
-                DirtMultiplier = DirtMultiplier + 1;
-                update();
-            }
-        }
-
-        function buyWoodMultiplier() {
-            if (GoldNugget >= ((WoodMultiplier + 1) * 200)) {
-                GoldNugget = GoldNugget - ((WoodMultiplier + 1) * 200);
-                WoodMultiplier = WoodMultiplier + 1;
-                update();
-            }
-        }
-
-        function buyStoneMultiplier() {
-            if (GoldNugget >= ((StoneMultiplier + 1) * 300)) {
-                GoldNugget = GoldNugget - ((StoneMultiplier + 1) * 300);
-                StoneMultiplier = StoneMultiplier + 1;
-                update();
-            }
-        }
-
-        function buyCoalMultiplier() {
-            if (GoldNugget >= ((CoalMultiplier + 1) * 300)) {
-                GoldNugget = GoldNugget - ((CoalMultiplier + 1) * 300);
-                CoalMultiplier = CoalMultiplier + 1;
-                update();
-            }
-        }
-
-        function buyIronMultiplier() {
-            if (GoldNugget >= ((IronMultiplier + 1) * 300)) {
-                GoldNugget = GoldNugget - ((IronMultiplier + 1) * 300);
-                IronMultiplier = IronMultiplier + 1;
-                update();
-            }
-        }
-
-        function craftItem() {
-            const craftCost = 10; // Cost of crafting an item
-            if (GoldNugget >= craftCost) {
-                GoldNugget -= craftCost;
-                // Add logic to craft the item here
-                // For example, increase an item count or do something else
-                update();
-            } else {
-                alert('You don\'t have enough Gold Nuggets to craft.');
-            }
-        }
-
-        function craftSticks() {
-            const woodCost = 1; // Cost of crafting sticks
-            if (WoodBlock >= woodCost) {
-                WoodBlock -= woodCost;
-                Sticks += 4;
-                update();
-            } else {
-                alert('You don\'t have enough Wood to craft sticks.');
-            }
-        }
-
-        function craftWoodenShovel() {
-            const woodCost = 1; // Cost of crafting wooden shovel
-            const stickCost = 2; // Cost of crafting wooden shovel
-            if (WoodBlock >= woodCost && Sticks >= stickCost) {
-                WoodBlock -= woodCost;
-                Sticks -= stickCost;
-                WoodenShovel += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Wooden Shovel.');
-            }
-        }
-
-        function craftWoodenPickaxe() {
-            const woodCost = 3; // Cost of crafting wooden pickaxe
-            const stickCost = 2; // Cost of crafting wooden pickaxe
-            if (WoodBlock >= woodCost && Sticks >= stickCost) {
-                WoodBlock -= woodCost;
-                Sticks -= stickCost;
-                WoodenPickaxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Wooden Pickaxe.');
-            }
-        }
-
-        function craftWoodenAxe() {
-            const woodCost = 3; // Cost of crafting wooden axe
-            const stickCost = 2; // Cost of crafting wooden axe
-            if (WoodBlock >= woodCost && Sticks >= stickCost) {
-                WoodBlock -= woodCost;
-                Sticks -= stickCost;
-                WoodenAxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Wooden Axe.');
-            }
-        }
-
-        function craftStoneShovel() {
-            const stoneCost = 1; // Cost of crafting stone shovel
-            const stickCost = 2; // Cost of crafting stone shovel
-            if (StoneBlock >= stoneCost && Sticks >= stickCost) {
-                StoneBlock -= stoneCost;
-                Sticks -= stickCost;
-                StoneShovel += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Stone Shovel.');
-            }
-        }
-
-        function craftStonePickaxe() {
-            const stoneCost = 3; // Cost of crafting stone pickaxe
-            const stickCost = 2; // Cost of crafting stone pickaxe
-            if (StoneBlock >= stoneCost && Sticks >= stickCost) {
-                StoneBlock -= stoneCost;
-                Sticks -= stickCost;
-                StonePickaxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Stone Pickaxe.');
-            }
-        }
-
-        function craftStoneAxe() {
-            const stoneCost = 3; // Cost of crafting stone axe
-            const stickCost = 2; // Cost of crafting stone axe
-            if (StoneBlock >= stoneCost && Sticks >= stickCost) {
-                StoneBlock -= stoneCost;
-                Sticks -= stickCost;
-                StoneAxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Stone Axe.');
-            }
-        }
-
-        function craftIronShovel() {
-            const IronCost = 1; // Cost of crafting Iron shovel
-            const stickCost = 2; // Cost of crafting Iron shovel
-            if (IronBlock >= IronCost && Sticks >= stickCost) {
-                IronBlock -= IronCost;
-                Sticks -= stickCost;
-                IronShovel += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Iron Shovel.');
-            }
-        }
-
-        function craftIronPickaxe() {
-            const IronCost = 3; // Cost of crafting Iron pickaxe
-            const stickCost = 2; // Cost of crafting Iron pickaxe
-            if (IronBlock >= IronCost && Sticks >= stickCost) {
-                IronBlock -= IronCost;
-                Sticks -= stickCost;
-                IronPickaxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Iron Pickaxe.');
-            }
-        }
-
-        function craftIronAxe() {
-            const IronCost = 3; // Cost of crafting Iron axe
-            const stickCost = 2; // Cost of crafting Iron axe
-            if (IronBlock >= IronCost && Sticks >= stickCost) {
-                IronBlock -= IronCost;
-                Sticks -= stickCost;
-                IronAxe += 1;
-                update();
-            } else {
-                alert('You don\'t have enough resources to craft a Iron Axe.');
-            }
-        }
-        
-        // Function to smelt Iron Ingots
-function smeltIronIngots() {
-    const ironRequired = 8;
-    const coalRequired = 1;
-
-    if (IronBlock >= ironRequired && CoalBlock >= coalRequired) {
-        IronBlock -= ironRequired;
-        CoalBlock -= coalRequired;
-        IronIngot += 8; // You produce 8 Iron Ingots
-        update();
-    } else {
-        alert('You don\'t have enough resources to smelt Iron Ingots.');
-    }
-}
-
-    
-
+        });
     </script>
-
-<br><br>
-<div id="buttonHolder">
-    <button><a href="#" onClick="save()">Save</a></button>
-    <button><a href="#" onclick="load()">Load</a></button>
-    <br><br>
-    <hr>
-    
-    <p id="buy">Buy 1 Wood cutter</p>
-    <button><a href="#" onClick="buyWood()"><img src="https://i.pinimg.com/736x/12/3f/f2/123ff2fe58086262ea9aad1811ffd2e8--block-wall-wood-blocks.jpg" width="50px" height="50px"></a></button>
-    <p id="costWood">12 Gold Nuggets</p>
-    <p id="ammountWood">You Own 0 Wood cutters</p>
-    <br>
-    <hr>
-    <p id="buy">Buy 1 Stone miner</p>
-    <button><a href="#" onClick="buyStone()"><img src="https://i.pinimg.com/originals/63/9e/e3/639ee336abefc1a6a1f40b97db9b409f.jpg" width="50px" height="50px"></a></button>
-    <p id="costStone">15 Gold nuggets</p>
-    <p id="ammountStone">Stone miners</p>
-    <br>
-    <hr>
-    <p id="buy">Buy 1 Coal miner</p>
-    <button><a href="#" onClick="buyCoal()"><img src="https://th.bing.com/th/id/OIP.LTuwzC4L_wFu7ZsQxYIEPwHaHa?pid=ImgDet&rs=1" width="50px" height="50px"></a></button>
-    <p id="costCoal">20 Gold nuggets</p>
-    <p id="ammountCoal">Coal miners</p>
-    <br>
-    <hr>
-    <p id="buy">Buy 1 Iron miner</p>
-    <button><a href="#" onClick="buyIron()"><img src="https://www.fractalcamo.com/uploads/5/9/0/2/5902948/s189772745713394276_p3860_i150_w640.jpeg" width="50px" height="50px"></a></button>
-    <p id="costIron">30 Gold nuggets</p>
-    <p id="ammountIron">Iron miners</p>
-</div>
-
 </body>
 </html>
-
