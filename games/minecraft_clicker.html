@@ -33,7 +33,7 @@
         .resource span {
             margin-top: 10px;
         }
-        #openCraftButton, #openInventoryButton {
+        #openCraftButton, #openInventoryButton, #openEquipmentButton {
             position: absolute;
             top: 10px;
             width: 50px;
@@ -51,13 +51,18 @@
             background: url('https://i.pinimg.com/474x/bb/74/18/bb7418d135b0139e94e0c5eaeb7956d8.jpg') no-repeat center center;
             background-size: cover;
         }
+        #openEquipmentButton {
+            left: 130px;
+            background: url('https://i.pinimg.com/474x/bb/74/18/bb7418d135b0139e94e0c5eaeb7956d8.jpg') no-repeat center center;
+            background-size: cover;
+        }
         #amounts {
             position: absolute;
             top: 80px;
             right: 10px;
             text-align: left;
         }
-        #craftModal, #inventoryModal {
+        #craftModal, #inventoryModal, #equipmentModal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -119,34 +124,50 @@
             height: 50px;
             margin-right: 10px;
         }
-        
-        
 
         /* CSS for inventory modal content */
-.inventory-content {
-    justify-content: flex-end; /* Align content to right */
-}
+        .inventory-content {
+            justify-content: flex-end; /* Align content to right */
+        }
 
-.inventory-row {
-    display: flex;
-}
+        .inventory-row {
+            display: flex;
+        }
 
-.inventory-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 60px;
-    width: 20%; /* Set each item to occupy 20% of the width */
-}
+        .inventory-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 60px;
+            width: 20%; /* Set each item to occupy 20% of the width */
+        }
 
-.inventory-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px; /* Adjust spacing between image and text */
-}
+        .inventory-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px; /* Adjust spacing between image and text */
+        }
 
-
-
+        /* CSS for equipment modal */
+        #equipmentModal .modal-content {
+            flex-direction: column;
+        }
+        .equipment-row {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+        .equipment-slot {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+            flex-direction: column;
+        }
+        .equipment-slot img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -154,6 +175,7 @@
         <h1>Minecraft Clicker</h1>
         <button id="openCraftButton"></button>
         <button id="openInventoryButton"></button>
+        <button id="openEquipmentButton"></button>
         <div id="resourceContainer">
             <div id="dirtImage" class="resource">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7OeF1I54rVVGhYZfYhN1TPeuQBD-L170oakZcns-dngBEUh2kWPdZG2P7fKBjoaMeFyQ&usqp=CAU" alt="Dirt">
@@ -163,211 +185,234 @@
                 <img src="https://i.pinimg.com/564x/9d/2b/fb/9d2bfbece72785cab98ba8d82463b424.jpg" alt="Wood">
                 <span id="woodScoreValue">0</span>
             </div>
-       
-
+        </div>
+    </div>
 
     <!-- The Crafting Modal -->
-<div id="craftModal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="craft-item">
-            <img id="craftPlanks" src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
-            <span>Craft 4 Planks (1 Wood)</span>
-        </div>
-        <div class="craft-item">
-            <img id="craftSticks" src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
-            <span>Craft 4 Sticks (2 Planks)</span>
-        </div>
-        <div class="craft-item">
-            <img id="craftSword" src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
-            <span>Craft 1 Sword (2 Planks, 1 Stick)</span>
-        </div>
-        <div class="craft-item">
-            <img id="craftPickaxe" src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
-            <span>Craft 1 Pickaxe (3 Planks, 2 Sticks)</span>
-        </div>
-        <div class="craft-item">
-            <img id="craftAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
-            <span>Craft 1 Wooden Axe (3 Planks, 2 Sticks)</span>
-        </div>
-    </div>
-</div>
-
-
-<!-- The Inventory Modal -->
-<div id="inventoryModal" class="modal">
-    <div class="modal-content inventory-content">
-        <span class="close">&times;</span>
-        <div class="inventory-row">
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Dirt">
-                <span id="dirtInventory">Dirt: 0</span>
+    <div id="craftModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="craft-item">
+                <img id="craftPlanks" src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
+                <span>Craft 4 Planks (1 Wood)</span>
             </div>
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
-                <span id="woodInventory">Wood: 0</span>
+            <div class="craft-item">
+                <img id="craftSticks" src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
+                <span>Craft 4 Sticks (2 Planks)</span>
             </div>
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
-                <span id="plankInventory">Planks: 0</span>
+            <div class="craft-item">
+                <img id="craftSword" src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
+                <span>Craft 1 Sword (2 Planks, 1 Stick)</span>
             </div>
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
-                <span id="stickInventory">Sticks: 0</span>
+            <div class="craft-item">
+                <img id="craftPickaxe" src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
+                <span>Craft 1 Pickaxe (3 Planks, 2 Sticks)</span>
             </div>
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
-                <span id="swordInventory">Swords: 0</span>
-            </div>
-        </div>
-        <div class="inventory-row">
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
-                <span id="pickaxeInventory">Pickaxes: 0</span>
-            </div>
-            <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
-                <span id="axeInventory">Axes: 0</span>
+            <div class="craft-item">
+                <img id="craftAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
+                <span>Craft 1 Wooden Axe (3 Planks, 2 Sticks)</span>
             </div>
         </div>
     </div>
-</div>
 
+    <!-- The Inventory Modal -->
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content inventory-content">
+            <span class="close">&times;</span>
+            <div class="inventory-row">
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Dirt">
+                    <span id="dirtInventory">Dirt: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
+                    <span id="woodInventory">Wood: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
+                    <span id="plankInventory">Planks: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
+                    <span id="stickInventory">Sticks: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
+                    <span id="swordInventory">Swords: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
+                    <span id="pickaxeInventory">Pickaxes: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
+                    <span id="axeInventory">Axes: 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
+    <!-- The Equipment Modal -->
+    <div id="equipmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="equipment-row">
+                <div class="equipment-slot">
+                    <button onclick="equipItem('pickaxe')">Equip Pickaxe</button>
+                </div>
+            </div>
+            <div class="equipment-row">
+                <div class="equipment-slot">
+                    <button onclick="equipItem('axe')">Equip Axe</button>
+                </div>
+            </div>
+            <div class="equipment-row">
+                <div class="equipment-slot">
+                    <button onclick="equipItem('sword')">Equip Sword</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        var dirtScore = 0;
-        var woodScore = 0;
-        var plankScore = 0;
-        var stickScore = 0;
-        var swordScore = 0;
-        var pickaxeScore = 0;
+        let dirtScore = 0;
+        let woodScore = 0;
+        let planks = 0;
+        let sticks = 0;
+        let swords = 0;
+        let pickaxes = 0;
+        let axes = 0;
 
-        var dirtImage = document.getElementById("dirtImage");
-        var woodImage = document.getElementById("woodImage");
-        var dirtScoreDisplay = document.getElementById("dirtScoreValue");
-        var woodScoreDisplay = document.getElementById("woodScoreValue");
-        var plankAmountDisplay = document.getElementById("plankAmount");
-        var stickAmountDisplay = document.getElementById("stickAmount");
-        var swordAmountDisplay = document.getElementById("swordAmount");
-        var pickaxeAmountDisplay = document.getElementById("pickaxeAmount");
-        var dirtInventoryDisplay = document.getElementById("dirtInventory");
-        var woodInventoryDisplay = document.getElementById("woodInventory");
-        var plankInventoryDisplay = document.getElementById("plankInventory");
-        var stickInventoryDisplay = document.getElementById("stickInventory");
-        var swordInventoryDisplay = document.getElementById("swordInventory");
-        var pickaxeInventoryDisplay = document.getElementById("pickaxeInventory");
-        var woodClicked = false;
-
-        dirtImage.addEventListener("click", function() {
+        document.getElementById('dirtImage').onclick = function() {
             dirtScore++;
-            dirtScoreDisplay.textContent = dirtScore;
-            dirtInventoryDisplay.textContent = `Dirt: ${dirtScore}`;
-        });
+            updateScores();
+        }
 
-        woodImage.addEventListener("click", function() {
-            if (!woodClicked) {
-                woodClicked = true;
-                setTimeout(function() {
-                    woodScore++;
-                    woodScoreDisplay.textContent = woodScore;
-                    woodInventoryDisplay.textContent = `Wood: ${woodScore}`;
-                    woodClicked = false;
-                }, 1000);
-            }
-        });
+        document.getElementById('woodImage').onclick = function() {
+            woodScore++;
+            updateScores();
+        }
 
-        var openCraftButton = document.getElementById("openCraftButton");
-        var openInventoryButton = document.getElementById("openInventoryButton");
-        var craftModal = document.getElementById("craftModal");
-        var inventoryModal = document.getElementById("inventoryModal");
-        var craftClose = document.querySelector("#craftModal .close");
-        var inventoryClose = document.querySelector("#inventoryModal .close");
+        function updateScores() {
+            document.getElementById('dirtScoreValue').innerText = dirtScore;
+            document.getElementById('woodScoreValue').innerText = woodScore;
+            document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
+            document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
+        }
 
-        openCraftButton.onclick = function() {
+        let craftModal = document.getElementById("craftModal");
+        let inventoryModal = document.getElementById("inventoryModal");
+        let equipmentModal = document.getElementById("equipmentModal");
+
+        let craftBtn = document.getElementById("openCraftButton");
+        let inventoryBtn = document.getElementById("openInventoryButton");
+        let equipmentBtn = document.getElementById("openEquipmentButton");
+
+        let closeBtns = document.getElementsByClassName("close");
+
+        craftBtn.onclick = function() {
             craftModal.style.display = "block";
         }
 
-        openInventoryButton.onclick = function() {
+        inventoryBtn.onclick = function() {
             inventoryModal.style.display = "block";
         }
 
-        craftClose.onclick = function() {
-            craftModal.style.display = "none";
+        equipmentBtn.onclick = function() {
+            equipmentModal.style.display = "block";
         }
 
-        inventoryClose.onclick = function() {
-            inventoryModal.style.display = "none";
+        for (let btn of closeBtns) {
+            btn.onclick = function() {
+                craftModal.style.display = "none";
+                inventoryModal.style.display = "none";
+                equipmentModal.style.display = "none";
+            }
         }
 
         window.onclick = function(event) {
             if (event.target == craftModal) {
                 craftModal.style.display = "none";
-            }
-            if (event.target == inventoryModal) {
+            } else if (event.target == inventoryModal) {
                 inventoryModal.style.display = "none";
+            } else if (event.target == equipmentModal) {
+                equipmentModal.style.display = "none";
             }
         }
 
-        document.getElementById("craftPlanks").addEventListener("click", function() {
-            if (woodScore > 0) {
-                woodScore--;
-                woodScoreDisplay.textContent = woodScore;
-                woodInventoryDisplay.textContent = `Wood: ${woodScore}`;
-                plankScore += 4;
-                plankAmountDisplay.textContent = plankScore;
-                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
+        document.getElementById("craftPlanks").onclick = function() {
+            if (woodScore >= 1) {
+                woodScore -= 1;
+                planks += 4;
+                updateScores();
+                updateInventory();
             } else {
-                alert("Not enough wood to craft planks");
+                alert("Not enough wood to craft planks!");
             }
-        });
+        }
 
-        document.getElementById("craftSticks").addEventListener("click", function() {
-            if (plankScore >= 2) {
-                plankScore -= 2;
-                plankAmountDisplay.textContent = plankScore;
-                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
-                stickScore += 4;
-                stickAmountDisplay.textContent = stickScore;
-                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
+        document.getElementById("craftSticks").onclick = function() {
+            if (planks >= 2) {
+                planks -= 2;
+                sticks += 4;
+                updateInventory();
             } else {
-                alert("Not enough planks to craft sticks");
+                alert("Not enough planks to craft sticks!");
             }
-        });
+        }
 
-        document.getElementById("craftSword").addEventListener("click", function() {
-            if (plankScore >= 2 && stickScore >= 1) {
-                plankScore -= 2;
-                stickScore -= 1;
-                plankAmountDisplay.textContent = plankScore;
-                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
-                stickAmountDisplay.textContent = stickScore;
-                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
-                swordScore++;
-                swordAmountDisplay.textContent = swordScore;
-                swordInventoryDisplay.textContent = `Swords: ${swordScore}`;
+        document.getElementById("craftSword").onclick = function() {
+            if (planks >= 2 && sticks >= 1) {
+                planks -= 2;
+                sticks -= 1;
+                swords += 1;
+                updateInventory();
             } else {
-                alert("Not enough resources to craft sword");
+                alert("Not enough materials to craft a sword!");
             }
-        });
+        }
 
-        document.getElementById("craftPickaxe").addEventListener("click", function() {
-            if (plankScore >= 3 && stickScore >= 2) {
-                plankScore -= 3;
-                stickScore -= 2;
-                plankAmountDisplay.textContent = plankScore;
-                plankInventoryDisplay.textContent = `Planks: ${plankScore}`;
-                stickAmountDisplay.textContent = stickScore;
-                stickInventoryDisplay.textContent = `Sticks: ${stickScore}`;
-                pickaxeScore++;
-                pickaxeAmountDisplay.textContent = pickaxeScore;
-                pickaxeInventoryDisplay.textContent = `Pickaxes: ${pickaxeScore}`;
+        document.getElementById("craftPickaxe").onclick = function() {
+            if (planks >= 3 && sticks >= 2) {
+                planks -= 3;
+                sticks -= 2;
+                pickaxes += 1;
+                updateInventory();
             } else {
-                alert("Not enough resources to craft pickaxe");
+                alert("Not enough materials to craft a pickaxe!");
             }
-        });
+        }
+
+        document.getElementById("craftAxe").onclick = function() {
+            if (planks >= 3 && sticks >= 2) {
+                planks -= 3;
+                sticks -= 2;
+                axes += 1;
+                updateInventory();
+            } else {
+                alert("Not enough materials to craft an axe!");
+            }
+        }
+
+        function updateInventory() {
+            document.getElementById('plankInventory').innerText = `Planks: ${planks}`;
+            document.getElementById('stickInventory').innerText = `Sticks: ${sticks}`;
+            document.getElementById('swordInventory').innerText = `Swords: ${swords}`;
+            document.getElementById('pickaxeInventory').innerText = `Pickaxes: ${pickaxes}`;
+            document.getElementById('axeInventory').innerText = `Axes: ${axes}`;
+        }
+
+        function equipItem(item) {
+            if (item === 'pickaxe' && pickaxes > 0) {
+                alert('Pickaxe equipped!');
+            } else if (item === 'axe' && axes > 0) {
+                alert('Axe equipped!');
+            } else if (item === 'sword' && swords > 0) {
+                alert('Sword equipped!');
+            } else {
+                alert(`You don't have any ${item}s to equip!`);
+            }
+        }
     </script>
 </body>
 </html>
