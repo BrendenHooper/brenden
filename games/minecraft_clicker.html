@@ -184,13 +184,19 @@
                 <img src="https://th.bing.com/th/id/OIP.oU4ywX2AJSR2MFTTRZc4kgAAAA?rs=1&pid=ImgDetMain" alt="Stone">
                 <span id="stoneScoreValue">0</span>
             </div>
+            <div id="coalImage" class="resource">
+                <img src="https://cdn4.iconfinder.com/data/icons/real-vista-business-basic/256/coal.png" alt="Coal">
+                <span id="coalScoreValue">0</span>
+            </div>
         </div>
+        
     </div>
 
     <!-- The Crafting Modal -->
-    <div id="craftModal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+<div id="craftModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="craft-row">
             <div class="craft-item">
                 <img id="craftPlanks" src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
                 <span>Craft 4 Planks (1 Wood)</span>
@@ -211,6 +217,8 @@
                 <img id="craftAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
                 <span>Craft 1 Wooden Axe (3 Planks, 2 Sticks)</span>
             </div>
+        </div>
+        <div class="craft-row">
             <div class="craft-item">
                 <img id="craftStoneSword" src="https://i.imgur.com/4M7IWwP.png" alt="Stone Sword">
                 <span>Craft 1 Stone Sword (2 Cobblestone, 1 Stick)</span>
@@ -225,59 +233,70 @@
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- The Inventory Modal -->
-    <div id="inventoryModal">
-        <div class="modal-content inventory-content">
-            <span class="close">&times;</span>
-            <div class="inventory-row">
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Dirt">
-                    <span id="dirtInventory">Dirt: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
-                    <span id="woodInventory">Wood: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone">
-                    <span id="stoneInventory">Stone: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
-                    <span id="plankInventory">Planks: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
-                    <span id="stickInventory">Sticks: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
-                    <span id="swordInventory">Swords: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
-                    <span id="pickaxeInventory">Pickaxes: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
-                    <span id="axeInventory">Axes: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Sword">
-                    <span id="stoneSwordInventory">Stone Swords: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Pickaxe">
-                    <span id="stonePickaxeInventory">Stone Pickaxes: 0</span>
-                </div>
-                <div class="inventory-item">
-                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Axe">
-                    <span id="stoneAxeInventory">Stone Axes: 0</span>
-                </div>
+<div id="inventoryModal">
+    <div class="modal-content inventory-content">
+        <span class="close">&times;</span>
+        <div class="inventory-row">
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Dirt">
+                <span id="dirtInventory">Dirt: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
+                <span id="woodInventory">Wood: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone">
+                <span id="stoneInventory">Stone: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
+                <span id="plankInventory">Planks: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sticks">
+                <span id="stickInventory">Sticks: 0</span>
+            </div>
+        </div>
+        <div class="inventory-row">
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Sword">
+                <span id="swordInventory">Swords: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Pickaxe">
+                <span id="pickaxeInventory">Pickaxes: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
+                <span id="axeInventory">Axes: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Sword">
+                <span id="stoneSwordInventory">Stone Swords: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Pickaxe">
+                <span id="stonePickaxeInventory">Stone Pickaxes: 0</span>
+            </div>
+        </div>
+        <div class="inventory-row">
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Axe">
+                <span id="stoneAxeInventory">Stone Axes: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Coal">
+                <span id="coalInventory">Coal: 0</span>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- The Equipment Modal -->
     <div id="equipmentModal" class="modal">
@@ -314,6 +333,7 @@
         let dirtScore = 0;
         let woodScore = 0;
         let stoneScore = 0;
+        let coalScore = 0; // Add this line for coal score
         let planks = 0;
         let sticks = 0;
         let swords = 0;
@@ -366,14 +386,36 @@
             }
         }
 
-        function updateScores() {
-            document.getElementById('dirtScoreValue').innerText = dirtScore;
-            document.getElementById('woodScoreValue').innerText = woodScore;
-            document.getElementById('stoneScoreValue').innerText = stoneScore;
-            document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
-            document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
-            document.getElementById('stoneInventory').innerText = `Stone: ${stoneScore}`;
+        document.getElementById('coalImage').onclick = function() {
+    if (equippedPickaxe || equippedStonePickaxe) {
+        document.getElementById('coalImage').style.pointerEvents = 'none'; // Disable click
+        let mineTime = 4000;
+        if (equippedPickaxe) {
+            mineTime = 3750;
+        } else if (equippedStonePickaxe) {
+            mineTime = 3500;
         }
+        setTimeout(function() {
+            coalScore++;
+            updateScores();
+            document.getElementById('coalImage').style.pointerEvents = 'auto'; // Enable click
+        }, mineTime);
+    } else {
+        alert("You need to equip a pickaxe to mine coal!");
+    }
+}
+
+
+        function updateScores() {
+    document.getElementById('dirtScoreValue').innerText = dirtScore;
+    document.getElementById('woodScoreValue').innerText = woodScore;
+    document.getElementById('stoneScoreValue').innerText = stoneScore;
+    document.getElementById('coalScoreValue').innerText = coalScore; // Add this line for coal score
+    document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
+    document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
+    document.getElementById('stoneInventory').innerText = `Stone: ${stoneScore}`;
+}
+
 
         let craftModal = document.getElementById("craftModal");
         let inventoryModal = document.getElementById("inventoryModal");
