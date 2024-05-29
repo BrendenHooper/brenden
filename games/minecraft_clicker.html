@@ -124,16 +124,13 @@
             height: 50px;
             margin-right: 10px;
         }
-
         /* CSS for inventory modal content */
         .inventory-content {
             justify-content: flex-end; /* Align content to right */
         }
-
         .inventory-row {
             display: flex;
         }
-
         .inventory-item {
             display: flex;
             flex-direction: column;
@@ -141,13 +138,11 @@
             margin: 60px;
             width: 20%; /* Set each item to occupy 20% of the width */
         }
-
         .inventory-item img {
             width: 50px;
             height: 50px;
             margin-bottom: 5px; /* Adjust spacing between image and text */
         }
-
         /* CSS for equipment modal */
         #equipmentModal .modal-content {
             flex-direction: column;
@@ -185,6 +180,10 @@
                 <img src="https://i.pinimg.com/564x/9d/2b/fb/9d2bfbece72785cab98ba8d82463b424.jpg" alt="Wood">
                 <span id="woodScoreValue">0</span>
             </div>
+            <div id="stoneImage" class="resource">
+                <img src="https://th.bing.com/th/id/OIP.oU4ywX2AJSR2MFTTRZc4kgAAAA?rs=1&pid=ImgDetMain" alt="Stone">
+                <span id="stoneScoreValue">0</span>
+            </div>
         </div>
     </div>
 
@@ -212,11 +211,23 @@
                 <img id="craftAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
                 <span>Craft 1 Wooden Axe (3 Planks, 2 Sticks)</span>
             </div>
+            <div class="craft-item">
+                <img id="craftStoneSword" src="https://i.imgur.com/4M7IWwP.png" alt="Stone Sword">
+                <span>Craft 1 Stone Sword (2 Cobblestone, 1 Stick)</span>
+            </div>
+            <div class="craft-item">
+                <img id="craftStonePickaxe" src="https://i.imgur.com/4M7IWwP.png" alt="Stone Pickaxe">
+                <span>Craft 1 Stone Pickaxe (3 Cobblestone, 2 Sticks)</span>
+            </div>
+            <div class="craft-item">
+                <img id="craftStoneAxe" src="https://i.imgur.com/4M7IWwP.png" alt="Stone Axe">
+                <span>Craft 1 Stone Axe (3 Cobblestone, 2 Sticks)</span>
+            </div>
         </div>
     </div>
 
     <!-- The Inventory Modal -->
-    <div id="inventoryModal" class="modal">
+    <div id="inventoryModal">
         <div class="modal-content inventory-content">
             <span class="close">&times;</span>
             <div class="inventory-row">
@@ -227,6 +238,10 @@
                 <div class="inventory-item">
                     <img src="https://i.imgur.com/4M7IWwP.png" alt="Wood">
                     <span id="woodInventory">Wood: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone">
+                    <span id="stoneInventory">Stone: 0</span>
                 </div>
                 <div class="inventory-item">
                     <img src="https://i.imgur.com/4M7IWwP.png" alt="Planks">
@@ -248,6 +263,18 @@
                     <img src="https://i.imgur.com/4M7IWwP.png" alt="Axe">
                     <span id="axeInventory">Axes: 0</span>
                 </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Sword">
+                    <span id="stoneSwordInventory">Stone Swords: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Pickaxe">
+                    <span id="stonePickaxeInventory">Stone Pickaxes: 0</span>
+                </div>
+                <div class="inventory-item">
+                    <img src="https://i.imgur.com/4M7IWwP.png" alt="Stone Axe">
+                    <span id="stoneAxeInventory">Stone Axes: 0</span>
+                </div>
             </div>
         </div>
     </div>
@@ -258,17 +285,26 @@
             <span class="close">&times;</span>
             <div class="equipment-row">
                 <div class="equipment-slot">
-                    <button onclick="equipItem('pickaxe')">Equip Pickaxe</button>
+                    <button onclick="equipItem('pickaxe')">Equip Wooden Pickaxe</button>
+                </div>
+                <div class="equipment-slot">
+                    <button onclick="equipItem('stonePickaxe')">Equip Stone Pickaxe</button>
                 </div>
             </div>
             <div class="equipment-row">
                 <div class="equipment-slot">
-                    <button onclick="equipItem('axe')">Equip Axe</button>
+                    <button onclick="equipItem('axe')">Equip Wooden Axe</button>
+                </div>
+                <div class="equipment-slot">
+                    <button onclick="equipItem('stoneAxe')">Equip Stone Axe</button>
                 </div>
             </div>
             <div class="equipment-row">
                 <div class="equipment-slot">
-                    <button onclick="equipItem('sword')">Equip Sword</button>
+                    <button onclick="equipItem('sword')">Equip Wooden Sword</button>
+                </div>
+                <div class="equipment-slot">
+                    <button onclick="equipItem('stoneSword')">Equip Stone Sword</button>
                 </div>
             </div>
         </div>
@@ -277,11 +313,19 @@
     <script>
         let dirtScore = 0;
         let woodScore = 0;
+        let stoneScore = 0;
         let planks = 0;
         let sticks = 0;
         let swords = 0;
         let pickaxes = 0;
         let axes = 0;
+        let stoneSwords = 0;
+        let stonePickaxes = 0;
+        let stoneAxes = 0;
+        let equippedPickaxe = false;
+        let equippedStonePickaxe = false;
+        let equippedAxe = false;
+        let equippedStoneAxe = false;
 
         document.getElementById('dirtImage').onclick = function() {
             dirtScore++;
@@ -289,15 +333,46 @@
         }
 
         document.getElementById('woodImage').onclick = function() {
-            woodScore++;
-            updateScores();
+            document.getElementById('woodImage').style.pointerEvents = 'none'; // Disable click
+            let mineTime = 2000;
+            if (equippedAxe) {
+                mineTime = 1750;
+            } else if (equippedStoneAxe) {
+                mineTime = 1500;
+            }
+            setTimeout(function() {
+                woodScore++;
+                updateScores();
+                document.getElementById('woodImage').style.pointerEvents = 'auto'; // Enable click
+            }, mineTime);
+        }
+
+        document.getElementById('stoneImage').onclick = function() {
+            if (equippedPickaxe || equippedStonePickaxe) {
+                document.getElementById('stoneImage').style.pointerEvents = 'none'; // Disable click
+                let mineTime = 3000;
+                if (equippedPickaxe) {
+                    mineTime = 2750;
+                } else if (equippedStonePickaxe) {
+                    mineTime = 2500;
+                }
+                setTimeout(function() {
+                    stoneScore++;
+                    updateScores();
+                    document.getElementById('stoneImage').style.pointerEvents = 'auto'; // Enable click
+                }, mineTime);
+            } else {
+                alert("You need to equip a pickaxe to mine stone!");
+            }
         }
 
         function updateScores() {
             document.getElementById('dirtScoreValue').innerText = dirtScore;
             document.getElementById('woodScoreValue').innerText = woodScore;
+            document.getElementById('stoneScoreValue').innerText = stoneScore;
             document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
             document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
+            document.getElementById('stoneInventory').innerText = `Stone: ${stoneScore}`;
         }
 
         let craftModal = document.getElementById("craftModal");
@@ -394,23 +469,103 @@
             }
         }
 
+        document.getElementById("craftStoneSword").onclick = function() {
+            if (stoneScore >= 2 && sticks >= 1) {
+                stoneScore -= 2;
+                sticks -= 1;
+                stoneSwords += 1;
+                updateInventory();
+            } else {
+                alert("Not enough materials to craft a stone sword!");
+            }
+        }
+
+        document.getElementById("craftStonePickaxe").onclick = function() {
+            if (stoneScore >= 3 && sticks >= 2) {
+                stoneScore -= 3;
+                sticks -= 2;
+                stonePickaxes += 1;
+                updateInventory();
+            } else {
+                alert("Not enough materials to craft a stone pickaxe!");
+            }
+        }
+
+        document.getElementById("craftStoneAxe").onclick = function() {
+            if (stoneScore >= 3 && sticks >= 2) {
+                stoneScore -= 3;
+                sticks -= 2;
+                stoneAxes += 1;
+                updateInventory();
+            } else {
+                alert("Not enough materials to craft a stone axe!");
+            }
+        }
+
         function updateInventory() {
             document.getElementById('plankInventory').innerText = `Planks: ${planks}`;
             document.getElementById('stickInventory').innerText = `Sticks: ${sticks}`;
             document.getElementById('swordInventory').innerText = `Swords: ${swords}`;
             document.getElementById('pickaxeInventory').innerText = `Pickaxes: ${pickaxes}`;
             document.getElementById('axeInventory').innerText = `Axes: ${axes}`;
+            document.getElementById('stoneSwordInventory').innerText = `Stone Swords: ${stoneSwords}`;
+            document.getElementById('stonePickaxeInventory').innerText = `Stone Pickaxes: ${stonePickaxes}`;
+            document.getElementById('stoneAxeInventory').innerText = `Stone Axes: ${stoneAxes}`;
+            updateScores();
         }
 
         function equipItem(item) {
-            if (item === 'pickaxe' && pickaxes > 0) {
-                alert('Pickaxe equipped!');
-            } else if (item === 'axe' && axes > 0) {
-                alert('Axe equipped!');
-            } else if (item === 'sword' && swords > 0) {
-                alert('Sword equipped!');
-            } else {
-                alert(`You don't have any ${item}s to equip!`);
+            switch (item) {
+                case 'pickaxe':
+                    if (pickaxes > 0) {
+                        equippedPickaxe = true;
+                        equippedStonePickaxe = false;
+                        alert("Wooden pickaxe equipped!");
+                    } else {
+                        alert("You don't have a wooden pickaxe to equip!");
+                    }
+                    break;
+                case 'stonePickaxe':
+                    if (stonePickaxes > 0) {
+                        equippedStonePickaxe = true;
+                        equippedPickaxe = false;
+                        alert("Stone pickaxe equipped!");
+                    } else {
+                        alert("You don't have a stone pickaxe to equip!");
+                    }
+                    break;
+                case 'axe':
+                    if (axes > 0) {
+                        equippedAxe = true;
+                        equippedStoneAxe = false;
+                        alert("Wooden axe equipped!");
+                    } else {
+                        alert("You don't have a wooden axe to equip!");
+                    }
+                    break;
+                case 'stoneAxe':
+                    if (stoneAxes > 0) {
+                        equippedStoneAxe = true;
+                        equippedAxe = false;
+                        alert("Stone axe equipped!");
+                    } else {
+                        alert("You don't have a stone axe to equip!");
+                    }
+                    break;
+                case 'sword':
+                    if (swords > 0) {
+                        alert("Wooden sword equipped!");
+                    } else {
+                        alert("You don't have a wooden sword to equip!");
+                    }
+                    break;
+                case 'stoneSword':
+                    if (stoneSwords > 0) {
+                        alert("Stone sword equipped!");
+                    } else {
+                        alert("You don't have a stone sword to equip!");
+                    }
+                    break;
             }
         }
     </script>
