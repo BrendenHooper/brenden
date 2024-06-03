@@ -67,7 +67,7 @@
             right: 10px;
             text-align: left;
         }
-        #craftModal, #inventoryModal, #equipmentModal {
+        #craftModal, #inventoryModal, #equipmentModal, #furnaceModal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -318,22 +318,26 @@
                 <span id="coalInventory">Coal: 0</span>
             </div>
             <div class="inventory-item">
-                <img src="https://i.imgur.com/4M7IWwP.png" alt="Coal">
-                <span id="ironInventory">iron: 0</span>
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Iron">
+                <span id="ironInventory">raw iron: 0</span>
             </div>
             <div class="inventory-item">
                 <img src="https://i.imgur.com/4M7IWwP.png" alt="iron Sword">
-                <span id="ironswordInventory">iron Swords: 0</span>
+                <span id="ironSwordInventory">iron Swords: 0</span>
             </div>
             <div class="inventory-item">
                 <img src="https://i.imgur.com/4M7IWwP.png" alt="iron Pickaxe">
-                <span id="ironpickaxeInventory">iron Pickaxes: 0</span>
+                <span id="ironPickaxeInventory">iron Pickaxes: 0</span>
             </div>
         </div>
         <div class="inventory-row">
             <div class="inventory-item">
                 <img src="https://i.imgur.com/4M7IWwP.png" alt="iron Axe">
-                <span id="ironaxeInventory">iron Axes: 0</span>
+                <span id="ironAxeInventory">iron Axes: 0</span>
+            </div>
+            <div class="inventory-item">
+                <img src="https://i.imgur.com/4M7IWwP.png" alt="Iron">
+                <span id="ironingotInventory">iron ingot: 0</span>
             </div>
         </div>
     </div>
@@ -380,12 +384,14 @@
         </div>
     </div>
 
-     <!-- The furnace Modal -->
-     <div id="furnaceModal" class="modal">
+    <div id="furnaceModal">
+        <div class="modal-content">
             <span class="close">&times;</span>
-                <div class="furnace-slot">
-                    <button onclick="smeltIron('iron')">smelt iron</button>
-                </div>
+            <div class="furnace-item">
+                <img src="https://cdn4.iconfinder.com/data/icons/real-vista-business-basic/256/coal.png" alt="Iron Ingot">
+                <button onclick="smeltiron()" id="smeltIronButton">Smelt Iron</button>
+            </div>
+        </div>
     </div>
 
 
@@ -395,7 +401,7 @@
         let stoneScore = 0;
         let coalScore = 0;
         let ironScore = 0;
-        let ironingotscore = 0;
+        let ironingotScore = 0;
         let planks = 0;
         let sticks = 0;
         let swords = 0;
@@ -417,9 +423,11 @@
         let equippedStoneAxe = false;
         let equippedIronAxe = false;
 
+
         document.getElementById('dirtImage').onclick = function() {
             dirtScore++;
             updateScores();
+            updateInventory();
         }
 
         document.getElementById('woodImage').onclick = function() {
@@ -433,6 +441,7 @@
             setTimeout(function() {
                 woodScore++;
                 updateScores();
+                updateInventory();
                 document.getElementById('woodImage').style.pointerEvents = 'auto'; // Enable click
             }, mineTime);
         }
@@ -451,6 +460,7 @@
                 setTimeout(function() {
                     stoneScore++;
                     updateScores();
+                    updateInventory();
                     document.getElementById('stoneImage').style.pointerEvents = 'auto'; // Enable click
                 }, mineTime);
             } else {
@@ -472,6 +482,7 @@
         setTimeout(function() {
             coalScore++;
             updateScores();
+            updateInventory();
             document.getElementById('coalImage').style.pointerEvents = 'auto'; // Enable click
         }, mineTime);
     } else {
@@ -492,6 +503,7 @@ document.getElementById('ironImage').onclick = function() {
         setTimeout(function() {
             ironScore++;
             updateScores();
+            updateInventory();
             document.getElementById('ironImage').style.pointerEvents = 'auto'; // Enable click
         }, mineTime);
     } else {
@@ -506,42 +518,31 @@ document.getElementById('ironImage').onclick = function() {
     document.getElementById('stoneScoreValue').innerText = stoneScore;
     document.getElementById('coalScoreValue').innerText = coalScore;
     document.getElementById('ironScoreValue').innerText = ironScore;
-    document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
-    document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
-    document.getElementById('stoneInventory').innerText = `Stone: ${stoneScore}`;
-    document.getElementById('coalInventory').innerText = `Coal: ${coalScore}`;
-    document.getElementById('ironInventory').innerText = `Iron: ${ironScore}`;
     console.log("s" + ironScore);
 }
 
 
-        let craftModal = document.getElementById("craftModal");
-        let inventoryModal = document.getElementById("inventoryModal");
-        let equipmentModal = document.getElementById("equipmentModal");
-        let furnaceModal = document.getElementById("equipmentModal");
+const craftModal = document.getElementById("craftModal");
+        const inventoryModal = document.getElementById("inventoryModal");
+        const equipmentModal = document.getElementById("equipmentModal");
+        const furnaceModal = document.getElementById("furnaceModal");
 
-
-        let craftBtn = document.getElementById("openCraftButton");
-        let inventoryBtn = document.getElementById("openInventoryButton");
-        let equipmentBtn = document.getElementById("openEquipmentButton");
-        let furnaceBtn = document.getElementById("openEquipmentButton");
-
-        let closeBtns = document.getElementsByClassName("close");
-
-        craftBtn.onclick = function() {
+        document.getElementById("openCraftButton").onclick = function() {
             craftModal.style.display = "block";
-        }
-
-        inventoryBtn.onclick = function() {
+        };
+        document.getElementById("openInventoryButton").onclick = function() {
             inventoryModal.style.display = "block";
-        }
-
-        equipmentBtn.onclick = function() {
+        };
+        document.getElementById("openEquipmentButton").onclick = function() {
             equipmentModal.style.display = "block";
-        }
+        };
+        document.getElementById("openFurnaceButton").onclick = function() {
+            furnaceModal.style.display = "block";
+        };
 
-        for (let btn of closeBtns) {
-            btn.onclick = function() {
+        const closeButtons = document.getElementsByClassName("close");
+        for (let i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].onclick = function() {
                 craftModal.style.display = "none";
                 inventoryModal.style.display = "none";
                 equipmentModal.style.display = "none";
@@ -552,11 +553,14 @@ document.getElementById('ironImage').onclick = function() {
         window.onclick = function(event) {
             if (event.target == craftModal) {
                 craftModal.style.display = "none";
-            } else if (event.target == inventoryModal) {
+            }
+            if (event.target == inventoryModal) {
                 inventoryModal.style.display = "none";
-            } else if (event.target == equipmentModal) {
+            }
+            if (event.target == equipmentModal) {
                 equipmentModal.style.display = "none";
-            } else if (event.target == furnaceModal) {
+            }
+            if (event.target == furnaceModal) {
                 furnaceModal.style.display = "none";
             }
         }
@@ -577,6 +581,7 @@ document.getElementById('ironImage').onclick = function() {
                 planks -= 2;
                 sticks += 4;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough planks to craft sticks!");
             }
@@ -588,6 +593,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 1;
                 swords += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a sword!");
             }
@@ -599,6 +605,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 pickaxes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a pickaxe!");
             }
@@ -610,6 +617,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 axes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft an axe!");
             }
@@ -621,6 +629,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 1;
                 stoneSwords += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a stone sword!");
             }
@@ -632,6 +641,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 stonePickaxes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a stone pickaxe!");
             }
@@ -643,6 +653,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 stoneAxes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a stone axe!");
             }
@@ -654,6 +665,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 1;
                 ironSwords += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a iron sword!");
             }
@@ -665,6 +677,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 ironpickaxes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a  iron pickaxe!");
             }
@@ -676,6 +689,7 @@ document.getElementById('ironImage').onclick = function() {
                 sticks -= 2;
                 ironaxes += 1;
                 updateInventory();
+                updateScores();
             } else {
                 alert("Not enough materials to craft a iron axe!");
             }
@@ -693,6 +707,12 @@ document.getElementById('ironImage').onclick = function() {
             document.getElementById('ironSwordInventory').innerText = `Iron Swords: ${ironSwords}`;
             document.getElementById('ironPickaxeInventory').innerText = `Iron Pickaxes: ${ironPickaxes}`;
             document.getElementById('ironAxeInventory').innerText = `ron Axes: ${ironAxes}`;
+            document.getElementById('dirtInventory').innerText = `Dirt: ${dirtScore}`;
+            document.getElementById('woodInventory').innerText = `Wood: ${woodScore}`;
+            document.getElementById('stoneInventory').innerText = `Stone: ${stoneScore}`;
+            document.getElementById('coalInventory').innerText = `Coal: ${coalScore}`;
+            document.getElementById('ironInventory').innerText = `Iron: ${ironScore}`;
+            document.getElementById('ironingotInventory').innerText = `Iron Ingot: ${ironingotScore}`;
             updateScores();
         }
 
@@ -790,6 +810,22 @@ document.getElementById('ironImage').onclick = function() {
                     break;
             }
         }
+
+
+
+        function smeltiron() {
+    if (ironScore >= 1 && coalScore >= 1) {
+        ironScore -= 1;
+        coalScore -= 1;
+        ironingotScore += 1;
+        updateInventory();
+        updateScores();
+    } else {
+        alert("Not enough materials to smelt iron");
+    }
+}
+
+
     </script>
 </body>
 </html>
