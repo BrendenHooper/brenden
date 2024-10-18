@@ -118,6 +118,44 @@ jump scare
 </html>
 
 
+<br><br> hover over image<br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Sound Example</title>
+    <style>
+        img {
+            width: 100px; /* Adjust image size as needed */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img src="https://raw.githubusercontent.com/BrendenHooper/brenden/main/pic/download.jpg" alt="Hover to play sound" id="hoverImage">
+<audio id="hoverSound" src="https://raw.githubusercontent.com/BrendenHooper/brenden/main/pic/that-one-josh-hutcherson-whistle-edit.mp3"></audio>
+
+<script>
+    const image = document.getElementById('hoverImage');
+    const sound = document.getElementById('hoverSound');
+
+    image.addEventListener('mouseenter', () => {
+        sound.currentTime = 0; // Reset sound to start
+        sound.play();
+    });
+
+    image.addEventListener('mouseleave', () => {
+        sound.pause();
+    });
+</script>
+
+</body>
+</html>
+
+
 
 
 
