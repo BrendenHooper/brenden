@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Maze Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="300" height="300"></canvas>
+    <div id="controls">
+        <p>Use "A" to Rotate Left, "D" to Rotate Right</p>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const maze = [
+            [1, 1, 1],
+            [0, 0, 2],
+            [1, 0, 1]
+        ];
+
+        const cellSize = 100;
+        const ballRadius = 10;
+        let ball = { x: 1, y: 1 }; // Starting position
+        let angle = 0;
+
+        function drawMaze() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(angle * Math.PI / 180);
+            ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+            for (let y = 0; y < maze.length; y++) {
+                for (let x = 0; x < maze[y].length; x++) {
+                    ctx.fillStyle = maze[y][x] === 1 ? '#000' : (maze[y][x] === 2 ? '#0f0' : '#fff');
+                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                }
+            }
+            drawBall();
+            ctx.restore();
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(ball.x * cellSize + cellSize / 2, ball.y * cellSize + cellSize / 2, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function rotateMaze(direction) {
+            angle += direction === 'left' ? -90 : 90;
+            applyGravity(); // Apply gravity after rotation
+            drawMaze();
+        }
+
+        function applyGravity() {
+            let gravity = (angle / 90) % 4; // 0 = up, 1 = right, 2 = down, 3 = left
+            let newX = ball.x;
+            let newY = ball.y;
+
+            // Move based on gravity direction
+            if (gravity === 0) newY--; // Up
+            else if (gravity === 1) newX++; // Right
+            else if (gravity === 2) newY++; // Down
+            else if (gravity === 3) newX--; // Left
+
+            // Check if the new position is valid
+            if (newX >= 0 && newX < maze[0].length && newY >= 0 && newY < maze.length) {
+                if (maze[newY][newX] === 0 || maze[newY][newX] === 2) {
+                    ball = { x: newX, y: newY }; // Move the ball if valid
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'a' || event.key === 'A') {
+                rotateMaze('left');
+            } else if (event.key === 'd' || event.key === 'D') {
+                rotateMaze('right');
+            }
+        });
+
+        drawMaze(); // Initial drawing
+    </script>
+</body>
+</html>
